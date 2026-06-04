@@ -2,6 +2,7 @@ import { Building2 } from 'lucide-react'
 import { useState } from 'react'
 
 import { formatCurrency } from '@/utils/formatCurrency'
+import { resolveImageUrl } from '@/utils/imageUrl'
 
 export type CatalogItem = {
 	id: number
@@ -40,15 +41,18 @@ export function CatalogGrid({
 				</p>
 			) : (
 				<div className='grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3'>
-					{items.map(item => (
+					{items.map(item => {
+						const imageSrc = resolveImageUrl(item.imageUrl)
+
+						return (
 						<article
 							key={item.id}
 							className='overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white'
 						>
 							<div className='aspect-[4/3] bg-[var(--color-surface-secondary)]'>
-								{item.imageUrl && !failedIds.has(item.id) ? (
+								{imageSrc && !failedIds.has(item.id) ? (
 									<img
-										src={item.imageUrl}
+										src={imageSrc}
 										alt={item.name}
 										className='size-full object-cover'
 										loading='lazy'
@@ -73,7 +77,7 @@ export function CatalogGrid({
 								)}
 							</div>
 						</article>
-					))}
+					)})}
 				</div>
 			)}
 		</section>

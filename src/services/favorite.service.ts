@@ -1,11 +1,21 @@
 import { apiClient } from '@/services/apiClient'
-import { getVenueById } from '@/services/venue.service'
 import type { ApiSuccessResponse } from '@/types/api'
 import type { FavoriteItem } from '@/types/customer'
 import type { Venue } from '@/types/venue'
+import { pickVenueImageSource } from '@/utils/imageUrl'
 
 export type FavoriteWithVenue = FavoriteItem & {
 	venue: Venue | null
+}
+
+type RawFavorite = FavoriteItem & {
+	venue?: Venue | null
+}
+
+function normalizeFavoriteVenue(venue: Venue | null | undefined): Venue | null {
+	if (!venue) return null
+	const imageUrl = pickVenueImageSource(venue)
+	return { ...venue, imageUrl, coverImage: imageUrl, image: imageUrl }
 }
 
 export async function getFavorites(): Promise<FavoriteItem[]> {
@@ -16,17 +26,14 @@ export async function getFavorites(): Promise<FavoriteItem[]> {
 }
 
 export async function getFavoritesWithVenues(): Promise<FavoriteWithVenue[]> {
-	const favorites = await getFavorites()
-	return Promise.all(
-		favorites.map(async favorite => {
-			try {
-				const venue = await getVenueById(favorite.venueId)
-				return { ...favorite, venue }
-			} catch {
-				return { ...favorite, venue: null }
-			}
-		}),
+	const res = await apiClient.get<ApiSuccessResponse<RawFavorite[]>>(
+		'/api/favorites',
 	)
+
+	return res.data.data.map(favorite => ({
+		...favorite,
+		venue: normalizeFavoriteVenue(favorite.venue),
+	}))
 }
 
 export async function addFavorite(venueId: number): Promise<FavoriteItem> {

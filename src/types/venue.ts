@@ -1,5 +1,11 @@
 export type VenueStatus = 'pending' | 'approved' | 'rejected'
 
+export type VenueImageRef = {
+	id?: number
+	venueId?: number
+	imageUrl: string
+}
+
 export type Venue = {
 	id: number
 	ownerId: number
@@ -12,6 +18,9 @@ export type Venue = {
 	status: VenueStatus
 	createdAt: string
 	imageUrl?: string | null
+	coverImage?: string | null
+	image?: string | null
+	images?: VenueImageRef[]
 }
 
 export type VenueSortField =

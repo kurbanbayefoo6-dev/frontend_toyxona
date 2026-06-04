@@ -4,8 +4,10 @@ import {
 	AdminTable,
 	AdminTableSkeleton,
 	AdminToolbar,
+	CreateOwnerModal,
 } from '@/components/features/admin'
 import { VenueListError } from '@/components/features/venues'
+import { Button } from '@/components/ui/Button'
 import { Pagination } from '@/components/ui/Pagination'
 import { useAdminOwners } from '@/hooks/useAdminOwners'
 import { useAdminVenues } from '@/hooks/useAdminVenues'
@@ -17,6 +19,7 @@ const PAGE_SIZE = 10
 export default function AdminOwnersPage() {
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)
+	const [createOpen, setCreateOpen] = useState(false)
 	const debouncedSearch = useDebounce(search.trim())
 
 	const ownersQuery = useAdminOwners({
@@ -70,12 +73,21 @@ export default function AdminOwnersPage() {
 
 	return (
 		<div>
-			<h1
-				className='mb-6 text-2xl font-semibold'
-				style={{ color: 'var(--color-text-primary)' }}
-			>
-				Ownerlar
-			</h1>
+			<div className='mb-6 flex flex-wrap items-center justify-between gap-3'>
+				<h1
+					className='text-2xl font-semibold'
+					style={{ color: 'var(--color-text-primary)' }}
+				>
+					Ownerlar
+				</h1>
+				<Button
+					type='button'
+					className='!w-auto px-4'
+					onClick={() => setCreateOpen(true)}
+				>
+					Yangi owner qo‘shish
+				</Button>
+			</div>
 
 			<AdminToolbar
 				search={search}
@@ -117,6 +129,12 @@ export default function AdminOwnersPage() {
 					disabled={ownersQuery.isFetching}
 				/>
 			</div>
+
+			<CreateOwnerModal
+				open={createOpen}
+				onClose={() => setCreateOpen(false)}
+				onCreated={() => void ownersQuery.refetch()}
+			/>
 		</div>
 	)
 }

@@ -24,6 +24,13 @@ const ERROR_MESSAGES_UZ: Record<string, string> = {
 	'guestCount must be greater than 0': 'Mehmonlar soni noto‘g‘ri',
 	'Only customers can create bookings': 'Faqat mijozlar bron qila oladi',
 	'Only customers can create payments': 'Faqat mijozlar to‘lov qila oladi',
+	Forbidden: 'Ruxsat yo‘q',
+	'You can only pay for your own bookings':
+		'Faqat o‘z broningiz uchun to‘lov qilishingiz mumkin',
+	'Booking is already cancelled': 'Bron allaqachon bekor qilingan',
+	'Owners can only cancel bookings': 'Egasi faqat bronni bekor qila oladi',
+	'Customers can only cancel bookings': 'Mijoz faqat bronni bekor qila oladi',
+	'Invalid role': 'Noto‘g‘ri rol',
 	'You have already reviewed this venue': 'Bu maskan uchun sharh allaqachon mavjud',
 	'Rating must be between 1 and 5': 'Baho 1 dan 5 gacha bo‘lishi kerak',
 	'Current password is incorrect': 'Joriy parol noto‘g‘ri',

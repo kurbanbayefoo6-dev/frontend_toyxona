@@ -6,6 +6,7 @@ import { FavoriteButton } from '@/components/features/venues/FavoriteButton'
 import { Button } from '@/components/ui/Button'
 import type { Venue } from '@/types/venue'
 import { formatCurrency } from '@/utils/formatCurrency'
+import { resolveVenueImageUrl } from '@/utils/imageUrl'
 
 type VenueCardProps = {
 	venue: Venue
@@ -16,6 +17,7 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 	const detailPath = `/venues/${venue.id}`
 	const isApproved = venue.status === 'approved'
 	const [imageFailed, setImageFailed] = useState(false)
+	const imageSrc = resolveVenueImageUrl(venue)
 
 	return (
 		<article className='group product-card flex min-h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-md)]'>
@@ -33,20 +35,20 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 									: 'var(--color-pending)',
 							}}
 						>
-							{isApproved ? 'Available' : 'Pending'}
+							{isApproved ? 'Mavjud' : 'Kutilmoqda'}
 						</span>
 						{featured ? (
 							<span className='rounded-full bg-white/90 px-3 py-1 text-xs font-black text-[var(--color-brand)] shadow-sm'>
-								Featured
+								Tavsiya
 							</span>
 						) : null}
 					</div>
 					<div className='absolute right-3 top-3 z-10'>
 						<FavoriteButton venueId={venue.id} />
 					</div>
-					{venue.imageUrl && !imageFailed ? (
+					{imageSrc && !imageFailed ? (
 						<img
-							src={venue.imageUrl}
+							src={imageSrc}
 							alt={venue.name}
 							className='size-full object-cover transition duration-500 group-hover:scale-105'
 							loading='lazy'
@@ -79,7 +81,7 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 						</span>
 						<span className='inline-flex items-center gap-1'>
 							<Users className='size-3.5 shrink-0' aria-hidden />
-							{venue.capacity} guests
+							{venue.capacity} kishi
 						</span>
 					</div>
 				</div>
@@ -87,19 +89,19 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 				<div className='mt-auto flex items-end justify-between gap-3 border-t border-[var(--color-border)] pt-4'>
 					<div>
 						<p className='text-xs font-bold uppercase tracking-wide text-[var(--color-text-hint)]'>
-							From
+							Dan
 						</p>
 						<p className='text-lg font-black text-[var(--color-text-primary)]'>
 							{formatCurrency(venue.pricePerSeat)}
 						</p>
 						<p className='text-xs text-[var(--color-text-secondary)]'>
-							per seat
+							o‘rin uchun
 						</p>
 					</div>
 					<Link to={detailPath}>
 						<Button type='button' className='w-auto px-4'>
 							<CalendarCheck className='size-4' />
-							Book
+							Bron
 						</Button>
 					</Link>
 				</div>

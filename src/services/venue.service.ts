@@ -7,43 +7,28 @@ import type {
 } from '@/types/venueDetail'
 import type { PaginatedVenues, Venue, VenueListParams } from '@/types/venue'
 import { parseApiNumber } from '@/utils/parseApiNumber'
+import { pickVenueImageSource } from '@/utils/imageUrl'
 
 type RawVenue = Omit<Venue, 'capacity' | 'pricePerSeat' | 'imageUrl'> & {
 	capacity: number | string
 	pricePerSeat: number | string
 	imageUrl?: string | null
+	coverImage?: string | null
+	image?: string | null
+	images?: Venue['images']
 }
 
-type VenueImage = { id: number; imageUrl: string }
+function normalizeVenue(raw: RawVenue): Venue {
+	const imageUrl = pickVenueImageSource(raw)
 
-function normalizeVenue(raw: RawVenue, imageUrl?: string | null): Venue {
 	return {
 		...raw,
 		capacity: parseApiNumber(raw.capacity),
 		pricePerSeat: parseApiNumber(raw.pricePerSeat),
-		imageUrl: imageUrl ?? raw.imageUrl ?? null,
+		imageUrl,
+		coverImage: imageUrl,
+		image: imageUrl,
 	}
-}
-
-async function fetchVenueCoverImage(venueId: number): Promise<string | null> {
-	try {
-		const res = await apiClient.get<ApiSuccessResponse<VenueImage[]>>(
-			`/api/venues/${venueId}/images`,
-		)
-		return res.data.data?.[0]?.imageUrl ?? null
-	} catch {
-		return null
-	}
-}
-
-async function enrichVenuesWithImages(venues: Venue[]): Promise<Venue[]> {
-	return Promise.all(
-		venues.map(async venue => {
-			if (venue.imageUrl) return venue
-			const imageUrl = await fetchVenueCoverImage(venue.id)
-			return { ...venue, imageUrl }
-		}),
-	)
 }
 
 type RawVenueResponse = RawVenue
@@ -52,9 +37,7 @@ export async function getVenueById(venueId: number): Promise<Venue> {
 	const res = await apiClient.get<ApiSuccessResponse<RawVenueResponse>>(
 		`/api/venues/${venueId}`,
 	)
-	const venue = normalizeVenue(res.data.data)
-	const imageUrl = venue.imageUrl ?? (await fetchVenueCoverImage(venueId))
-	return { ...venue, imageUrl }
+	return normalizeVenue(res.data.data)
 }
 
 export async function getVenues(
@@ -66,14 +49,11 @@ export async function getVenues(
 	)
 
 	const data = res.data.data
-	const items = data.items.map(item =>
-		normalizeVenue(item as RawVenue),
-	)
-	const itemsWithImages = await enrichVenuesWithImages(items)
+	const items = data.items.map(item => normalizeVenue(item as RawVenue))
 
 	return {
 		...data,
-		items: itemsWithImages,
+		items,
 	}
 }
 

@@ -1,9 +1,13 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 import { CustomerEmptyState, CustomerListSkeleton, StatusBadge } from '@/components/features/customer'
 import { VenueListError } from '@/components/features/venues'
+import { Button } from '@/components/ui/Button'
 import { useOwnerBookingPhones } from '@/hooks/useOwnerBookingPhones'
 import { useOwnerBookings } from '@/hooks/useOwnerBookings'
+import { cancelBooking } from '@/services/booking.service'
+import { toast } from '@/stores/toastStore'
 import { getApiErrorMessage } from '@/utils/authErrors'
 import {
 	getBookingDisplayStatus,
@@ -14,8 +18,20 @@ import {
 import { formatCurrency } from '@/utils/formatCurrency'
 
 export default function OwnerBookingsPage() {
+	const queryClient = useQueryClient()
 	const { data, isLoading, isError, error, refetch, isFetching } =
 		useOwnerBookings()
+
+	const cancelMutation = useMutation({
+		mutationFn: (bookingId: number) => cancelBooking(bookingId),
+		onSuccess: () => {
+			void queryClient.invalidateQueries({ queryKey: ['owner', 'bookings'] })
+			toast.success('Bandlov bekor qilindi')
+		},
+		onError: err => {
+			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib bo‘lmadi'))
+		},
+	})
 
 	const bookings = data?.items ?? []
 	const venueIds = useMemo(
@@ -82,6 +98,7 @@ export default function OwnerBookingsPage() {
 									<th className='px-4 py-3'>Telefon</th>
 									<th className='px-4 py-3'>Holat</th>
 									<th className='px-4 py-3 text-right'>Summa</th>
+									<th className='px-4 py-3 text-right'>Amallar</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -91,6 +108,7 @@ export default function OwnerBookingsPage() {
 										paidIds,
 									)
 									const style = getBookingStatusStyle(displayStatus)
+									const canCancel = booking.status !== 'cancelled'
 									return (
 										<tr
 											key={booking.id}
@@ -125,6 +143,29 @@ export default function OwnerBookingsPage() {
 											>
 												{formatCurrency(booking.totalPrice)}
 											</td>
+											<td className='px-4 py-3 text-right'>
+												{canCancel ? (
+													<Button
+														type='button'
+														variant='ghost'
+														className='!w-auto px-2 text-xs'
+														disabled={cancelMutation.isPending}
+														onClick={() => {
+															if (
+																window.confirm(
+																	'Bandlovni bekor qilishni tasdiqlaysizmi?',
+																)
+															) {
+																cancelMutation.mutate(booking.id)
+															}
+														}}
+													>
+														Bekor qilish
+													</Button>
+												) : (
+													'—'
+												)}
+											</td>
 										</tr>
 									)
 								})}
@@ -139,6 +180,7 @@ export default function OwnerBookingsPage() {
 								paidIds,
 							)
 							const style = getBookingStatusStyle(displayStatus)
+							const canCancel = booking.status !== 'cancelled'
 							return (
 								<li
 									key={booking.id}
@@ -174,6 +216,17 @@ export default function OwnerBookingsPage() {
 									>
 										{formatCurrency(booking.totalPrice)}
 									</p>
+									{canCancel ? (
+										<Button
+											type='button'
+											variant='ghost'
+											className='mt-2 text-xs'
+											disabled={cancelMutation.isPending}
+											onClick={() => cancelMutation.mutate(booking.id)}
+										>
+											Bekor qilish
+										</Button>
+									) : null}
 								</li>
 							)
 						})}

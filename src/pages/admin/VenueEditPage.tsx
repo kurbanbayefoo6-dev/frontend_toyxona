@@ -10,5 +10,5 @@ export default function AdminVenueEditPage() {
 		return <p>Noto'g'ri maskan identifikatori</p>
 	}
 
-	return <VenueManagePage mode='edit' venueId={venueId} />
+	return <VenueManagePage mode='edit' venueId={venueId} adminMode />
 }

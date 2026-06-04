@@ -13,6 +13,7 @@ import { removeFavorite } from '@/services/favorite.service'
 import { toast } from '@/stores/toastStore'
 import { getApiErrorMessage } from '@/utils/authErrors'
 import { formatCurrency } from '@/utils/formatCurrency'
+import { resolveVenueImageUrl } from '@/utils/imageUrl'
 
 export default function CustomerFavoritesPage() {
 	const queryClient = useQueryClient()
@@ -77,7 +78,10 @@ export default function CustomerFavoritesPage() {
 				<CustomerEmptyState message='Sevimli maskanlar ro‘yxati bo‘sh' />
 			) : (
 				<ul className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-					{favorites.map(fav => (
+					{favorites.map(fav => {
+						const imageSrc = fav.venue ? resolveVenueImageUrl(fav.venue) : null
+
+						return (
 						<li
 							key={fav.id}
 							className='flex flex-col overflow-hidden rounded-[var(--radius-lg)] border'
@@ -92,10 +96,10 @@ export default function CustomerFavoritesPage() {
 									backgroundColor: 'var(--color-surface-secondary)',
 								}}
 							>
-								{fav.venue?.imageUrl ? (
+								{imageSrc ? (
 									<img
-										src={fav.venue.imageUrl}
-										alt={fav.venue.name}
+										src={imageSrc}
+										alt={fav.venue?.name ?? `Maskan #${fav.venueId}`}
 										className='size-full object-cover'
 									/>
 								) : (
@@ -155,7 +159,7 @@ export default function CustomerFavoritesPage() {
 								</div>
 							</div>
 						</li>
-					))}
+					)})}
 				</ul>
 			)}
 		</div>

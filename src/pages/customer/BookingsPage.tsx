@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo, useState } from 'react'
 
 import {
@@ -9,6 +10,8 @@ import {
 import { VenueListError } from '@/components/features/venues'
 import { useCustomerBookings } from '@/hooks/useCustomerBookings'
 import { useCustomerPayments } from '@/hooks/useCustomerPayments'
+import { cancelBooking } from '@/services/booking.service'
+import { toast } from '@/stores/toastStore'
 import type { BookingListItem } from '@/types/customer'
 import { getApiErrorMessage } from '@/utils/authErrors'
 import {
@@ -21,12 +24,27 @@ import {
 import { formatCurrency } from '@/utils/formatCurrency'
 
 export default function CustomerBookingsPage() {
+	const queryClient = useQueryClient()
 	const { data, isLoading, isError, error, refetch, isFetching } =
 		useCustomerBookings()
 	const paymentsQuery = useCustomerPayments()
 
 	const [selected, setSelected] = useState<BookingListItem | null>(null)
 	const [modalOpen, setModalOpen] = useState(false)
+
+	const cancelMutation = useMutation({
+		mutationFn: (bookingId: number) => cancelBooking(bookingId),
+		onSuccess: () => {
+			void queryClient.invalidateQueries({ queryKey: ['customer', 'bookings'] })
+			void queryClient.invalidateQueries({ queryKey: ['customer', 'payments'] })
+			toast.success('Bron bekor qilindi')
+			setModalOpen(false)
+			setSelected(null)
+		},
+		onError: err => {
+			toast.error(getApiErrorMessage(err, 'Bronni bekor qilib bo‘lmadi'))
+		},
+	})
 
 	const paidBookingIds = useMemo(
 		() => buildPaidBookingIds(paymentsQuery.data?.items ?? []),
@@ -123,6 +141,12 @@ export default function CustomerBookingsPage() {
 				onClose={() => setModalOpen(false)}
 				booking={selected}
 				paidBookingIds={paidBookingIds}
+				isCancelling={cancelMutation.isPending}
+				onCancel={
+					selected
+						? () => cancelMutation.mutate(selected.id)
+						: undefined
+				}
 			/>
 		</PageShell>
 	)

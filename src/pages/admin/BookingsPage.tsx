@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo, useState } from 'react'
 
 import {
@@ -8,6 +9,7 @@ import {
 } from '@/components/features/admin'
 import { StatusBadge } from '@/components/features/customer'
 import { VenueListError } from '@/components/features/venues'
+import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Pagination } from '@/components/ui/Pagination'
 import { DISTRICTS } from '@/constants/districts'
@@ -15,7 +17,9 @@ import { useAdminBookings } from '@/hooks/useAdminBookings'
 import { useAdminUsers } from '@/hooks/useAdminUsers'
 import { useAdminVenues } from '@/hooks/useAdminVenues'
 import { useDebounce } from '@/hooks/useDebounce'
+import { cancelBooking } from '@/services/booking.service'
 import type { AdminBooking } from '@/types/admin'
+import { toast } from '@/stores/toastStore'
 import { getApiErrorMessage } from '@/utils/authErrors'
 import {
 	getBookingDisplayStatus,
@@ -27,6 +31,7 @@ import {
 const PAGE_SIZE = 10
 
 export default function AdminBookingsPage() {
+	const queryClient = useQueryClient()
 	const [search, setSearch] = useState('')
 	const [statusFilter, setStatusFilter] = useState('')
 	const [districtFilter, setDistrictFilter] = useState('')
@@ -41,6 +46,17 @@ export default function AdminBookingsPage() {
 			page: 1,
 			limit: 200,
 		})
+
+	const cancelMutation = useMutation({
+		mutationFn: (bookingId: number) => cancelBooking(bookingId),
+		onSuccess: () => {
+			void queryClient.invalidateQueries({ queryKey: ['admin', 'bookings'] })
+			toast.success('Bandlov bekor qilindi')
+		},
+		onError: err => {
+			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib bo‘lmadi'))
+		},
+	})
 
 	const venuesQuery = useAdminVenues({ page: 1, limit: 500 })
 	const usersQuery = useAdminUsers({ page: 1, limit: 500 })
@@ -166,8 +182,11 @@ export default function AdminBookingsPage() {
 					'Mehmon',
 					'Sana',
 					'Holat',
+					'Amallar',
 				]}
-				rows={pageItems.map(b => buildBookingRow(b, paidIds))}
+				rows={pageItems.map(b =>
+					buildBookingRow(b, paidIds, cancelMutation),
+				)}
 				emptyMessage='Bandlovlar topilmadi'
 			/>
 
@@ -176,7 +195,7 @@ export default function AdminBookingsPage() {
 					page={page}
 					totalPages={totalPages}
 					onPageChange={setPage}
-					disabled={isFetching}
+					disabled={isFetching || cancelMutation.isPending}
 				/>
 			</div>
 		</div>
@@ -186,9 +205,14 @@ export default function AdminBookingsPage() {
 function buildBookingRow(
 	booking: AdminBooking & { district: string; customerPhone: string },
 	paidIds: Set<number>,
+	cancelMutation: {
+		isPending: boolean
+		mutate: (bookingId: number) => void
+	},
 ) {
 	const displayStatus = getBookingDisplayStatus(booking, paidIds)
 	const style = getBookingStatusStyle(displayStatus)
+	const canCancel = booking.status !== 'cancelled'
 
 	return {
 		key: booking.id,
@@ -204,9 +228,29 @@ function buildBookingRow(
 				bg={style.bg}
 				color={style.color}
 			/>,
+			canCancel ? (
+				<Button
+					key='cancel'
+					type='button'
+					variant='ghost'
+					className='!w-auto px-3 text-xs'
+					disabled={cancelMutation.isPending}
+					onClick={() => {
+						if (window.confirm('Bandlovni bekor qilishni tasdiqlaysizmi?')) {
+							cancelMutation.mutate(booking.id)
+						}
+					}}
+				>
+					Bekor qilish
+				</Button>
+			) : (
+				<span key='cancel' className='text-xs text-[var(--color-text-hint)]'>
+					—
+				</span>
+			),
 		],
 		mobile: (
-			<div className='space-y-1 text-sm'>
+			<div className='space-y-2 text-sm'>
 				<p className='font-semibold'>{booking.venueName}</p>
 				<p>{booking.customerName}</p>
 				<p>{booking.customerPhone}</p>
@@ -219,6 +263,17 @@ function buildBookingRow(
 					bg={style.bg}
 					color={style.color}
 				/>
+				{canCancel ? (
+					<Button
+						type='button'
+						variant='ghost'
+						className='mt-2 text-xs'
+						disabled={cancelMutation.isPending}
+						onClick={() => cancelMutation.mutate(booking.id)}
+					>
+						Bekor qilish
+					</Button>
+				) : null}
 			</div>
 		),
 	}

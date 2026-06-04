@@ -29,6 +29,7 @@ import {
 } from '@/utils/bookingRedirect'
 import { formatCurrency } from '@/utils/formatCurrency'
 import { validateBookingForm } from '@/utils/validateBookingForm'
+import { parseApiNumber } from '@/utils/parseApiNumber'
 import { BOOKING_TOAST } from '@/utils/toastMessages'
 
 type BookingPanelProps = {
@@ -46,6 +47,7 @@ export function BookingPanel({
 	const queryClient = useQueryClient()
 	const isAuthenticated = useAuthStore(s => s.isAuthenticated)
 	const role = useAuthStore(s => s.role)
+	const authUser = useAuthStore(s => s.user)
 
 	const { venue, singers, cars, karnaySurnay, availability } = data
 	const [selectedDate, setSelectedDate] = useState<string | null>(null)
@@ -171,6 +173,21 @@ export function BookingPanel({
 	async function handlePayment() {
 		if (!createdBooking) return
 
+		if (!createdBooking.id || createdBooking.id <= 0) {
+			toast.error('Bron identifikatori noto‘g‘ri. Qayta urinib koring.')
+			return
+		}
+
+		const authUserId = authUser ? parseApiNumber(authUser.id) : 0
+		if (
+			authUserId > 0 &&
+			createdBooking.customerId > 0 &&
+			createdBooking.customerId !== authUserId
+		) {
+			toast.error('Bron boshqa foydalanuvchiga tegishli')
+			return
+		}
+
 		setIsPaying(true)
 		await new Promise(r => setTimeout(r, 1200))
 
@@ -201,12 +218,12 @@ export function BookingPanel({
 			<div className='product-panel p-4 lg:sticky lg:top-24'>
 				<div className='mb-4 flex items-start justify-between gap-3'>
 					<div>
-						<p className='section-kicker'>Booking</p>
-						<h2 className='mt-1 text-2xl font-black'>Reserve this venue</h2>
+						<p className='section-kicker'>Bron</p>
+						<h2 className='mt-1 text-2xl font-black'>Maskanni bron qilish</h2>
 					</div>
 					<div className='rounded-[var(--radius-lg)] bg-[var(--color-brand-light)] px-3 py-2 text-right'>
 						<p className='text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
-							Seat
+							O‘rin
 						</p>
 						<p className='text-sm font-black text-[var(--color-brand)]'>
 							{formatCurrency(venue.pricePerSeat)}
@@ -224,7 +241,7 @@ export function BookingPanel({
 
 				<div className='mt-5 flex flex-col gap-1.5'>
 					<label className='text-sm font-black text-[var(--color-text-primary)]'>
-						Guest count
+						Mehmonlar soni
 					</label>
 					<Input
 						type='number'
@@ -241,20 +258,20 @@ export function BookingPanel({
 						}
 					/>
 					<p className='text-xs text-[var(--color-text-hint)]'>
-						Maximum: {venue.capacity} guests
+						Maksimum: {venue.capacity} kishi
 					</p>
 				</div>
 
 				{selectedDate && (
 					<p className='mt-3 rounded-[var(--radius-md)] bg-[var(--color-available-light)] px-3 py-2 text-sm font-bold text-[var(--color-available)]'>
-						Selected date: {selectedDate}
+						Tanlangan sana: {selectedDate}
 					</p>
 				)}
 
 				<div className='mt-5 grid gap-3'>
 					<AddonCheckboxes
-						title='Singers'
-						emptyText='No singers available'
+						title='Xonandalar'
+						emptyText='Xonandalar yo‘q'
 						items={singers.map(s => ({
 							id: s.id,
 							label: `${s.name} - ${formatCurrency(s.price)}`,
@@ -264,8 +281,8 @@ export function BookingPanel({
 					/>
 
 					<AddonCheckboxes
-						title='Cars'
-						emptyText='No cars available'
+						title='Avtomobillar'
+						emptyText='Avtomobillar yo‘q'
 						items={cars.map(c => ({
 							id: c.id,
 							label: `${c.brand} - ${formatCurrency(c.price)}`,
@@ -276,7 +293,7 @@ export function BookingPanel({
 
 					<AddonCheckboxes
 						title='Karnay-surnay'
-						emptyText='No karnay-surnay available'
+						emptyText='Karnay-surnay yo‘q'
 						items={availableKarnay.map(k => ({
 							id: k.id,
 							label: formatCurrency(k.price),
@@ -288,14 +305,14 @@ export function BookingPanel({
 
 				<div className='mt-5 space-y-2 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-elevated)] p-4'>
 					<PriceRow
-						label={`Seats (${guestCount} x ${formatCurrency(venue.pricePerSeat)})`}
+						label={`O‘rinlar (${guestCount} x ${formatCurrency(venue.pricePerSeat)})`}
 						value={priceBreakdown.baseTotal}
 					/>
 					{priceBreakdown.singersTotal > 0 && (
-						<PriceRow label='Singers' value={priceBreakdown.singersTotal} />
+						<PriceRow label='Xonandalar' value={priceBreakdown.singersTotal} />
 					)}
 					{priceBreakdown.carsTotal > 0 && (
-						<PriceRow label='Cars' value={priceBreakdown.carsTotal} />
+						<PriceRow label='Avtomobillar' value={priceBreakdown.carsTotal} />
 					)}
 					{priceBreakdown.karnayTotal > 0 && (
 						<PriceRow
@@ -304,7 +321,7 @@ export function BookingPanel({
 						/>
 					)}
 					<div className='flex justify-between border-t border-[var(--color-border)] pt-2 text-base font-black text-[var(--color-text-primary)]'>
-						<span>Total</span>
+						<span>Jami</span>
 						<span className='text-[var(--color-brand)]'>
 							{formatCurrency(priceBreakdown.grandTotal)}
 						</span>
@@ -318,7 +335,7 @@ export function BookingPanel({
 					disabled={isSubmitting || isPaying || !!successData}
 					onClick={() => void handleBronClick()}
 				>
-					{isSubmitting ? 'Creating booking...' : 'Book venue'}
+					{isSubmitting ? 'Bron yaratilmoqda...' : 'Bron qilish'}
 				</Button>
 			</div>
 

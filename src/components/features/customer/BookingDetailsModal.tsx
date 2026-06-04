@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Modal } from '@/components/ui/Modal'
+import { Button } from '@/components/ui/Button'
 import type { BookingListItem } from '@/types/customer'
 import {
 	getBookingDisplayStatus,
@@ -17,6 +18,8 @@ type BookingDetailsModalProps = {
 	onClose: () => void
 	booking: BookingListItem | null
 	paidBookingIds: Set<number>
+	onCancel?: () => void
+	isCancelling?: boolean
 }
 
 export function BookingDetailsModal({
@@ -24,11 +27,17 @@ export function BookingDetailsModal({
 	onClose,
 	booking,
 	paidBookingIds,
+	onCancel,
+	isCancelling = false,
 }: BookingDetailsModalProps) {
 	if (!booking) return null
 
 	const displayStatus = getBookingDisplayStatus(booking, paidBookingIds)
 	const statusStyle = getBookingStatusStyle(displayStatus)
+	const canCancel =
+		booking.status !== 'cancelled' &&
+		displayStatus !== 'completed' &&
+		Boolean(onCancel)
 
 	return (
 		<Modal open={open} onClose={onClose} title='Bron tafsilotlari' size='lg'>
@@ -60,13 +69,26 @@ export function BookingDetailsModal({
 				</div>
 				<DetailRow label='Bron ID' value={`#${booking.id}`} />
 			</dl>
-			<Link
-				to={`/venues/${booking.venueId}`}
-				className='mt-4 inline-block text-sm font-medium'
-				style={{ color: 'var(--color-brand)' }}
-			>
-				Maskan sahifasiga →
-			</Link>
+			<div className='mt-5 flex flex-col gap-2 sm:flex-row'>
+				<Link
+					to={`/venues/${booking.venueId}`}
+					className='inline-block text-sm font-medium'
+					style={{ color: 'var(--color-brand)' }}
+				>
+					Maskan sahifasiga →
+				</Link>
+				{canCancel ? (
+					<Button
+						type='button'
+						variant='ghost'
+						className='!w-auto sm:ml-auto'
+						loading={isCancelling}
+						onClick={onCancel}
+					>
+						Bronni bekor qilish
+					</Button>
+				) : null}
+			</div>
 		</Modal>
 	)
 }

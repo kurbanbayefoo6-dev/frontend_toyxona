@@ -1,7 +1,8 @@
 import { Building2, Images } from 'lucide-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import type { VenueImage } from '@/types/venueDetail'
+import { resolveImageUrl } from '@/utils/imageUrl'
 
 type VenueGalleryProps = {
 	images: VenueImage[]
@@ -11,20 +12,26 @@ type VenueGalleryProps = {
 const THUMB_COUNT = 4
 
 export function VenueGallery({ images, venueName }: VenueGalleryProps) {
-	const displayImages =
-		images.length > 0
-			? images
-			: [{ id: 0, imageUrl: '' } as VenueImage]
+	const displayImages = useMemo(
+		() =>
+			images.length > 0
+				? images.map(img => ({
+						...img,
+						resolvedUrl: resolveImageUrl(img.imageUrl),
+					}))
+				: [{ id: 0, imageUrl: '', resolvedUrl: null }],
+		[images],
+	)
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [failedIds, setFailedIds] = useState<Set<number>>(new Set())
 	const mainImage = displayImages[activeIndex] ?? displayImages[0]
 	const thumbnails = displayImages.slice(0, THUMB_COUNT)
 	const mainHasImage = Boolean(
-		mainImage?.imageUrl && !failedIds.has(mainImage.id),
+		mainImage?.resolvedUrl && !failedIds.has(mainImage.id),
 	)
 
 	while (thumbnails.length < THUMB_COUNT) {
-		thumbnails.push({ id: -thumbnails.length, imageUrl: '' })
+		thumbnails.push({ id: -thumbnails.length, imageUrl: '', resolvedUrl: null })
 	}
 
 	return (
@@ -32,7 +39,7 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 			<div className='relative aspect-[16/10] overflow-hidden rounded-[var(--radius-xl)] bg-[var(--color-surface-secondary)] shadow-[var(--shadow-md)]'>
 				{mainHasImage ? (
 					<img
-						src={mainImage.imageUrl}
+						src={mainImage.resolvedUrl!}
 						alt={venueName}
 						className='size-full object-cover'
 						onError={() =>
@@ -49,13 +56,13 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 				)}
 				<div className='absolute bottom-4 left-4 rounded-full bg-black/45 px-3 py-1.5 text-sm font-bold text-white backdrop-blur'>
 					<Images className='mr-1 inline size-4' />
-					{displayImages.filter(img => img.imageUrl && !failedIds.has(img.id)).length || 1} photos
+					{displayImages.filter(img => img.resolvedUrl && !failedIds.has(img.id)).length || 1} photos
 				</div>
 			</div>
 
 			<div className='grid grid-cols-4 gap-2 lg:grid-cols-1'>
 				{thumbnails.map((img, index) => {
-					const hasImage = Boolean(img.imageUrl && !failedIds.has(img.id))
+					const hasImage = Boolean(img.resolvedUrl && !failedIds.has(img.id))
 					const isActive = activeIndex === index && hasImage
 
 					return (
@@ -77,7 +84,7 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 						>
 							{hasImage ? (
 								<img
-									src={img.imageUrl}
+									src={img.resolvedUrl!}
 									alt=''
 									className='size-full object-cover'
 									onError={() =>

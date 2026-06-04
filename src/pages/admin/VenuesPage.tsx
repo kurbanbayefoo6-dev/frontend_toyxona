@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import {
 	AdminTable,
@@ -14,26 +15,14 @@ import { Pagination } from '@/components/ui/Pagination'
 import { useAdminVenues } from '@/hooks/useAdminVenues'
 import { useDebounce } from '@/hooks/useDebounce'
 import { updateVenueStatus } from '@/services/admin.service'
-import { apiClient } from '@/services/apiClient'
-import type { ApiSuccessResponse } from '@/types/api'
+import { deleteVenue } from '@/services/venue.service'
 import type { AdminVenue } from '@/types/admin'
 import type { VenueStatus } from '@/types/venue'
 import { toast } from '@/stores/toastStore'
 import { getApiErrorMessage } from '@/utils/authErrors'
-import { resolveImageUrl } from '@/utils/imageUrl'
+import { resolveVenueImageUrl } from '@/utils/imageUrl'
 
 const PAGE_SIZE = 10
-
-async function fetchCoverImage(venueId: number): Promise<string | null> {
-	try {
-		const res = await apiClient.get<
-			ApiSuccessResponse<Array<{ id: number; imageUrl: string }>>
-		>(`/api/venues/${venueId}/images`)
-		return res.data.data?.[0]?.imageUrl ?? null
-	} catch {
-		return null
-	}
-}
 
 export default function AdminVenuesPage() {
 	const queryClient = useQueryClient()
@@ -50,25 +39,17 @@ export default function AdminVenuesPage() {
 			limit: PAGE_SIZE,
 		})
 
-	const [imageMap, setImageMap] = useState<Record<number, string | null>>({})
-
-	useEffect(() => {
-		if (!data?.items.length) return
-		let cancelled = false
-		data.items.forEach(venue => {
-			void fetchCoverImage(venue.id).then(url => {
-				if (!cancelled) {
-					setImageMap(prev => {
-						if (prev[venue.id] !== undefined) return prev
-						return { ...prev, [venue.id]: url }
-					})
-				}
-			})
-		})
-		return () => {
-			cancelled = true
-		}
-	}, [data?.items])
+	const deleteMutation = useMutation({
+		mutationFn: (venueId: number) => deleteVenue(venueId),
+		onSuccess: () => {
+			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
+			void queryClient.invalidateQueries({ queryKey: ['admin', 'dashboard'] })
+			toast.success('Maskan o‘chirildi')
+		},
+		onError: err => {
+			toast.error(getApiErrorMessage(err, 'Maskanni o‘chirib bo‘lmadi'))
+		},
+	})
 
 	const statusMutation = useMutation({
 		mutationFn: ({
@@ -115,12 +96,19 @@ export default function AdminVenuesPage() {
 
 	return (
 		<div>
-			<h1
-				className='mb-6 text-2xl font-semibold'
-				style={{ color: 'var(--color-text-primary)' }}
-			>
-				Maskanlar
-			</h1>
+			<div className='mb-6 flex flex-wrap items-center justify-between gap-3'>
+				<h1
+					className='text-2xl font-semibold'
+					style={{ color: 'var(--color-text-primary)' }}
+				>
+					Maskanlar
+				</h1>
+				<Link to='/admin/venues/new'>
+					<Button type='button' className='!w-auto px-4'>
+						Yangi maskan
+					</Button>
+				</Link>
+			</div>
 
 			<AdminToolbar
 				search={search}
@@ -148,7 +136,9 @@ export default function AdminVenuesPage() {
 
 			<AdminTable
 				headers={['Rasm', 'Maskan', 'Tuman', 'Sig‘im', 'Holat', 'Amallar']}
-				rows={venues.map(venue => buildVenueRow(venue, imageMap, statusMutation))}
+				rows={venues.map(venue =>
+					buildVenueRow(venue, statusMutation, deleteMutation),
+				)}
 				emptyMessage='Maskanlar topilmadi'
 			/>
 
@@ -166,7 +156,6 @@ export default function AdminVenuesPage() {
 
 function buildVenueRow(
 	venue: AdminVenue,
-	imageMap: Record<number, string | null>,
 	statusMutation: {
 		isPending: boolean
 		mutate: (vars: {
@@ -174,8 +163,12 @@ function buildVenueRow(
 			status: Exclude<VenueStatus, 'pending'>
 		}) => void
 	},
+	deleteMutation: {
+		isPending: boolean
+		mutate: (venueId: number) => void
+	},
 ) {
-	const imgUrl = resolveImageUrl(imageMap[venue.id] ?? null)
+	const imgUrl = resolveVenueImageUrl(venue)
 	const canApprove = venue.status === 'pending'
 	const canReject = venue.status === 'pending' || venue.status === 'approved'
 
@@ -206,6 +199,11 @@ function buildVenueRow(
 			`${venue.capacity} kishi`,
 			<VenueStatusBadge key='status' status={venue.status} />,
 			<div key='actions' className='flex flex-wrap gap-2'>
+				<Link to={`/admin/venues/${venue.id}/edit`}>
+					<Button type='button' variant='secondary' className='!w-auto px-3 text-xs'>
+						Tahrirlash
+					</Button>
+				</Link>
 				{canApprove && (
 					<Button
 						type='button'
@@ -238,6 +236,19 @@ function buildVenueRow(
 						Rad etish
 					</Button>
 				)}
+				<Button
+					type='button'
+					variant='ghost'
+					className='!w-auto px-3 text-xs'
+					disabled={deleteMutation.isPending}
+					onClick={() => {
+						if (window.confirm('Maskanni o‘chirishni tasdiqlaysizmi?')) {
+							deleteMutation.mutate(venue.id)
+						}
+					}}
+				>
+					O‘chirish
+				</Button>
 			</div>,
 		],
 		mobile: (

@@ -36,8 +36,10 @@ import {
 	updateSinger,
 	uploadVenueImage,
 } from '@/services/ownerCatalog.service'
+import { useAdminOwners } from '@/hooks/useAdminOwners'
 import {
 	createVenue,
+	deleteVenue,
 	updateVenue,
 } from '@/services/venue.service'
 import { toast } from '@/stores/toastStore'
@@ -61,12 +63,20 @@ type VenueFormValues = z.infer<typeof venueSchema>
 type VenueManagePageProps = {
 	mode: 'create' | 'edit'
 	venueId?: number
+	adminMode?: boolean
 }
 
-export default function VenueManagePage({ mode, venueId = 0 }: VenueManagePageProps) {
+export default function VenueManagePage({
+	mode,
+	venueId = 0,
+	adminMode = false,
+}: VenueManagePageProps) {
 	const navigate = useNavigate()
 	const queryClient = useQueryClient()
 	const isEdit = mode === 'edit' && venueId > 0
+	const venuesListPath = adminMode ? '/admin/venues' : '/owner/venues'
+	const [ownerId, setOwnerId] = useState<number | ''>('')
+	const ownersQuery = useAdminOwners({ page: 1, limit: 200 })
 
 	const fullQuery = useOwnerVenueFull(isEdit ? venueId : 0)
 	const calendarQuery = useVenueBookingCalendar(venueId, isEdit)
@@ -109,7 +119,10 @@ export default function VenueManagePage({ mode, venueId = 0 }: VenueManagePagePr
 			phone: v.phone,
 			description: '',
 		})
-	}, [fullQuery.data, form])
+		if (adminMode) {
+			setOwnerId(v.ownerId)
+		}
+	}, [fullQuery.data, form, adminMode])
 
 	const calendarByDate = useMemo(() => {
 		const map = new Map<string, BookingCalendarEntry>()
@@ -128,6 +141,9 @@ export default function VenueManagePage({ mode, venueId = 0 }: VenueManagePagePr
 				capacity: values.capacity,
 				pricePerSeat: values.pricePerSeat,
 				phone: values.phone,
+				...(adminMode && ownerId
+					? { ownerId: Number(ownerId) }
+					: {}),
 			}
 			if (isEdit) {
 				return updateVenue(venueId, payload)
@@ -141,13 +157,30 @@ export default function VenueManagePage({ mode, venueId = 0 }: VenueManagePagePr
 			}
 			clearPending()
 			void queryClient.invalidateQueries({ queryKey: ['owner'] })
+			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
 			toast.success(isEdit ? 'Maskan yangilandi' : 'Maskan yaratildi')
 			if (!isEdit) {
-				navigate(`/owner/venues/${id}/edit`, { replace: true })
+				const editPath = adminMode
+					? `/admin/venues/${id}/edit`
+					: `/owner/venues/${id}/edit`
+				navigate(editPath, { replace: true })
 			}
 		},
 		onError: err => {
 			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+		},
+	})
+
+	const deleteVenueMutation = useMutation({
+		mutationFn: () => deleteVenue(venueId),
+		onSuccess: () => {
+			void queryClient.invalidateQueries({ queryKey: ['owner'] })
+			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
+			toast.success('Maskan o‘chirildi')
+			navigate(venuesListPath)
+		},
+		onError: err => {
+			toast.error(getApiErrorMessage(err, 'Maskanni o‘chirib bo‘lmadi'))
 		},
 	})
 
@@ -197,7 +230,7 @@ export default function VenueManagePage({ mode, venueId = 0 }: VenueManagePagePr
 		<div className='mx-auto max-w-4xl'>
 			<div className='mb-6 flex flex-wrap items-center gap-3'>
 				<Link
-					to='/owner/venues'
+					to={venuesListPath}
 					className='text-sm'
 					style={{ color: 'var(--color-brand)' }}
 				>
@@ -214,12 +247,34 @@ export default function VenueManagePage({ mode, venueId = 0 }: VenueManagePagePr
 
 			<form
 				onSubmit={form.handleSubmit(values => {
+					if (adminMode && !ownerId) {
+						toast.error('Eganni tanlang')
+						return
+					}
 					saveVenueMutation.mutate(values)
 				})}
 				className='flex flex-col gap-6'
 				noValidate
 			>
 				<OwnerSection title='Asosiy ma’lumotlar'>
+					{adminMode ? (
+						<div className='mb-4 flex flex-col gap-1.5'>
+							<label className='text-sm font-medium'>Egasi</label>
+							<Select
+								value={ownerId === '' ? '' : String(ownerId)}
+								onChange={e =>
+									setOwnerId(e.target.value ? Number(e.target.value) : '')
+								}
+							>
+								<option value=''>Eganni tanlang</option>
+								{(ownersQuery.data?.items ?? []).map(owner => (
+									<option key={owner.id} value={owner.id}>
+										{owner.firstName} {owner.lastName} (@{owner.username})
+									</option>
+								))}
+							</Select>
+						</div>
+					) : null}
 					<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
 						<FormField
 							label='Nom'
@@ -301,9 +356,30 @@ export default function VenueManagePage({ mode, venueId = 0 }: VenueManagePagePr
 					)}
 				</OwnerSection>
 
-				<Button type='submit' loading={saveVenueMutation.isPending}>
-					{isEdit ? 'Saqlash' : 'Yaratish va davom etish'}
-				</Button>
+				<div className='flex flex-wrap gap-3'>
+					<Button type='submit' loading={saveVenueMutation.isPending}>
+						{isEdit ? 'Saqlash' : 'Yaratish va davom etish'}
+					</Button>
+					{isEdit ? (
+						<Button
+							type='button'
+							variant='ghost'
+							className='!w-auto'
+							loading={deleteVenueMutation.isPending}
+							onClick={() => {
+								if (
+									window.confirm(
+										'Maskanni o‘chirishni tasdiqlaysizmi? Bu amalni qaytarib bo‘lmaydi.',
+									)
+								) {
+									deleteVenueMutation.mutate()
+								}
+							}}
+						>
+							Maskanni o‘chirish
+						</Button>
+					) : null}
+				</div>
 			</form>
 
 			{isEdit && data && (

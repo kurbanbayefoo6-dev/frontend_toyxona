@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { useOwnerVenues } from '@/hooks/useOwnerVenues'
 import { getApiErrorMessage } from '@/utils/authErrors'
 import { formatCurrency } from '@/utils/formatCurrency'
-import { resolveImageUrl } from '@/utils/imageUrl'
+import { resolveVenueImageUrl } from '@/utils/imageUrl'
 
 export default function OwnerVenuesPage() {
 	const { data, isLoading, isError, error, refetch, isFetching } =
@@ -46,7 +46,10 @@ export default function OwnerVenuesPage() {
 				<CustomerEmptyState message='Sizda hali maskanlar yo‘q' />
 			) : (
 				<ul className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
-					{venues.map(venue => (
+					{venues.map(venue => {
+						const imageSrc = resolveVenueImageUrl(venue)
+
+						return (
 						<li
 							key={venue.id}
 							className='flex flex-col overflow-hidden rounded-[var(--radius-lg)] border'
@@ -61,9 +64,9 @@ export default function OwnerVenuesPage() {
 									backgroundColor: 'var(--color-surface-secondary)',
 								}}
 							>
-								{venue.imageUrl ? (
+								{imageSrc ? (
 									<img
-										src={resolveImageUrl(venue.imageUrl) ?? ''}
+										src={imageSrc}
 										alt={venue.name}
 										className='size-full object-cover'
 									/>
@@ -108,7 +111,7 @@ export default function OwnerVenuesPage() {
 								</Link>
 							</div>
 						</li>
-					))}
+					)})}
 				</ul>
 			)}
 		</div>

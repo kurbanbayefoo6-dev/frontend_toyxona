@@ -1,6 +1,6 @@
 import type { UserRole } from '@/types/auth'
-import type { VenueStatus } from '@/types/venue'
 import type { BookingStatus } from '@/types/booking'
+import type { VenueImageRef, VenueStatus } from '@/types/venue'
 
 export type AdminDashboardSummary = {
 	totalUsers: number
@@ -58,6 +58,9 @@ export type AdminVenue = {
 	status: VenueStatus
 	createdAt: string
 	imageUrl?: string | null
+	coverImage?: string | null
+	image?: string | null
+	images?: VenueImageRef[]
 }
 
 export type AdminBooking = {
