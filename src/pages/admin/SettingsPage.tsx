@@ -30,7 +30,7 @@ export default function AdminSettingsPage() {
 				</h2>
 				<dl className='space-y-3 text-sm'>
 					<SettingsRow label='Loyiha' value={APP_NAME} />
-					<SettingsRow label='Frontend versiyasi' value={FRONTEND_VERSION} />
+					<SettingsRow label='Interfeys versiyasi' value={FRONTEND_VERSION} />
 					<SettingsRow label='Muhit' value={modeLabel} />
 				</dl>
 			</section>

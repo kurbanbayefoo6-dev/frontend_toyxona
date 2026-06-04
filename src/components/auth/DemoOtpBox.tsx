@@ -10,7 +10,7 @@ export function DemoOtpBox() {
 			role='status'
 		>
 			<span className='font-medium' style={{ color: 'var(--color-pending)' }}>
-				Demo OTP:
+				Sinov tasdiqlash kodi:
 			</span>{' '}
 			<span className='font-mono text-base font-semibold tracking-widest'>
 				111111

@@ -12,9 +12,9 @@ export function HomeHeroStats({
 	isLoading = false,
 }: HomeHeroStatsProps) {
 	const items = [
-		{ label: 'Venues', value: venueCount },
-		{ label: 'Active bookings', value: activeBookingsCount },
-		{ label: 'Approved partners', value: approvedVenueCount },
+		{ label: 'Maskanlar', value: venueCount },
+		{ label: 'Faol bandlovlar', value: activeBookingsCount },
+		{ label: 'Tasdiqlangan hamkorlar', value: approvedVenueCount },
 	]
 
 	return (

@@ -38,6 +38,18 @@ export function getBookingStatusLabel(status: BookingDisplayStatus): string {
 	return BOOKING_STATUS_LABELS[status]
 }
 
+/** API booking.status values shown in timelines and lists */
+export function getApiBookingStatusLabel(status: string): string {
+	const labels: Record<string, string> = {
+		upcoming: 'Yaqinlashayotgan',
+		completed: 'Yakunlangan',
+		cancelled: 'Bekor qilingan',
+		pending: 'Kutilmoqda',
+		confirmed: 'Tasdiqlangan',
+	}
+	return labels[status] ?? status
+}
+
 export function getPaymentStatusLabel(
 	status: PaymentListItem['paymentStatus'],
 ): string {

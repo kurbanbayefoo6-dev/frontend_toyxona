@@ -22,7 +22,7 @@ import {
 import { AUTH_TOAST } from '@/utils/toastMessages'
 
 const loginSchema = z.object({
-	identifier: z.string().min(1, 'Login yoki email kiriting'),
+	identifier: z.string().min(1, 'Foydalanuvchi nomi yoki elektron pochta kiriting'),
 	password: z.string().min(1, 'Parol kiriting'),
 })
 
@@ -93,7 +93,7 @@ export default function LoginPage() {
 				error.response?.status === 403 &&
 				values.identifier.includes('@')
 			) {
-				toast.error('Hisob tasdiqlanmagan. OTP kodini kiriting.')
+				toast.error('Hisob tasdiqlanmagan. Tasdiqlash kodini kiriting.')
 				navigate(
 					`/verify-otp?email=${encodeURIComponent(values.identifier)}`,
 				)
@@ -130,11 +130,11 @@ export default function LoginPage() {
 				{serverError && <Alert variant='error'>{serverError}</Alert>}
 
 				<FormField
-					label='Login yoki email'
-					placeholder='username yoki email'
+					label='Foydalanuvchi nomi yoki elektron pochta'
+					placeholder='foydalanuvchi nomi yoki elektron pochta'
 					autoComplete='username'
 					disabled={isSubmitting}
-					hint='Foydalanuvchi nomi yoki email manzili'
+					hint='Foydalanuvchi nomi yoki elektron pochta manzili'
 					error={form.formState.errors.identifier?.message}
 					{...form.register('identifier')}
 				/>

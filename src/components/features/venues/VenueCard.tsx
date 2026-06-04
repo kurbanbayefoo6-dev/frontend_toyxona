@@ -6,7 +6,7 @@ import { FavoriteButton } from '@/components/features/venues/FavoriteButton'
 import { Button } from '@/components/ui/Button'
 import type { Venue } from '@/types/venue'
 import { formatCurrency } from '@/utils/formatCurrency'
-import { resolveVenueImageUrl } from '@/utils/imageUrl'
+import { logImageRenderDebug, resolveVenueImageUrl } from '@/utils/imageUrl'
 
 type VenueCardProps = {
 	venue: Venue
@@ -18,6 +18,8 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 	const isApproved = venue.status === 'approved'
 	const [imageFailed, setImageFailed] = useState(false)
 	const imageSrc = resolveVenueImageUrl(venue)
+
+	logImageRenderDebug('VenueCard', venue, imageSrc)
 
 	return (
 		<article className='group product-card flex min-h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-md)]'>
@@ -52,7 +54,15 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 							alt={venue.name}
 							className='size-full object-cover transition duration-500 group-hover:scale-105'
 							loading='lazy'
-							onError={() => setImageFailed(true)}
+							onError={() => {
+								if (import.meta.env.DEV) {
+									console.warn(
+										'[image-render:VenueCard] img onError — showing placeholder',
+										{ venueId: venue.id, src: imageSrc },
+									)
+								}
+								setImageFailed(true)
+							}}
 						/>
 					) : (
 						<div className='flex size-full items-center justify-center'>

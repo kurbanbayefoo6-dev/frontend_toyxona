@@ -49,7 +49,7 @@ export default function AdminOwnersPage() {
 	if (isLoading) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>Ownerlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>Egalar</h1>
 				<AdminTableSkeleton />
 			</div>
 		)
@@ -58,11 +58,11 @@ export default function AdminOwnersPage() {
 	if (isError) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>Ownerlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>Egalar</h1>
 				<VenueListError
 					message={getApiErrorMessage(
 						ownersQuery.error,
-						'Ownerlar yuklanmadi',
+						'Egalar yuklanmadi',
 					)}
 					onRetry={() => void ownersQuery.refetch()}
 					isRetrying={ownersQuery.isFetching}
@@ -78,14 +78,14 @@ export default function AdminOwnersPage() {
 					className='text-2xl font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					Ownerlar
+					Egalar
 				</h1>
 				<Button
 					type='button'
 					className='!w-auto px-4'
 					onClick={() => setCreateOpen(true)}
 				>
-					Yangi owner qo‘shish
+					Yangi ega qo‘shish
 				</Button>
 			</div>
 
@@ -99,7 +99,7 @@ export default function AdminOwnersPage() {
 			/>
 
 			<AdminTable
-				headers={['Owner', 'Maskanlar', 'Telefon', 'Email']}
+				headers={['Ega', 'Maskanlar', 'Telefon', 'Elektron pochta']}
 				rows={owners.map(owner => {
 					const name =
 						`${owner.firstName} ${owner.lastName}`.trim() ||
@@ -118,7 +118,7 @@ export default function AdminOwnersPage() {
 						),
 					}
 				})}
-				emptyMessage='Ownerlar topilmadi'
+				emptyMessage='Egalar topilmadi'
 			/>
 
 			<div className='mt-6'>

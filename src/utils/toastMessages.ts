@@ -1,13 +1,13 @@
 export const AUTH_TOAST = {
 	registerSuccess: 'Ro‘yxatdan o‘tish muvaffaqiyatli',
-	otpVerified: 'OTP tasdiqlandi',
+	otpVerified: 'Tasdiqlash kodi qabul qilindi',
 	loginSuccess: 'Kirish muvaffaqiyatli',
 	forgotPasswordSent: 'Parol tiklash havolasi yuborildi',
 	passwordResetSuccess: 'Parol muvaffaqiyatli yangilandi',
 	resendOtpSuccess: 'Yangi OTP kodi yuborildi',
 	logoutSuccess: 'Tizimdan chiqildi',
-	invalidCredentials: 'Noto‘g‘ri email yoki parol',
-	invalidOtp: 'OTP noto‘g‘ri',
+	invalidCredentials: 'Noto‘g‘ri elektron pochta yoki parol',
+	invalidOtp: 'Tasdiqlash kodi noto‘g‘ri',
 	networkError: 'Server bilan bog‘lanib bo‘lmadi',
 } as const
 

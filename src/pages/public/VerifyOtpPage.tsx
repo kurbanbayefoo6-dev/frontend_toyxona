@@ -38,9 +38,9 @@ import { AUTH_TOAST } from '@/utils/toastMessages'
 
 const verifySchema = z.object({
 
-	email: z.string().email('Email noto‘g‘ri'),
+	email: z.string().email('Elektron pochta noto‘g‘ri'),
 
-	otpCode: z.string().min(1, 'OTP kod majburiy'),
+	otpCode: z.string().min(1, 'Tasdiqlash kodi majburiy'),
 
 })
 
@@ -182,7 +182,7 @@ export default function VerifyOtpPage() {
 
 		if (!emailValue) {
 
-			const msg = 'Avval email manzilini kiriting'
+			const msg = 'Avval elektron pochta manzilini kiriting'
 
 			setServerError(msg)
 
@@ -250,9 +250,9 @@ export default function VerifyOtpPage() {
 
 		<AuthCard
 
-			title='Emailni tasdiqlash'
+			title='Elektron pochtani tasdiqlash'
 
-			subtitle='Hisobingizni faollashtirish uchun OTP kodini kiriting'
+			subtitle='Hisobingizni faollashtirish uchun tasdiqlash kodini kiriting'
 
 			size='compact'
 
@@ -288,7 +288,7 @@ export default function VerifyOtpPage() {
 
 				<FormField
 
-					label='Email'
+					label='Elektron pochta'
 
 					type='email'
 
@@ -312,7 +312,7 @@ export default function VerifyOtpPage() {
 
 				<FormField
 
-					label='OTP kod'
+					label='Tasdiqlash kodi'
 
 					placeholder='123456'
 

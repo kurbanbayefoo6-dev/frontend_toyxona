@@ -77,7 +77,7 @@ export function BookingSuccessView({
 						highlight
 					/>
 					<SuccessRow
-						label='Tranzaksiya ID'
+						label='Tranzaksiya raqami'
 						value={data.transactionId}
 						mono
 					/>

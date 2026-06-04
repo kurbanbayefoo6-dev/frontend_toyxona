@@ -17,7 +17,7 @@ const registerSchema = z.object({
 	firstName: z.string().min(1, 'Ism majburiy'),
 	lastName: z.string().min(1, 'Familiya majburiy'),
 	username: z.string().min(1, 'Foydalanuvchi nomi majburiy'),
-	email: z.string().email('Email noto‘g‘ri'),
+	email: z.string().email('Elektron pochta noto‘g‘ri'),
 	phone: z.string().min(1, 'Telefon raqami majburiy'),
 	password: z
 		.string()
@@ -120,7 +120,7 @@ export default function RegisterPage() {
 
 				<FormField
 					label='Foydalanuvchi nomi'
-					placeholder='username'
+					placeholder='foydalanuvchi nomi'
 					hint='Boshqa foydalanuvchilardan farqli nom tanlang'
 					disabled={isSubmitting}
 					error={form.formState.errors.username?.message}
@@ -128,7 +128,7 @@ export default function RegisterPage() {
 				/>
 
 				<FormField
-					label='Email'
+					label='Elektron pochta'
 					type='email'
 					placeholder='email@misol.uz'
 					autoComplete='email'

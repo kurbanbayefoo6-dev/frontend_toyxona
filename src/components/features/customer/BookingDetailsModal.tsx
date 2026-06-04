@@ -67,7 +67,7 @@ export function BookingDetailsModal({
 						/>
 					</dd>
 				</div>
-				<DetailRow label='Bron ID' value={`#${booking.id}`} />
+				<DetailRow label='Bron raqami' value={`#${booking.id}`} />
 			</dl>
 			<div className='mt-5 flex flex-col gap-2 sm:flex-row'>
 				<Link

@@ -7,7 +7,7 @@ import { Topbar } from '@/components/layout/Topbar'
 export const adminLinks = [
 	{ to: '/admin/dashboard', label: 'Bosh sahifa' },
 	{ to: '/admin/users', label: 'Foydalanuvchilar' },
-	{ to: '/admin/owners', label: 'Ownerlar' },
+	{ to: '/admin/owners', label: 'Egalar' },
 	{ to: '/admin/venues', label: 'Maskanlar' },
 	{ to: '/admin/bookings', label: 'Bandlovlar' },
 	{ to: '/admin/payments', label: 'To‘lovlar' },

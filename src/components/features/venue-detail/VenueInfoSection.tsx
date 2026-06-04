@@ -14,7 +14,7 @@ export function VenueInfoSection({ venue }: VenueInfoSectionProps) {
 		<section className='product-card p-5 sm:p-7'>
 			<div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between'>
 				<div>
-					<p className='section-kicker'>Venue detail</p>
+					<p className='section-kicker'>Maskan tafsilotlari</p>
 					<h1 className='mt-2 text-3xl font-black leading-tight sm:text-5xl'>
 						{venue.name}
 					</h1>
@@ -23,18 +23,18 @@ export function VenueInfoSection({ venue }: VenueInfoSectionProps) {
 			</div>
 
 			<div className='mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4'>
-				<InfoPill icon={<MapPin className='size-4' />} label='District' value={venue.district} />
-				<InfoPill icon={<Users className='size-4' />} label='Capacity' value={`${venue.capacity} guests`} />
-				<InfoPill icon={<Phone className='size-4' />} label='Phone' value={venue.phone} />
-				<InfoPill icon={<WalletCards className='size-4' />} label='Price' value={`${formatCurrency(venue.pricePerSeat)} / seat`} />
+				<InfoPill icon={<MapPin className='size-4' />} label='Tuman' value={venue.district} />
+				<InfoPill icon={<Users className='size-4' />} label='Sig‘im' value={`${venue.capacity} mehmon`} />
+				<InfoPill icon={<Phone className='size-4' />} label='Telefon' value={venue.phone} />
+				<InfoPill icon={<WalletCards className='size-4' />} label='Narx' value={`${formatCurrency(venue.pricePerSeat)} / o‘rin`} />
 			</div>
 
 			<div className='mt-6 rounded-[var(--radius-lg)] bg-[var(--color-surface-secondary)] p-5'>
-				<h2 className='text-lg font-black'>About this venue</h2>
+				<h2 className='text-lg font-black'>Bu maskan haqida</h2>
 				<p className='mt-2 leading-relaxed text-[var(--color-text-secondary)]'>
-					{venue.name} is located at {venue.address}. The hall supports up to{' '}
-					{venue.capacity} guests and is suited for weddings, family events,
-					and celebrations that need reliable services in one place.
+					{venue.name} {venue.address} manzilida joylashgan. Zal {venue.capacity}{' '}
+					mehmongacha, to‘y va oilaviy tadbirlar uchun mos. Barcha xizmatlar bir
+					joyda.
 				</p>
 			</div>
 		</section>

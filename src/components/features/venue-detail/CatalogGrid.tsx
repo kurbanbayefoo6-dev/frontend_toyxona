@@ -28,11 +28,11 @@ export function CatalogGrid({
 		<section className='product-card p-5 sm:p-6'>
 			<div className='mb-4 flex items-end justify-between gap-4'>
 				<div>
-					<p className='section-kicker'>Services</p>
+					<p className='section-kicker'>Xizmatlar</p>
 					<h2 className='text-2xl font-black'>{title}</h2>
 				</div>
 				{items.length > 0 ? (
-					<span className='premium-badge'>{items.length} options</span>
+					<span className='premium-badge'>{items.length} ta variant</span>
 				) : null}
 			</div>
 			{items.length === 0 ? (

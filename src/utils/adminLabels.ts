@@ -3,7 +3,7 @@ import type { UserRole } from '@/types/auth'
 export function getUserRoleLabel(role: UserRole): string {
 	switch (role) {
 		case 'admin':
-			return 'Administrator'
+			return 'Boshqaruvchi'
 		case 'owner':
 			return 'Sahib'
 		case 'customer':

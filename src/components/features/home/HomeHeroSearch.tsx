@@ -37,7 +37,7 @@ export function HomeHeroSearch({
 		>
 			<label className='flex min-w-0 flex-col gap-1'>
 				<span className='px-1 text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
-					Search venues
+					Maskan qidirish
 				</span>
 				<div className='relative min-w-0'>
 					<Search
@@ -47,19 +47,19 @@ export function HomeHeroSearch({
 					/>
 					<Input
 						type='search'
-						placeholder='Venue name, address, district...'
+						placeholder='Maskan nomi, manzil, tuman...'
 						value={search}
 						onChange={e => onSearchChange(e.target.value)}
 						disabled={disabled}
 						className='py-3 pl-11 text-base'
-						aria-label='Search'
+						aria-label='Qidiruv'
 					/>
 				</div>
 			</label>
 
 			<label className='flex min-w-0 flex-col gap-1'>
 				<span className='px-1 text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
-					District
+					Tuman
 				</span>
 				<Select
 					value={district ?? ''}
@@ -70,9 +70,9 @@ export function HomeHeroSearch({
 					}
 					disabled={disabled}
 					className='py-3 text-base'
-					aria-label='District'
+					aria-label='Tuman'
 				>
-					<option value=''>All districts</option>
+					<option value=''>Barcha tumanlar</option>
 					{DISTRICTS.map(d => (
 						<option key={d} value={d}>
 							{d}
@@ -86,7 +86,7 @@ export function HomeHeroSearch({
 				disabled={disabled}
 				className='h-[50px] shrink-0 px-7 text-base sm:w-auto'
 			>
-				Search
+				Qidirish
 			</Button>
 		</form>
 	)

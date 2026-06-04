@@ -82,7 +82,7 @@ export function PaymentModal({
 						onChange={e =>
 							setCardHolder(maskCardHolder(e.target.value))
 						}
-						placeholder='ISM FAMILIYA'
+						placeholder='TO‘LIQ ISM'
 						autoComplete='cc-name'
 						disabled={isProcessing}
 					/>
@@ -114,7 +114,7 @@ export function PaymentModal({
 							disabled={isProcessing}
 						/>
 					</Field>
-					<Field label='CVV'>
+					<Field label='Xavfsizlik kodi'>
 						<Input
 							value={cvv}
 							onChange={e => setCvv(maskCvv(e.target.value))}

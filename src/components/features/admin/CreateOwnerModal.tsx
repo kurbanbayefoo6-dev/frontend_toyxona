@@ -13,9 +13,10 @@ import { getApiErrorMessage } from '@/utils/authErrors'
 const schema = z.object({
 	firstName: z.string().min(1, 'Ism kiriting'),
 	lastName: z.string().min(1, 'Familiya kiriting'),
-	email: z.string().email('Email noto‘g‘ri'),
-	username: z.string().min(3, 'Login kamida 3 belgi'),
+	email: z.string().email('Elektron pochta noto‘g‘ri'),
+	username: z.string().min(3, 'Foydalanuvchi nomi kamida 3 belgi'),
 	password: z.string().min(6, 'Parol kamida 6 belgi'),
+	phone: z.string().optional(),
 })
 
 type FormValues = z.infer<typeof schema>
@@ -39,24 +40,25 @@ export function CreateOwnerModal({
 			email: '',
 			username: '',
 			password: '',
+			phone: '',
 		},
 	})
 
 	const mutation = useMutation({
 		mutationFn: (values: FormValues) => createOwnerByAdmin(values),
 		onSuccess: () => {
-			toast.success('Owner yaratildi. U darhol tizimga kira oladi.')
+			toast.success('Ega yaratildi. U darhol tizimga kira oladi.')
 			form.reset()
 			onCreated()
 			onClose()
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Owner yaratib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Ega yaratib bo‘lmadi'))
 		},
 	})
 
 	return (
-		<Modal open={open} onClose={onClose} title='Yangi owner qo‘shish' size='lg'>
+		<Modal open={open} onClose={onClose} title='Yangi ega qo‘shish' size='lg'>
 			<form
 				onSubmit={form.handleSubmit(values => mutation.mutate(values))}
 				className='flex flex-col gap-3'
@@ -73,13 +75,13 @@ export function CreateOwnerModal({
 					{...form.register('lastName')}
 				/>
 				<FormField
-					label='Email'
+					label='Elektron pochta'
 					type='email'
 					error={form.formState.errors.email?.message}
 					{...form.register('email')}
 				/>
 				<FormField
-					label='Login (username)'
+					label='Foydalanuvchi nomi'
 					error={form.formState.errors.username?.message}
 					{...form.register('username')}
 				/>
@@ -89,11 +91,18 @@ export function CreateOwnerModal({
 					error={form.formState.errors.password?.message}
 					{...form.register('password')}
 				/>
+				<FormField
+					label='Telefon (ixtiyoriy)'
+					type='tel'
+					placeholder='+998901234567'
+					error={form.formState.errors.phone?.message}
+					{...form.register('phone')}
+				/>
 				<p
 					className='text-xs'
 					style={{ color: 'var(--color-text-hint)' }}
 				>
-					Owner avtomatik tasdiqlangan hisob bilan yaratiladi va login qilishi mumkin.
+					Ega avtomatik tasdiqlangan hisob bilan yaratiladi va darhol kirishi mumkin.
 				</p>
 				<Button type='submit' loading={mutation.isPending} className='mt-2'>
 					Saqlash

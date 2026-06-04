@@ -93,13 +93,13 @@ export default function AdminUsersPage() {
 						{ value: '', label: 'Barchasi' },
 						{ value: 'customer', label: 'Mijoz' },
 						{ value: 'owner', label: 'Sahib' },
-						{ value: 'admin', label: 'Administrator' },
+						{ value: 'admin', label: 'Boshqaruvchi' },
 					]}
 				/>
 			</AdminToolbar>
 
 			<AdminTable
-				headers={['Ism', 'Email', 'Telefon', 'Rol', 'Holat']}
+				headers={['Ism', 'Elektron pochta', 'Telefon', 'Rol', 'Holat']}
 				rows={users.map(user => buildUserRow(user))}
 				emptyMessage='Foydalanuvchilar topilmadi'
 			/>

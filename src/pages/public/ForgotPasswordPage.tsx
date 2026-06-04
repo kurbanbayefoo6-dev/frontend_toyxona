@@ -14,7 +14,10 @@ import { handleAuthError } from '@/utils/handleAuthError'
 import { AUTH_TOAST } from '@/utils/toastMessages'
 
 const forgotSchema = z.object({
-	email: z.string().min(1, 'Email majburiy').email('Email noto‘g‘ri'),
+	email: z
+		.string()
+		.min(1, 'Elektron pochta majburiy')
+		.email('Elektron pochta noto‘g‘ri'),
 })
 
 type ForgotFormValues = z.infer<typeof forgotSchema>
@@ -65,7 +68,7 @@ export default function ForgotPasswordPage() {
 	return (
 		<AuthCard
 			title='Parolni tiklash'
-			subtitle='Email manzilingizni kiriting — tiklash havolasini yuboramiz'
+			subtitle='Elektron pochta manzilingizni kiriting — tiklash havolasini yuboramiz'
 			size='compact'
 			footer={
 				<p style={{ color: 'var(--color-text-secondary)' }}>
@@ -91,7 +94,7 @@ export default function ForgotPasswordPage() {
 					{serverError && <Alert variant='error'>{serverError}</Alert>}
 
 					<FormField
-						label='Email'
+						label='Elektron pochta'
 						type='email'
 						placeholder='email@misol.uz'
 						autoComplete='email'

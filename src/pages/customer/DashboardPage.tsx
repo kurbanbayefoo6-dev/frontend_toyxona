@@ -15,7 +15,10 @@ import { useCustomerBookings } from '@/hooks/useCustomerBookings'
 import { useCustomerFavorites } from '@/hooks/useCustomerFavorites'
 import { useCustomerPayments } from '@/hooks/useCustomerPayments'
 import { getApiErrorMessage } from '@/utils/authErrors'
-import { isUpcomingBooking } from '@/utils/customerStatus'
+import {
+	getApiBookingStatusLabel,
+	isUpcomingBooking,
+} from '@/utils/customerStatus'
 import { formatCurrency } from '@/utils/formatCurrency'
 
 export default function CustomerDashboardPage() {
@@ -35,7 +38,7 @@ export default function CustomerDashboardPage() {
 
 	const errorMessage = getApiErrorMessage(
 		bookingsQuery.error ?? paymentsQuery.error ?? favoritesQuery.error,
-		'Malumotlar yuklanmadi',
+		'Ma’lumotlar yuklanmadi',
 	)
 
 	const stats = useMemo(() => {
@@ -50,9 +53,9 @@ export default function CustomerDashboardPage() {
 			paidTotal,
 			timeline: bookings.slice(0, 5).map(item => ({
 				id: item.id,
-				title: `Booking #${item.id}`,
-				meta: `${item.bookingDate.split('T')[0]} - ${item.guestCount} guests - ${formatCurrency(item.totalPrice)}`,
-				status: item.status,
+				title: `Bron #${item.id}`,
+				meta: `${item.bookingDate.split('T')[0]} — ${item.guestCount} mehmon — ${formatCurrency(item.totalPrice)}`,
+				status: getApiBookingStatusLabel(item.status),
 			})),
 		}
 	}, [bookingsQuery.data, paymentsQuery.data, favoritesQuery.data])
@@ -83,67 +86,67 @@ export default function CustomerDashboardPage() {
 
 	return (
 		<DashboardShell
-			kicker='Customer dashboard'
-			title='Plan, track, and pay from one calm place'
-			subtitle='A modern overview of bookings, payments, favorite venues, and the next planning moves.'
+			kicker='Mijoz boshqaruv paneli'
+			title='Rejalashtiring, kuzating va bitta joydan to‘lang'
+			subtitle='Bandlovlar, to‘lovlar, sevimlilar va keyingi qadamlarning umumiy ko‘rinishi.'
 			actions={
 				<Link to='/'>
 					<Button className='sm:w-auto'>
 						<Search className='size-4' />
-						Find venues
+						Maskan qidirish
 					</Button>
 				</Link>
 			}
 		>
 			<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4'>
 				<MetricCard
-					label='Total bookings'
+					label='Jami bandlovlar'
 					value={stats.totalBookings}
-					helper='All reservations created'
+					helper='Yaratilgan barcha bronlar'
 				/>
 				<MetricCard
-					label='Upcoming'
+					label='Yaqinlashayotgan'
 					value={stats.upcomingBookings}
-					helper='Bookings still ahead'
+					helper='Oldinda turgan bandlovlar'
 					tone='success'
 				/>
 				<MetricCard
-					label='Payments'
+					label='To‘lovlar'
 					value={stats.totalPayments}
-					helper={`Advance paid: ${formatCurrency(stats.paidTotal)}`}
+					helper={`Oldindan to‘langan: ${formatCurrency(stats.paidTotal)}`}
 					tone='accent'
 				/>
 				<MetricCard
-					label='Favorites'
+					label='Sevimlilar'
 					value={stats.totalFavorites}
-					helper='Saved venues for comparison'
+					helper='Solishtirish uchun saqlangan maskanlar'
 					tone='warning'
 				/>
 			</div>
 
 			<div className='grid gap-5 xl:grid-cols-[1.2fr_0.8fr]'>
 				<Timeline
-					title='Booking timeline'
+					title='Bandlovlar vaqti'
 					items={stats.timeline}
-					empty='No bookings yet. Start with a venue search.'
+					empty='Hali bandlov yo‘q. Maskan qidiruvidan boshlang.'
 				/>
 
 				<section className='product-card p-5'>
-					<h2 className='text-xl font-black'>Planning shortcuts</h2>
+					<h2 className='text-xl font-black'>Tezkor havolalar</h2>
 					<div className='mt-5 grid gap-3'>
 						<Shortcut
 							icon={<CalendarDays className='size-5' />}
-							title='Review bookings'
+							title='Bandlovlarni ko‘rish'
 							href='/customer/bookings'
 						/>
 						<Shortcut
 							icon={<ReceiptText className='size-5' />}
-							title='Check payments'
+							title='To‘lovlarni tekshirish'
 							href='/customer/payments'
 						/>
 						<Shortcut
 							icon={<Heart className='size-5' />}
-							title='Compare favorites'
+							title='Sevimlilarni solishtirish'
 							href='/customer/favorites'
 						/>
 					</div>

@@ -3,18 +3,22 @@ import axios from 'axios'
 import type { ApiErrorResponse } from '@/types/api'
 
 const ERROR_MESSAGES_UZ: Record<string, string> = {
-	'Identifier and password are required': 'Login va parol majburiy',
-	'Invalid credentials': 'Noto‘g‘ri email yoki parol',
-	'User is not verified': 'Hisob tasdiqlanmagan. OTP kodini kiriting.',
-	'Email and otpCode are required': 'Email va OTP kodi majburiy',
-	'Invalid or expired OTP': 'OTP noto‘g‘ri',
-	'Email is required': 'Email majburiy',
+	'Identifier and password are required':
+		'Foydalanuvchi nomi va parol majburiy',
+	'Invalid credentials': 'Noto‘g‘ri elektron pochta yoki parol',
+	'User is not verified': 'Hisob tasdiqlanmagan. Tasdiqlash kodini kiriting.',
+	'Email and otpCode are required':
+		'Elektron pochta va tasdiqlash kodi majburiy',
+	'Invalid or expired OTP': 'Tasdiqlash kodi noto‘g‘ri yoki muddati tugagan',
+	'Email is required': 'Elektron pochta majburiy',
 	'User not found': 'Foydalanuvchi topilmadi',
 	'User already verified': 'Hisob allaqachon tasdiqlangan',
 	'All fields are required': 'Barcha maydonlarni to‘ldiring',
-	'Email already exists': 'Bu email allaqachon ro‘yxatdan o‘tgan',
+	'Email already exists':
+		'Bu elektron pochta allaqachon ro‘yxatdan o‘tgan',
 	'Username already exists': 'Bu foydalanuvchi nomi band',
-	'Token and newPassword are required': 'Token va yangi parol majburiy',
+	'Token and newPassword are required':
+		'Tiklash kaliti va yangi parol majburiy',
 	'Password must be at least 6 characters':
 		'Parol kamida 6 ta belgidan iborat bo‘lsin',
 	'Invalid or expired reset token':

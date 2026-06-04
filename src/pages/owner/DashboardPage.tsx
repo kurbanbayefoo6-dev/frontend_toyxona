@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/Button'
 import { useOwnerBookings } from '@/hooks/useOwnerBookings'
 import { useOwnerVenues } from '@/hooks/useOwnerVenues'
 import { getApiErrorMessage } from '@/utils/authErrors'
+import { getApiBookingStatusLabel } from '@/utils/customerStatus'
 import { formatCurrency } from '@/utils/formatCurrency'
 
 export default function OwnerDashboardPage() {
@@ -36,9 +37,9 @@ export default function OwnerDashboardPage() {
 			revenue,
 			activity: bookings.slice(0, 5).map(item => ({
 				id: item.id,
-				title: `Booking #${item.id}`,
-				meta: `${item.bookingDate.split('T')[0]} - ${item.guestCount} guests - advance ${formatCurrency(item.advanceAmount)}`,
-				status: item.status,
+				title: `Bron #${item.id}`,
+				meta: `${item.bookingDate.split('T')[0]} — ${item.guestCount} mehmon — oldindan ${formatCurrency(item.advanceAmount)}`,
+				status: getApiBookingStatusLabel(item.status),
 			})),
 		}
 	}, [venuesQuery.data, bookingsQuery.data])
@@ -57,7 +58,7 @@ export default function OwnerDashboardPage() {
 			<VenueListError
 				message={getApiErrorMessage(
 					venuesQuery.error ?? bookingsQuery.error,
-					'Malumotlar yuklanmadi',
+					'Ma’lumotlar yuklanmadi',
 				)}
 				onRetry={handleRetry}
 				isRetrying={venuesQuery.isFetching || bookingsQuery.isFetching}
@@ -69,70 +70,70 @@ export default function OwnerDashboardPage() {
 
 	return (
 		<DashboardShell
-			kicker='Owner workspace'
-			title='Operate venues like a real SaaS product'
-			subtitle='Track venue approvals, booking activity, and revenue signals from one focused owner cockpit.'
+			kicker='Egasi ish maydoni'
+			title='Maskanlarni boshqarish markazi'
+			subtitle='Tasdiqlar, bandlovlar va daromad signallarini bitta paneldan kuzating.'
 			actions={
 				<Link to='/owner/venues/new'>
 					<Button className='sm:w-auto'>
 						<Plus className='size-4' />
-						Add venue
+						Maskan qo‘shish
 					</Button>
 				</Link>
 			}
 		>
 			<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4'>
 				<MetricCard
-					label='Venues'
+					label='Maskanlar'
 					value={stats.totalVenues}
-					helper='All owned venues'
+					helper='Barcha egalik maskanlar'
 					tone='accent'
 				/>
 				<MetricCard
-					label='Approved'
+					label='Tasdiqlangan'
 					value={stats.approved}
-					helper='Live in marketplace'
+					helper='Bozorda faol'
 					tone='success'
 				/>
 				<MetricCard
-					label='Pending'
+					label='Kutilmoqda'
 					value={stats.pending}
-					helper='Waiting for admin review'
+					helper='Boshqaruv tasdiqini kutmoqda'
 					tone='warning'
 				/>
 				<MetricCard
-					label='Bookings'
+					label='Bandlovlar'
 					value={stats.totalBookings}
-					helper={`Advance revenue ${formatCurrency(stats.revenue)}`}
+					helper={`Oldindan to‘lov daromadi ${formatCurrency(stats.revenue)}`}
 				/>
 			</div>
 
 			<div className='grid gap-5 xl:grid-cols-[0.9fr_1.1fr]'>
 				<BarList
-					title='Venue health'
+					title='Maskan holati'
 					items={[
-						{ label: 'Approved', value: stats.approved, max: maxVenueMetric },
-						{ label: 'Pending', value: stats.pending, max: maxVenueMetric },
+						{ label: 'Tasdiqlangan', value: stats.approved, max: maxVenueMetric },
+						{ label: 'Kutilmoqda', value: stats.pending, max: maxVenueMetric },
 					]}
 				/>
 				<Timeline
-					title='Activity feed'
+					title='Faollik lentasi'
 					items={stats.activity}
-					empty='No bookings yet. Published venues will appear here once customers book.'
+					empty='Hali bandlov yo‘q. Mijozlar band qilgach, nashr qilingan maskanlar shu yerda ko‘rinadi.'
 				/>
 			</div>
 
 			<div className='grid gap-4 md:grid-cols-2'>
 				<OwnerAction
 					icon={<Building2 className='size-5' />}
-					title='Manage venues'
-					text='Edit listings, images, catalog, and publication status.'
+					title='Maskanlarni boshqarish'
+					text='E’lonlar, rasmlar, katalog va nashr holatini tahrirlang.'
 					href='/owner/venues'
 				/>
 				<OwnerAction
 					icon={<CalendarClock className='size-5' />}
-					title='Review bookings'
-					text='Follow customer reservations and booking status.'
+					title='Bandlovlarni ko‘rish'
+					text='Mijoz bronlari va holatini kuzating.'
 					href='/owner/bookings'
 				/>
 			</div>

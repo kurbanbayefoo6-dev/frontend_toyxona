@@ -1,10 +1,11 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { format } from 'date-fns'
+import { uz } from 'date-fns/locale'
 import { useState } from 'react'
 
 import type { CalendarDayStatus, VenueAvailability } from '@/types/venueDetail'
 import {
 	addMonths,
-	format,
 	getCalendarDays,
 	getDayStatus,
 	isSameMonth,
@@ -71,7 +72,7 @@ export function BookingCalendar({
 					className='text-sm font-semibold capitalize'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					{format(currentMonth, 'LLLL yyyy')}
+					{format(currentMonth, 'LLLL yyyy', { locale: uz })}
 				</span>
 				<button
 					type='button'
@@ -143,7 +144,7 @@ export function BookingCalendar({
 									? { outlineColor: 'var(--color-brand)' }
 									: {}),
 							}}
-							aria-label={`${format(day, 'd MMMM')}${
+							aria-label={`${format(day, 'd MMMM', { locale: uz })}${
 								isPast ? ' — o‘tgan' : isBooked ? ' — band' : ' — bo‘sh'
 							}`}
 						>

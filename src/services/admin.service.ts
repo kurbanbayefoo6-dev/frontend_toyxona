@@ -111,6 +111,7 @@ export type CreateOwnerByAdminPayload = {
 	email: string
 	username: string
 	password: string
+	phone?: string
 }
 
 function normalizeAdminUser(raw: AdminUser & { id?: number | string }): AdminUser {

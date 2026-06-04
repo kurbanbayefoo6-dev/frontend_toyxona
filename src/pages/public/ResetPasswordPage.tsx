@@ -52,7 +52,7 @@ export default function ResetPasswordPage() {
 
 		if (!resetToken) {
 			const msg =
-				'Tiklash havolasi topilmadi. Emaildagi havoladan kiring yoki qayta so‘rang.'
+				'Tiklash havolasi topilmadi. Elektron pochtadagi havoladan kiring yoki qayta so‘rang.'
 			setServerError(msg)
 			toast.error(msg)
 			return
@@ -103,7 +103,7 @@ export default function ResetPasswordPage() {
 				}
 			>
 				<Alert variant='error'>
-					Tiklash tokeni topilmadi. Emaildagi havoladan kiring yoki parolni
+					Tiklash kaliti topilmadi. Elektron pochtadagi havoladan kiring yoki parolni
 					qayta tiklashni so‘rang.
 				</Alert>
 				<Button

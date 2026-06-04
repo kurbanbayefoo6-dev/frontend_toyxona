@@ -25,7 +25,7 @@ export function HomeHero({
 				className='absolute inset-0 bg-cover bg-center bg-no-repeat'
 				style={{ backgroundImage: `url(${HERO_WEDDING_HALL_IMAGE})` }}
 				role='img'
-				aria-label='Wedding hall interior'
+				aria-label='To‘y zali interyeri'
 			/>
 			<div className='absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-black/70' aria-hidden />
 			<div className='absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[var(--color-page-bg)] to-transparent' aria-hidden />
@@ -33,21 +33,21 @@ export function HomeHero({
 			<div className='relative z-10 flex w-full flex-col items-center gap-8 px-4 pb-14 pt-28 text-center sm:gap-10 lg:pb-20'>
 				<div className='mx-auto flex max-w-5xl flex-col items-center gap-5'>
 					<span className='premium-badge border-white/30 bg-white/15 text-white backdrop-blur-md'>
-						Curated wedding venues across Tashkent
+						Toshkent bo‘ylab tanlangan to‘y maskanlari
 					</span>
 					<h1
 						id='home-hero-title'
 						className='max-w-4xl text-4xl font-black leading-[1.02] sm:text-5xl lg:text-7xl'
 						style={{ color: '#ffffff' }}
 					>
-						Find the venue that makes the whole day feel effortless
+						Butun kun oson o‘tadigan maskanni toping
 					</h1>
 					<p
 						className='mx-auto max-w-2xl text-base leading-relaxed sm:text-lg lg:text-xl'
 						style={{ color: 'rgba(255, 255, 255, 0.92)' }}
 					>
-						Search, compare, and book premium halls with transparent pricing,
-						availability, and services in one modern marketplace.
+						Qidiring, solishtiring va premium zallarni shaffof narx, mavjudlik
+						va xizmatlar bilan bir joyda band qiling.
 					</p>
 				</div>
 

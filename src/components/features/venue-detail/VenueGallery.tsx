@@ -2,7 +2,7 @@ import { Building2, Images } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import type { VenueImage } from '@/types/venueDetail'
-import { resolveImageUrl } from '@/utils/imageUrl'
+import { logImageRenderDebug, resolveImageUrl } from '@/utils/imageUrl'
 
 type VenueGalleryProps = {
 	images: VenueImage[]
@@ -26,6 +26,14 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 	const [failedIds, setFailedIds] = useState<Set<number>>(new Set())
 	const mainImage = displayImages[activeIndex] ?? displayImages[0]
 	const thumbnails = displayImages.slice(0, THUMB_COUNT)
+
+	if (import.meta.env.DEV && images[0]) {
+		logImageRenderDebug(
+			'VenueGallery',
+			{ images },
+			mainImage?.resolvedUrl ?? null,
+		)
+	}
 	const mainHasImage = Boolean(
 		mainImage?.resolvedUrl && !failedIds.has(mainImage.id),
 	)
@@ -42,9 +50,15 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 						src={mainImage.resolvedUrl!}
 						alt={venueName}
 						className='size-full object-cover'
-						onError={() =>
+						onError={() => {
+							if (import.meta.env.DEV) {
+								console.warn(
+									'[image-render:VenueGallery] main img onError',
+									{ src: mainImage.resolvedUrl },
+								)
+							}
 							setFailedIds(prev => new Set(prev).add(mainImage.id))
-						}
+						}}
 					/>
 				) : (
 					<div className='flex size-full items-center justify-center'>
@@ -56,7 +70,7 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 				)}
 				<div className='absolute bottom-4 left-4 rounded-full bg-black/45 px-3 py-1.5 text-sm font-bold text-white backdrop-blur'>
 					<Images className='mr-1 inline size-4' />
-					{displayImages.filter(img => img.resolvedUrl && !failedIds.has(img.id)).length || 1} photos
+					{displayImages.filter(img => img.resolvedUrl && !failedIds.has(img.id)).length || 1} ta rasm
 				</div>
 			</div>
 

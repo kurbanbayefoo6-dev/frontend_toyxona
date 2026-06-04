@@ -31,16 +31,16 @@ const SEARCH_DEBOUNCE_MS = 300
 
 const TESTIMONIALS = [
 	{
-		name: 'Madina & Aziz',
-		text: 'We compared halls, services, and prices in one place. The booking flow felt calm on a very busy week.',
+		name: 'Madina va Aziz',
+		text: 'Bir joyda zallar, xizmatlar va narxlarni solishtirdik. Band qilish jarayoni juda band haftada ham xotirjam tuyuldi.',
 	},
 	{
-		name: 'Dilshod, venue owner',
-		text: 'The owner cabinet makes bookings and venue status easy to follow without calling every customer manually.',
+		name: 'Dilshod, maskan egasi',
+		text: 'Egasi kabineti har bir mijozga qo‘ng‘iroq qilmasdan bandlovlar va maskan holatini kuzatishni osonlashtiradi.',
 	},
 	{
 		name: 'Zarina',
-		text: 'Photos, capacity, and price were clear. It finally felt like choosing a real product, not chasing screenshots.',
+		text: 'Rasmlar, sig‘im va narx aniq edi. Nihoyat skrinshotlar emas, haqiqiy mahsulot tanlashdek tuyuldi.',
 	},
 ]
 
@@ -160,26 +160,26 @@ export default function HomePage() {
 			<section className='mx-auto grid w-full max-w-7xl gap-4 px-4 py-8 sm:grid-cols-3 lg:-mt-8 lg:py-12'>
 				<ValueCard
 					icon={<ShieldCheck className='size-5' />}
-					title='Verified venues'
-					text='Clear status, photos, capacity, and contact details before you book.'
+					title='Tasdiqlangan maskanlar'
+					text='Band qilishdan oldin aniq holat, rasmlar, sig‘im va aloqa ma’lumotlari.'
 				/>
 				<ValueCard
 					icon={<CalendarCheck className='size-5' />}
-					title='Availability first'
-					text='See open and booked dates with a booking flow built around decisions.'
+					title='Avval mavjudlik'
+					text='Bo‘sh va band kunlarni ko‘ring — qaror qabul qilishga qulay bandlov jarayoni.'
 				/>
 				<ValueCard
 					icon={<Sparkles className='size-5' />}
-					title='Services in context'
-					text='Compare singers, cars, menu items, and event add-ons around the hall.'
+					title='Kontekstdagi xizmatlar'
+					text='Xonandalar, avtomobillar, menyu va qo‘shimcha xizmatlarni zal atrofida solishtiring.'
 				/>
 			</section>
 
 			<section className='mx-auto w-full max-w-7xl px-4 py-8'>
 				<SectionHeader
-					kicker='Featured'
-					title='Venues worth opening first'
-					text='Image-first cards surface location, capacity, pricing, and booking intent without making people hunt.'
+					kicker='Tanlangan'
+					title='Avval ko‘rishga arziydigan maskanlar'
+					text='Rasmga urg‘u berilgan kartochkalar joylashuv, sig‘im, narx va bandlov niyatini izlashsiz ko‘rsatadi.'
 				/>
 				<div className='mt-6 grid grid-cols-1 gap-5 md:grid-cols-3'>
 					{showInitialLoading
@@ -218,19 +218,19 @@ export default function HomePage() {
 				<div className='min-w-0'>
 					<header className='mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between'>
 						<div>
-							<p className='section-kicker'>Marketplace</p>
-							<h2 className='section-title'>Explore venues</h2>
+							<p className='section-kicker'>Bozor</p>
+							<h2 className='section-title'>Maskanlarni ko‘rib chiqish</h2>
 						</div>
 						{!showInitialLoading && !isError && total > 0 && (
 							<p className='text-sm tabular-nums text-[var(--color-text-secondary)]'>
 								<span className='font-black text-[var(--color-brand)]'>
 									{total.toLocaleString('uz-UZ')}
 								</span>{' '}
-								results
+								ta natija
 								{isFetching ? (
 									<span className='text-[var(--color-text-hint)]'>
 										{' '}
-										- refreshing
+										— yangilanmoqda
 									</span>
 								) : null}
 							</p>
@@ -281,9 +281,9 @@ export default function HomePage() {
 
 			<section className='mx-auto w-full max-w-7xl px-4 py-10'>
 				<SectionHeader
-					kicker='Districts'
-					title='Browse by neighborhood'
-					text='Fast district chips make the marketplace feel local and mobile-friendly.'
+					kicker='Tumanlar'
+					title='Tuman bo‘yicha ko‘rish'
+					text='Tez tuman tugmalari bozorni mahalliy va mobilga qulay qiladi.'
 				/>
 				<div className='mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6'>
 					{DISTRICTS.map(item => (
@@ -323,15 +323,15 @@ export default function HomePage() {
 					<div className='grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center'>
 						<div>
 							<p className='text-sm font-bold uppercase tracking-wide text-white/70'>
-								Ready when you are
+								Tayyor bo‘lsangiz, boshlaymiz
 							</p>
 							<h2 className='mt-3 max-w-2xl text-3xl font-black leading-tight sm:text-5xl'>
-								Build a shortlist today, book with confidence tomorrow.
+								Bugun qisqa ro‘yxat tuzing, ertaga ishonch bilan band qiling.
 							</h2>
 						</div>
 						<Link to='/register'>
 							<Button className='bg-white text-[var(--color-accent)] sm:w-auto'>
-								Create account <ArrowRight className='size-4' />
+								Hisob yaratish <ArrowRight className='size-4' />
 							</Button>
 						</Link>
 					</div>
@@ -343,18 +343,18 @@ export default function HomePage() {
 					<div>
 						<p className='text-2xl font-black'>Toyxona</p>
 						<p className='mt-2 max-w-md text-sm leading-relaxed text-white/65'>
-							A modern marketplace for venues, bookings, owners, and admins.
+							Maskanlar, bandlovlar, egalar va adminlar uchun zamonaviy bozor.
 						</p>
 					</div>
 					<div className='text-sm text-white/70'>
-						<p className='font-bold text-white'>Marketplace</p>
-						<a href='#venue-results' className='mt-3 block'>Venues</a>
-						<Link to='/register/owner' className='mt-2 block'>List venue</Link>
+						<p className='font-bold text-white'>Bozor</p>
+						<a href='#venue-results' className='mt-3 block'>Maskanlar</a>
+						<Link to='/register/owner' className='mt-2 block'>Maskanni ro‘yxatga qo‘shish</Link>
 					</div>
 					<div className='text-sm text-white/70'>
-						<p className='font-bold text-white'>Account</p>
-						<Link to='/login' className='mt-3 block'>Login</Link>
-						<Link to='/register' className='mt-2 block'>Register</Link>
+						<p className='font-bold text-white'>Hisob</p>
+						<Link to='/login' className='mt-3 block'>Kirish</Link>
+						<Link to='/register' className='mt-2 block'>Ro‘yxatdan o‘tish</Link>
 					</div>
 				</div>
 			</footer>

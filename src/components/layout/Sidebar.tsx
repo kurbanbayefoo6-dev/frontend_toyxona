@@ -19,7 +19,7 @@ export function Sidebar({ links }: SidebarProps) {
 			}}
 		>
 			<div className='px-5 pb-3 pt-6'>
-				<p className='section-kicker'>Workspace</p>
+				<p className='section-kicker'>Ish maydoni</p>
 				<p className='mt-1 text-lg font-black'>Toyxona</p>
 			</div>
 			<nav className='flex flex-col gap-1 p-3'>

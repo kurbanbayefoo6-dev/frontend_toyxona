@@ -12,14 +12,14 @@ export function KarnaySection({ items }: KarnaySectionProps) {
 		<section className='product-card p-5 sm:p-6'>
 			<div className='mb-4 flex items-end justify-between gap-4'>
 				<div>
-					<p className='section-kicker'>Ceremony sound</p>
+					<p className='section-kicker'>Marosim musiqasi</p>
 					<h2 className='text-2xl font-black'>Karnay-surnay</h2>
 				</div>
 				<Music2 className='size-6 text-[var(--color-brand)]' />
 			</div>
 			{items.length === 0 ? (
 				<p className='text-sm text-[var(--color-text-hint)]'>
-					Karnay-surnay service is not available.
+					Karnay-surnay xizmati mavjud emas.
 				</p>
 			) : (
 				<div className='grid gap-3 sm:grid-cols-2'>
@@ -39,7 +39,7 @@ export function KarnaySection({ items }: KarnaySectionProps) {
 										: 'var(--color-text-hint)',
 								}}
 							>
-								{item.isAvailable ? 'Available' : 'Unavailable'}
+								{item.isAvailable ? 'Mavjud' : 'Mavjud emas'}
 							</span>
 							<span className='text-sm font-black text-[var(--color-text-primary)]'>
 								{formatCurrency(item.price)}

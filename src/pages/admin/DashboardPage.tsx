@@ -41,72 +41,72 @@ export default function AdminDashboardPage() {
 
 	return (
 		<DashboardShell
-			kicker='Admin command center'
-			title='KPI clarity for marketplace operations'
-			subtitle='A high-level view of users, owners, venues, bookings, pending approvals, and revenue health.'
+			kicker='Boshqaruv markazi'
+			title='Bozor operatsiyalari uchun asosiy ko‘rsatkichlar'
+			subtitle='Foydalanuvchilar, egalar, maskanlar, bandlovlar, kutilayotgan tasdiqlar va daromadning umumiy ko‘rinishi.'
 			actions={
 				<Link to='/admin/venues'>
 					<Button className='sm:w-auto'>
 						<ShieldCheck className='size-4' />
-						Review venues
+						Maskanlarni ko‘rib chiqish
 					</Button>
 				</Link>
 			}
 		>
 			<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4'>
 				<MetricCard
-					label='Users'
+					label='Foydalanuvchilar'
 					value={data.totalUsers}
-					helper='Registered platform users'
+					helper='Ro‘yxatdan o‘tgan foydalanuvchilar'
 				/>
 				<MetricCard
-					label='Owners'
+					label='Egalar'
 					value={data.totalOwners}
-					helper='Venue partners'
+					helper='Maskan hamkorlari'
 					tone='accent'
 				/>
 				<MetricCard
-					label='Venues'
+					label='Maskanlar'
 					value={data.totalVenues}
-					helper={`${data.pendingVenues} pending review`}
+					helper={`${data.pendingVenues} ta ko‘rib chiqish kutilmoqda`}
 					tone='warning'
 				/>
 				<MetricCard
-					label='Revenue'
+					label='Daromad'
 					value={formatCurrency(data.totalRevenue)}
-					helper='Recorded marketplace revenue'
+					helper='Bozorda qayd etilgan daromad'
 					tone='success'
 				/>
 			</div>
 
 			<div className='grid gap-5 xl:grid-cols-[1fr_0.9fr]'>
 				<BarList
-					title='Marketplace scale'
+					title='Bozor hajmi'
 					items={[
-						{ label: 'Users', value: data.totalUsers, max: maxOps },
-						{ label: 'Owners', value: data.totalOwners, max: maxOps },
-						{ label: 'Venues', value: data.totalVenues, max: maxOps },
-						{ label: 'Bookings', value: data.totalBookings, max: maxOps },
+						{ label: 'Foydalanuvchilar', value: data.totalUsers, max: maxOps },
+						{ label: 'Egalar', value: data.totalOwners, max: maxOps },
+						{ label: 'Maskanlar', value: data.totalVenues, max: maxOps },
+						{ label: 'Bandlovlar', value: data.totalBookings, max: maxOps },
 					]}
 				/>
 
 				<section className='product-card p-5'>
-					<h2 className='text-xl font-black'>Operational queue</h2>
+					<h2 className='text-xl font-black'>Operatsion navbat</h2>
 					<div className='mt-5 grid gap-3'>
 						<QueueRow
-							label='Pending venues'
+							label='Kutilayotgan maskanlar'
 							value={data.pendingVenues}
 							href='/admin/venues'
 							tone='warning'
 						/>
 						<QueueRow
-							label='Upcoming bookings'
+							label='Yaqinlashayotgan bandlovlar'
 							value={data.upcomingBookings}
 							href='/admin/bookings'
 							tone='success'
 						/>
 						<QueueRow
-							label='Total payments'
+							label='Jami to‘lovlar'
 							value={formatCurrency(data.totalRevenue)}
 							href='/admin/payments'
 							tone='brand'

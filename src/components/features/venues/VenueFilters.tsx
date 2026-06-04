@@ -15,11 +15,11 @@ export type SortOption =
 	| 'capacity:desc'
 
 export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-	{ value: 'created_at:desc', label: 'Newest' },
-	{ value: 'name:asc', label: 'Name A-Z' },
-	{ value: 'price_per_seat:asc', label: 'Price low first' },
-	{ value: 'price_per_seat:desc', label: 'Price high first' },
-	{ value: 'capacity:desc', label: 'Largest capacity' },
+	{ value: 'created_at:desc', label: 'Eng yangi' },
+	{ value: 'name:asc', label: 'Nom A–Z' },
+	{ value: 'price_per_seat:asc', label: 'Avval arzon' },
+	{ value: 'price_per_seat:desc', label: 'Avval qimmat' },
+	{ value: 'capacity:desc', label: 'Eng katta sig‘im' },
 ]
 
 export function parseSortOption(
@@ -69,9 +69,9 @@ export function VenueFilters({
 		<div className='product-card p-4 sm:p-5'>
 			<div className='mb-4 flex items-center justify-between gap-3'>
 				<div>
-					<p className='text-sm font-black'>Filters</p>
+					<p className='text-sm font-black'>Filtrlar</p>
 					<p className='text-xs text-[var(--color-text-secondary)]'>
-						Refine by location, size, and budget
+						Joylashuv, sig‘im va byudjet bo‘yicha aniqlang
 					</p>
 				</div>
 				<span className='flex size-10 items-center justify-center rounded-full bg-[var(--color-brand-light)] text-[var(--color-brand)]'>
@@ -81,7 +81,7 @@ export function VenueFilters({
 
 			<div className='grid grid-cols-1 gap-3'>
 				{!hideSearch && (
-					<FilterField label='Search'>
+					<FilterField label='Qidiruv'>
 						<div className='relative'>
 							<Search
 								className='pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[var(--color-text-hint)]'
@@ -89,18 +89,18 @@ export function VenueFilters({
 							/>
 							<Input
 								type='search'
-								placeholder='Name, address, district...'
+								placeholder='Nom, manzil, tuman...'
 								value={search}
 								onChange={e => onSearchChange(e.target.value)}
 								disabled={disabled}
 								className='pl-10'
-								aria-label='Search'
+								aria-label='Qidiruv'
 							/>
 						</div>
 					</FilterField>
 				)}
 
-				<FilterField label='District'>
+				<FilterField label='Tuman'>
 					<Select
 						value={district ?? ''}
 						onChange={e =>
@@ -109,9 +109,9 @@ export function VenueFilters({
 							)
 						}
 						disabled={disabled}
-						aria-label='District filter'
+						aria-label='Tuman filtri'
 					>
-						<option value=''>All districts</option>
+						<option value=''>Barcha tumanlar</option>
 						{DISTRICTS.map(d => (
 							<option key={d} value={d}>
 								{d}
@@ -120,50 +120,50 @@ export function VenueFilters({
 					</Select>
 				</FilterField>
 
-				<FilterField label='Minimum capacity'>
+				<FilterField label='Minimal sig‘im'>
 					<Input
 						type='number'
 						min={1}
-						placeholder='Example: 150'
+						placeholder='Masalan: 150'
 						value={capacity}
 						onChange={e => onCapacityChange(e.target.value)}
 						disabled={disabled}
-						aria-label='Minimum capacity'
+						aria-label='Minimal sig‘im'
 					/>
 				</FilterField>
 
 				<div className='grid grid-cols-2 gap-3'>
-					<FilterField label='Min price'>
+					<FilterField label='Minimal narx'>
 						<Input
 							type='number'
 							min={0}
-							placeholder='sum'
+							placeholder='so‘m'
 							value={minPrice}
 							onChange={e => onMinPriceChange(e.target.value)}
 							disabled={disabled}
-							aria-label='Minimum price'
+							aria-label='Minimal narx'
 						/>
 					</FilterField>
 
-					<FilterField label='Max price'>
+					<FilterField label='Maksimal narx'>
 						<Input
 							type='number'
 							min={0}
-							placeholder='sum'
+							placeholder='so‘m'
 							value={maxPrice}
 							onChange={e => onMaxPriceChange(e.target.value)}
 							disabled={disabled}
-							aria-label='Maximum price'
+							aria-label='Maksimal narx'
 						/>
 					</FilterField>
 				</div>
 
-				<FilterField label='Sort'>
+				<FilterField label='Saralash'>
 					<Select
 						value={sort}
 						onChange={e => onSortChange(e.target.value as SortOption)}
 						disabled={disabled}
-						aria-label='Sort'
+						aria-label='Saralash'
 					>
 						{SORT_OPTIONS.map(option => (
 							<option key={option.value} value={option.value}>
