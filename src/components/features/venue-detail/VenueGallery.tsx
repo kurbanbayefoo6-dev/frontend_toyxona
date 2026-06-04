@@ -1,4 +1,4 @@
-import { Building2 } from 'lucide-react'
+import { Building2, Images } from 'lucide-react'
 import { useState } from 'react'
 
 import type { VenueImage } from '@/types/venueDetail'
@@ -16,27 +16,28 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 			? images
 			: [{ id: 0, imageUrl: '' } as VenueImage]
 	const [activeIndex, setActiveIndex] = useState(0)
+	const [failedIds, setFailedIds] = useState<Set<number>>(new Set())
 	const mainImage = displayImages[activeIndex] ?? displayImages[0]
 	const thumbnails = displayImages.slice(0, THUMB_COUNT)
+	const mainHasImage = Boolean(
+		mainImage?.imageUrl && !failedIds.has(mainImage.id),
+	)
 
 	while (thumbnails.length < THUMB_COUNT) {
 		thumbnails.push({ id: -thumbnails.length, imageUrl: '' })
 	}
 
 	return (
-		<div className='flex flex-col gap-3'>
-			<div
-				className='relative aspect-[16/10] overflow-hidden rounded-[var(--radius-lg)] border'
-				style={{
-					backgroundColor: 'var(--color-surface-secondary)',
-					borderColor: 'var(--color-border)',
-				}}
-			>
-				{mainImage?.imageUrl ? (
+		<div className='grid gap-3 lg:grid-cols-[1fr_220px]'>
+			<div className='relative aspect-[16/10] overflow-hidden rounded-[var(--radius-xl)] bg-[var(--color-surface-secondary)] shadow-[var(--shadow-md)]'>
+				{mainHasImage ? (
 					<img
 						src={mainImage.imageUrl}
 						alt={venueName}
 						className='size-full object-cover'
+						onError={() =>
+							setFailedIds(prev => new Set(prev).add(mainImage.id))
+						}
 					/>
 				) : (
 					<div className='flex size-full items-center justify-center'>
@@ -46,11 +47,15 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 						/>
 					</div>
 				)}
+				<div className='absolute bottom-4 left-4 rounded-full bg-black/45 px-3 py-1.5 text-sm font-bold text-white backdrop-blur'>
+					<Images className='mr-1 inline size-4' />
+					{displayImages.filter(img => img.imageUrl && !failedIds.has(img.id)).length || 1} photos
+				</div>
 			</div>
 
-			<div className='grid grid-cols-4 gap-2'>
+			<div className='grid grid-cols-4 gap-2 lg:grid-cols-1'>
 				{thumbnails.map((img, index) => {
-					const hasImage = Boolean(img.imageUrl)
+					const hasImage = Boolean(img.imageUrl && !failedIds.has(img.id))
 					const isActive = activeIndex === index && hasImage
 
 					return (
@@ -60,8 +65,8 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 							disabled={!hasImage}
 							onClick={() => hasImage && setActiveIndex(index)}
 							className={[
-								'relative aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] border-2 transition-colors',
-								!hasImage ? 'cursor-default opacity-50' : 'cursor-pointer',
+								'relative aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] border-2 transition-all',
+								!hasImage ? 'cursor-default opacity-50' : 'cursor-pointer hover:-translate-y-0.5',
 							].join(' ')}
 							style={{
 								borderColor: isActive
@@ -75,13 +80,13 @@ export function VenueGallery({ images, venueName }: VenueGalleryProps) {
 									src={img.imageUrl}
 									alt=''
 									className='size-full object-cover'
+									onError={() =>
+										setFailedIds(prev => new Set(prev).add(img.id))
+									}
 								/>
 							) : (
 								<div className='flex size-full items-center justify-center'>
-									<Building2
-										className='size-6 opacity-30'
-										style={{ color: 'var(--color-text-hint)' }}
-									/>
+									<Building2 className='size-6 opacity-30 text-[var(--color-text-hint)]' />
 								</div>
 							)}
 						</button>

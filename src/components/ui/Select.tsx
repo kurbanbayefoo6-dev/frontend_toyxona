@@ -9,8 +9,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 				ref={ref}
 				disabled={disabled}
 				className={[
-					'w-full rounded-[var(--radius-md)] border px-3 py-2.5 text-sm outline-none',
-					'focus:ring-2 focus:ring-[var(--color-brand-light)]',
+					'w-full rounded-[var(--radius-md)] border px-3.5 py-2.5 text-sm outline-none transition-all',
+					'focus:border-[var(--color-brand)] focus:ring-4 focus:ring-[var(--color-brand-light)]',
 					disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer',
 					className,
 				].join(' ')}

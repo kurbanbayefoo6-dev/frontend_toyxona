@@ -13,11 +13,13 @@ const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
 		backgroundColor: 'var(--color-brand)',
 		color: '#ffffff',
 		borderColor: 'var(--color-brand)',
+		boxShadow: '0 10px 22px rgb(159 79 38 / 0.22)',
 	},
 	secondary: {
-		backgroundColor: 'var(--color-surface-secondary)',
+		backgroundColor: 'var(--color-card-bg)',
 		color: 'var(--color-text-primary)',
 		borderColor: 'var(--color-border)',
+		boxShadow: 'var(--shadow-sm)',
 	},
 	ghost: {
 		backgroundColor: 'transparent',
@@ -43,8 +45,10 @@ export function Button({
 			type={type}
 			disabled={isDisabled}
 			className={[
-				'inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-md)] border px-4 py-2.5 text-sm font-medium transition-opacity',
-				isDisabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer hover:opacity-90',
+				'inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-md)] border px-4 py-2.5 text-sm font-semibold transition-all duration-200',
+				isDisabled
+					? 'cursor-not-allowed opacity-60'
+					: 'cursor-pointer hover:-translate-y-0.5 hover:brightness-95 active:translate-y-0',
 				className,
 			].join(' ')}
 			style={{

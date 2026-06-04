@@ -12,24 +12,27 @@ export function HomeHeroStats({
 	isLoading = false,
 }: HomeHeroStatsProps) {
 	const items = [
-		{ label: 'To‘yxonalar soni', value: venueCount },
-		{ label: 'Faol bronlar', value: activeBookingsCount },
-		{ label: 'Tasdiqlangan to‘yxonalar', value: approvedVenueCount },
+		{ label: 'Venues', value: venueCount },
+		{ label: 'Active bookings', value: activeBookingsCount },
+		{ label: 'Approved partners', value: approvedVenueCount },
 	]
 
 	return (
-		<div className='mx-auto flex w-full max-w-[700px] flex-wrap items-center justify-center gap-6 sm:gap-10'>
+		<div className='mx-auto grid w-full max-w-4xl grid-cols-3 gap-2 rounded-[var(--radius-xl)] border border-white/20 bg-white/10 p-2 backdrop-blur-md sm:gap-4'>
 			{items.map(item => (
-				<div key={item.label} className='min-w-[120px] text-center'>
+				<div
+					key={item.label}
+					className='rounded-[var(--radius-lg)] px-2 py-3 text-center sm:py-4'
+				>
 					<p
-						className='text-2xl font-semibold tabular-nums sm:text-3xl'
+						className='text-2xl font-black tabular-nums sm:text-4xl'
 						style={{ color: '#ffffff' }}
 					>
-						{isLoading ? '—' : formatStatValue(item.value)}
+						{isLoading ? '-' : formatStatValue(item.value)}
 					</p>
 					<p
-						className='mt-1 text-xs font-medium sm:text-sm'
-						style={{ color: 'rgba(255, 255, 255, 0.88)' }}
+						className='mt-1 text-xs font-semibold sm:text-sm'
+						style={{ color: 'rgba(255, 255, 255, 0.84)' }}
 					>
 						{item.label}
 					</p>
@@ -40,6 +43,6 @@ export function HomeHeroStats({
 }
 
 function formatStatValue(value: number | null): string {
-	if (value === null) return '—'
+	if (value === null) return '-'
 	return value.toLocaleString('uz-UZ')
 }

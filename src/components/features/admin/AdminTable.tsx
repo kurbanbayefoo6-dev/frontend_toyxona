@@ -19,14 +19,7 @@ export function AdminTable({
 }: AdminTableProps) {
 	if (rows.length === 0) {
 		return (
-			<div
-				className='rounded-[var(--radius-lg)] border px-6 py-12 text-center text-sm'
-				style={{
-					backgroundColor: 'var(--color-card-bg)',
-					borderColor: 'var(--color-border)',
-					color: 'var(--color-text-secondary)',
-				}}
-			>
+			<div className='product-card px-6 py-12 text-center text-sm text-[var(--color-text-secondary)]'>
 				{emptyMessage}
 			</div>
 		)
@@ -34,25 +27,19 @@ export function AdminTable({
 
 	return (
 		<>
-			<div
-				className='hidden overflow-x-auto rounded-[var(--radius-lg)] border md:block'
-				style={{
-					backgroundColor: 'var(--color-card-bg)',
-					borderColor: 'var(--color-border)',
-				}}
-			>
+			<div className='product-card hidden overflow-x-auto md:block'>
 				<table className='w-full min-w-[640px] text-left text-sm'>
 					<thead>
 						<tr
-							className='border-b text-xs uppercase'
+							className='border-b text-xs uppercase tracking-wide'
 							style={{
 								borderColor: 'var(--color-border)',
-								color: 'var(--color-text-hint)',
-								backgroundColor: 'var(--color-surface-secondary)',
+								color: 'var(--color-text-secondary)',
+								backgroundColor: 'var(--color-surface-elevated)',
 							}}
 						>
 							{headers.map(h => (
-								<th key={h} className='px-4 py-3 font-medium'>
+								<th key={h} className='px-5 py-4 font-black'>
 									{h}
 								</th>
 							))}
@@ -62,11 +49,11 @@ export function AdminTable({
 						{rows.map(row => (
 							<tr
 								key={row.key}
-								className='border-b even:bg-[var(--color-surface-secondary)]/50 last:border-0'
+								className='border-b transition-colors last:border-0 hover:bg-[var(--color-surface-secondary)]'
 								style={{ borderColor: 'var(--color-border)' }}
 							>
 								{row.cells.map((cell, i) => (
-									<td key={i} className='px-4 py-3 align-middle'>
+									<td key={i} className='px-5 py-4 align-middle'>
 										{cell}
 									</td>
 								))}
@@ -77,14 +64,7 @@ export function AdminTable({
 			</div>
 			<div className='flex flex-col gap-3 md:hidden'>
 				{rows.map(row => (
-					<div
-						key={row.key}
-						className='rounded-[var(--radius-lg)] border p-4'
-						style={{
-							backgroundColor: 'var(--color-card-bg)',
-							borderColor: 'var(--color-border)',
-						}}
-					>
+					<div key={row.key} className='product-card p-4'>
 						{row.mobile}
 					</div>
 				))}
@@ -103,10 +83,8 @@ export function AdminTableSkeleton({
 			{Array.from({ length: rows }).map((_, i) => (
 				<div
 					key={i}
-					className='animate-pulse rounded-[var(--radius-md)] border p-4'
+					className='product-card animate-pulse p-4'
 					style={{
-						backgroundColor: 'var(--color-card-bg)',
-						borderColor: 'var(--color-border)',
 					}}
 				>
 					<div

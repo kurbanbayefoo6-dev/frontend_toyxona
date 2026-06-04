@@ -97,10 +97,7 @@ export function BookingPanel({
 		],
 	)
 
-	function toggleId(
-		key: keyof BookingAddonsSelection,
-		id: number,
-	) {
+	function toggleId(key: keyof BookingAddonsSelection, id: number) {
 		setSelection(prev => {
 			const list = prev[key]
 			const next = list.includes(id)
@@ -164,10 +161,7 @@ export function BookingPanel({
 				queryKey: ['venue', venue.id],
 			})
 		} catch (error) {
-			const message = getApiErrorMessage(
-				error,
-				BOOKING_TOAST.networkError,
-			)
+			const message = getApiErrorMessage(error, BOOKING_TOAST.networkError)
 			toast.error(message)
 		} finally {
 			setIsSubmitting(false)
@@ -196,9 +190,7 @@ export function BookingPanel({
 				transactionId: result.transactionId,
 			})
 		} catch (error) {
-			toast.error(
-				getApiErrorMessage(error, BOOKING_TOAST.networkError),
-			)
+			toast.error(getApiErrorMessage(error, BOOKING_TOAST.networkError))
 		} finally {
 			setIsPaying(false)
 		}
@@ -206,19 +198,21 @@ export function BookingPanel({
 
 	return (
 		<>
-			<div
-				className='rounded-[var(--radius-lg)] border p-4 lg:sticky lg:top-[72px]'
-				style={{
-					backgroundColor: 'var(--color-card-bg)',
-					borderColor: 'var(--color-border)',
-				}}
-			>
-				<h2
-					className='mb-4 text-lg font-semibold'
-					style={{ color: 'var(--color-text-primary)' }}
-				>
-					Bron qilish
-				</h2>
+			<div className='product-panel p-4 lg:sticky lg:top-24'>
+				<div className='mb-4 flex items-start justify-between gap-3'>
+					<div>
+						<p className='section-kicker'>Booking</p>
+						<h2 className='mt-1 text-2xl font-black'>Reserve this venue</h2>
+					</div>
+					<div className='rounded-[var(--radius-lg)] bg-[var(--color-brand-light)] px-3 py-2 text-right'>
+						<p className='text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
+							Seat
+						</p>
+						<p className='text-sm font-black text-[var(--color-brand)]'>
+							{formatCurrency(venue.pricePerSeat)}
+						</p>
+					</div>
+				</div>
 
 				<BookingCalendar
 					availability={availability}
@@ -228,12 +222,9 @@ export function BookingPanel({
 					canViewBookingDetails={canViewBookingDetails}
 				/>
 
-				<div className='mt-4 flex flex-col gap-1.5'>
-					<label
-						className='text-sm font-medium'
-						style={{ color: 'var(--color-text-primary)' }}
-					>
-						Mehmonlar soni
+				<div className='mt-5 flex flex-col gap-1.5'>
+					<label className='text-sm font-black text-[var(--color-text-primary)]'>
+						Guest count
 					</label>
 					<Input
 						type='number'
@@ -249,73 +240,62 @@ export function BookingPanel({
 							)
 						}
 					/>
-					<p className='text-xs' style={{ color: 'var(--color-text-hint)' }}>
-						Maksimum: {venue.capacity} kishi
+					<p className='text-xs text-[var(--color-text-hint)]'>
+						Maximum: {venue.capacity} guests
 					</p>
 				</div>
 
 				{selectedDate && (
-					<p
-						className='mt-3 text-sm'
-						style={{ color: 'var(--color-text-secondary)' }}
-					>
-						Tanlangan sana:{' '}
-						<span className='font-medium'>{selectedDate}</span>
+					<p className='mt-3 rounded-[var(--radius-md)] bg-[var(--color-available-light)] px-3 py-2 text-sm font-bold text-[var(--color-available)]'>
+						Selected date: {selectedDate}
 					</p>
 				)}
 
-				<AddonCheckboxes
-					title='Qo‘shimcha xonandalar'
-					emptyText='Xonandalar mavjud emas'
-					items={singers.map(s => ({
-						id: s.id,
-						label: `${s.name} — ${formatCurrency(s.price)}`,
-					}))}
-					selectedIds={selection.selectedSingerIds}
-					onToggle={id => toggleId('selectedSingerIds', id)}
-				/>
+				<div className='mt-5 grid gap-3'>
+					<AddonCheckboxes
+						title='Singers'
+						emptyText='No singers available'
+						items={singers.map(s => ({
+							id: s.id,
+							label: `${s.name} - ${formatCurrency(s.price)}`,
+						}))}
+						selectedIds={selection.selectedSingerIds}
+						onToggle={id => toggleId('selectedSingerIds', id)}
+					/>
 
-				<AddonCheckboxes
-					title='Avtomobillar'
-					emptyText='Avtomobillar mavjud emas'
-					items={cars.map(c => ({
-						id: c.id,
-						label: `${c.brand} — ${formatCurrency(c.price)}`,
-					}))}
-					selectedIds={selection.selectedCarIds}
-					onToggle={id => toggleId('selectedCarIds', id)}
-				/>
+					<AddonCheckboxes
+						title='Cars'
+						emptyText='No cars available'
+						items={cars.map(c => ({
+							id: c.id,
+							label: `${c.brand} - ${formatCurrency(c.price)}`,
+						}))}
+						selectedIds={selection.selectedCarIds}
+						onToggle={id => toggleId('selectedCarIds', id)}
+					/>
 
-				<AddonCheckboxes
-					title='Karnay-surnay'
-					emptyText='Karnay-surnay mavjud emas'
-					items={availableKarnay.map(k => ({
-						id: k.id,
-						label: formatCurrency(k.price),
-					}))}
-					selectedIds={selection.selectedKarnayIds}
-					onToggle={id => toggleId('selectedKarnayIds', id)}
-				/>
+					<AddonCheckboxes
+						title='Karnay-surnay'
+						emptyText='No karnay-surnay available'
+						items={availableKarnay.map(k => ({
+							id: k.id,
+							label: formatCurrency(k.price),
+						}))}
+						selectedIds={selection.selectedKarnayIds}
+						onToggle={id => toggleId('selectedKarnayIds', id)}
+					/>
+				</div>
 
-				<div
-					className='mt-4 space-y-2 rounded-[var(--radius-md)] border p-3'
-					style={{
-						backgroundColor: 'var(--color-surface-secondary)',
-						borderColor: 'var(--color-border)',
-					}}
-				>
+				<div className='mt-5 space-y-2 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-elevated)] p-4'>
 					<PriceRow
-						label={`O‘rin narxi (${guestCount} × ${formatCurrency(venue.pricePerSeat)})`}
+						label={`Seats (${guestCount} x ${formatCurrency(venue.pricePerSeat)})`}
 						value={priceBreakdown.baseTotal}
 					/>
 					{priceBreakdown.singersTotal > 0 && (
-						<PriceRow
-							label='Xonandalar'
-							value={priceBreakdown.singersTotal}
-						/>
+						<PriceRow label='Singers' value={priceBreakdown.singersTotal} />
 					)}
 					{priceBreakdown.carsTotal > 0 && (
-						<PriceRow label='Avtomobillar' value={priceBreakdown.carsTotal} />
+						<PriceRow label='Cars' value={priceBreakdown.carsTotal} />
 					)}
 					{priceBreakdown.karnayTotal > 0 && (
 						<PriceRow
@@ -323,15 +303,9 @@ export function BookingPanel({
 							value={priceBreakdown.karnayTotal}
 						/>
 					)}
-					<div
-						className='flex justify-between border-t pt-2 text-base font-semibold'
-						style={{
-							borderColor: 'var(--color-border)',
-							color: 'var(--color-text-primary)',
-						}}
-					>
-						<span>Jami</span>
-						<span style={{ color: 'var(--color-brand)' }}>
+					<div className='flex justify-between border-t border-[var(--color-border)] pt-2 text-base font-black text-[var(--color-text-primary)]'>
+						<span>Total</span>
+						<span className='text-[var(--color-brand)]'>
 							{formatCurrency(priceBreakdown.grandTotal)}
 						</span>
 					</div>
@@ -339,12 +313,12 @@ export function BookingPanel({
 
 				<Button
 					type='button'
-					className='mt-4 w-full'
+					className='mt-5 w-full py-3 text-base'
 					loading={isSubmitting}
 					disabled={isSubmitting || isPaying || !!successData}
 					onClick={() => void handleBronClick()}
 				>
-					{isSubmitting ? 'Bron yaratilmoqda...' : 'Bron qilish'}
+					{isSubmitting ? 'Creating booking...' : 'Book venue'}
 				</Button>
 			</div>
 
@@ -377,29 +351,24 @@ function AddonCheckboxes({
 	onToggle: (id: number) => void
 }) {
 	return (
-		<div className='mt-4'>
-			<p
-				className='mb-2 text-sm font-medium'
-				style={{ color: 'var(--color-text-primary)' }}
-			>
+		<div className='rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white p-3'>
+			<p className='mb-2 text-sm font-black text-[var(--color-text-primary)]'>
 				{title}
 			</p>
 			{items.length === 0 ? (
-				<p className='text-xs' style={{ color: 'var(--color-text-hint)' }}>
-					{emptyText}
-				</p>
+				<p className='text-xs text-[var(--color-text-hint)]'>{emptyText}</p>
 			) : (
-				<ul className='flex max-h-32 flex-col gap-2 overflow-y-auto'>
+				<ul className='flex max-h-36 flex-col gap-2 overflow-y-auto pr-1'>
 					{items.map(item => (
 						<li key={item.id}>
-							<label className='flex cursor-pointer items-start gap-2 text-sm'>
+							<label className='flex cursor-pointer items-start gap-2 rounded-[var(--radius-md)] p-2 text-sm transition hover:bg-[var(--color-surface-secondary)]'>
 								<input
 									type='checkbox'
 									checked={selectedIds.includes(item.id)}
 									onChange={() => onToggle(item.id)}
-									className='mt-0.5'
+									className='mt-0.5 accent-[var(--color-brand)]'
 								/>
-								<span style={{ color: 'var(--color-text-secondary)' }}>
+								<span className='text-[var(--color-text-secondary)]'>
 									{item.label}
 								</span>
 							</label>
@@ -413,12 +382,9 @@ function AddonCheckboxes({
 
 function PriceRow({ label, value }: { label: string; value: number }) {
 	return (
-		<div
-			className='flex justify-between text-sm'
-			style={{ color: 'var(--color-text-secondary)' }}
-		>
+		<div className='flex justify-between gap-4 text-sm text-[var(--color-text-secondary)]'>
 			<span>{label}</span>
-			<span>{formatCurrency(value)}</span>
+			<span className='font-bold'>{formatCurrency(value)}</span>
 		</div>
 	)
 }

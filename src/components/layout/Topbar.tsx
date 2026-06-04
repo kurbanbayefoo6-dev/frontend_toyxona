@@ -37,38 +37,52 @@ export function Topbar({ title }: TopbarProps) {
 
 	return (
 		<header
-			className='flex h-14 shrink-0 items-center justify-between border-b px-4'
+			className='sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between border-b px-4 backdrop-blur-xl sm:px-6'
 			style={{
-				backgroundColor: 'var(--color-card-bg)',
+				backgroundColor: 'rgb(255 250 244 / 0.92)',
 				borderColor: 'var(--color-border)',
 			}}
 		>
 			<div className='flex items-center gap-3'>
 				<Link
 					to='/'
-					className='text-sm font-semibold'
-					style={{ color: 'var(--color-brand)' }}
+					className='inline-flex items-center gap-2 text-base font-black'
+					style={{ color: 'var(--color-text-primary)' }}
 				>
+					<span
+						className='flex size-8 items-center justify-center rounded-full text-sm text-white'
+						style={{ backgroundColor: 'var(--color-brand)' }}
+					>
+						T
+					</span>
 					{APP_NAME}
 				</Link>
 				{title && (
 					<span
-						className='text-sm'
+						className='hidden rounded-full px-3 py-1 text-xs font-semibold sm:inline-flex'
 						style={{ color: 'var(--color-text-secondary)' }}
 					>
 						{title}
 					</span>
 				)}
 			</div>
-			<nav className='flex items-center gap-4 text-sm'>
+			<nav className='flex items-center gap-3 text-sm'>
 				{isAuthenticated && role ? (
 					<>
-						<span style={{ color: 'var(--color-text-hint)' }}>
+						<span
+							className='hidden sm:inline'
+							style={{ color: 'var(--color-text-hint)' }}
+						>
 							{user?.firstName}
 						</span>
 						<Link
 							to={roleHomePath(role)}
-							style={{ color: 'var(--color-text-secondary)' }}
+							className='rounded-full border px-3 py-1.5 font-semibold'
+							style={{
+								color: 'var(--color-text-primary)',
+								borderColor: 'var(--color-border)',
+								backgroundColor: 'var(--color-card-bg)',
+							}}
 						>
 							Kabinet
 						</Link>
@@ -84,7 +98,12 @@ export function Topbar({ title }: TopbarProps) {
 				) : (
 					<Link
 						to='/login'
-						style={{ color: 'var(--color-text-secondary)' }}
+						className='rounded-full border px-4 py-2 font-semibold'
+						style={{
+							color: 'var(--color-text-primary)',
+							borderColor: 'var(--color-border)',
+							backgroundColor: 'var(--color-card-bg)',
+						}}
 					>
 						Kirish
 					</Link>

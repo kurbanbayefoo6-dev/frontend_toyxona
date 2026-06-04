@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 
-import { HERO_OVERLAY, HERO_WEDDING_HALL_IMAGE } from '@/constants/hero'
+import { HERO_WEDDING_HALL_IMAGE } from '@/constants/hero'
 
 import { HomeHeroSearch } from './HomeHeroSearch'
 import { HomeHeroStats } from './HomeHeroStats'
@@ -18,36 +18,36 @@ export function HomeHero({
 }: HomeHeroProps) {
 	return (
 		<section
-			className='relative flex min-h-[320px] w-full items-center justify-center overflow-hidden lg:min-h-[520px]'
+			className='relative flex min-h-[640px] w-full items-end justify-center overflow-hidden'
 			aria-labelledby='home-hero-title'
 		>
 			<div
 				className='absolute inset-0 bg-cover bg-center bg-no-repeat'
 				style={{ backgroundImage: `url(${HERO_WEDDING_HALL_IMAGE})` }}
 				role='img'
-				aria-label='To‘yxona zali fon rasmi'
+				aria-label='Wedding hall interior'
 			/>
-			<div
-				className='absolute inset-0'
-				style={{ backgroundColor: HERO_OVERLAY }}
-				aria-hidden
-			/>
+			<div className='absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-black/70' aria-hidden />
+			<div className='absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[var(--color-page-bg)] to-transparent' aria-hidden />
 
-			<div className='relative z-10 flex w-full flex-col items-center gap-8 px-4 py-12 text-center sm:gap-10 sm:py-16 lg:gap-12 lg:py-20'>
-				<div className='mx-auto flex max-w-3xl flex-col gap-4'>
+			<div className='relative z-10 flex w-full flex-col items-center gap-8 px-4 pb-14 pt-28 text-center sm:gap-10 lg:pb-20'>
+				<div className='mx-auto flex max-w-5xl flex-col items-center gap-5'>
+					<span className='premium-badge border-white/30 bg-white/15 text-white backdrop-blur-md'>
+						Curated wedding venues across Tashkent
+					</span>
 					<h1
 						id='home-hero-title'
-						className='text-2xl font-semibold leading-tight tracking-tight sm:text-3xl lg:text-4xl'
+						className='max-w-4xl text-4xl font-black leading-[1.02] sm:text-5xl lg:text-7xl'
 						style={{ color: '#ffffff' }}
 					>
-						Orzuingizdagi to‘yxona bir necha daqiqada
+						Find the venue that makes the whole day feel effortless
 					</h1>
 					<p
-						className='mx-auto max-w-2xl text-sm leading-relaxed sm:text-base lg:text-lg'
+						className='mx-auto max-w-2xl text-base leading-relaxed sm:text-lg lg:text-xl'
 						style={{ color: 'rgba(255, 255, 255, 0.92)' }}
 					>
-						Toshkentdagi eng yaxshi to‘yxonalarni qidiring, solishtiring va bron
-						qiling.
+						Search, compare, and book premium halls with transparent pricing,
+						availability, and services in one modern marketplace.
 					</p>
 				</div>
 

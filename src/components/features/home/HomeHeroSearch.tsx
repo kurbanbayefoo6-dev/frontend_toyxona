@@ -32,60 +32,61 @@ export function HomeHeroSearch({
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='mx-auto flex w-full max-w-[700px] flex-col gap-2 rounded-[var(--radius-lg)] border p-2 sm:flex-row sm:items-stretch sm:gap-0 sm:p-2'
-			style={{
-				backgroundColor: 'var(--color-card-bg)',
-				borderColor: 'var(--color-border)',
-			}}
+			className='product-panel mx-auto grid w-full max-w-4xl grid-cols-1 gap-3 p-3 text-left sm:grid-cols-[1fr_220px_auto] sm:items-end sm:gap-2'
+			style={{ backgroundColor: 'rgb(255 255 255 / 0.94)' }}
 		>
-			<div className='relative min-w-0 flex-1'>
-				<Search
-					className='pointer-events-none absolute top-1/2 left-3 size-5 -translate-y-1/2'
-					style={{ color: 'var(--color-text-hint)' }}
-					aria-hidden
-				/>
-				<Input
-					type='search'
-					placeholder='Maskan nomi yoki manzil...'
-					value={search}
-					onChange={e => onSearchChange(e.target.value)}
+			<label className='flex min-w-0 flex-col gap-1'>
+				<span className='px-1 text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
+					Search venues
+				</span>
+				<div className='relative min-w-0'>
+					<Search
+						className='pointer-events-none absolute top-1/2 left-3 size-5 -translate-y-1/2'
+						style={{ color: 'var(--color-text-hint)' }}
+						aria-hidden
+					/>
+					<Input
+						type='search'
+						placeholder='Venue name, address, district...'
+						value={search}
+						onChange={e => onSearchChange(e.target.value)}
+						disabled={disabled}
+						className='py-3 pl-11 text-base'
+						aria-label='Search'
+					/>
+				</div>
+			</label>
+
+			<label className='flex min-w-0 flex-col gap-1'>
+				<span className='px-1 text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
+					District
+				</span>
+				<Select
+					value={district ?? ''}
+					onChange={e =>
+						onDistrictChange(
+							e.target.value ? (e.target.value as District) : null,
+						)
+					}
 					disabled={disabled}
-					className='border-0 py-3 pl-11 text-base focus:ring-0 sm:rounded-r-none'
-					aria-label='Qidiruv'
-				/>
-			</div>
-
-			<div
-				className='hidden w-px sm:block'
-				style={{ backgroundColor: 'var(--color-border)' }}
-				aria-hidden
-			/>
-
-			<Select
-				value={district ?? ''}
-				onChange={e =>
-					onDistrictChange(
-						e.target.value ? (e.target.value as District) : null,
-					)
-				}
-				disabled={disabled}
-				className='border-0 py-3 text-base focus:ring-0 sm:max-w-[200px] sm:rounded-none'
-				aria-label='Tuman'
-			>
-				<option value=''>Barcha tumanlar</option>
-				{DISTRICTS.map(d => (
-					<option key={d} value={d}>
-						{d}
-					</option>
-				))}
-			</Select>
+					className='py-3 text-base'
+					aria-label='District'
+				>
+					<option value=''>All districts</option>
+					{DISTRICTS.map(d => (
+						<option key={d} value={d}>
+							{d}
+						</option>
+					))}
+				</Select>
+			</label>
 
 			<Button
 				type='submit'
 				disabled={disabled}
-				className='shrink-0 px-6 py-3 text-base sm:w-auto sm:min-w-[120px] sm:rounded-l-none'
+				className='h-[50px] shrink-0 px-7 text-base sm:w-auto'
 			>
-				Qidirish
+				Search
 			</Button>
 		</form>
 	)

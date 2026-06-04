@@ -122,16 +122,16 @@ export default function VenueDetailsPage() {
 	}))
 
 	return (
-		<div className='mx-auto w-full max-w-7xl px-4 pb-12'>
+		<div className='mx-auto w-full max-w-7xl px-4 py-8 pb-14'>
 			<Link
 				to='/'
-				className='mb-4 inline-block text-sm'
+				className='premium-badge mb-5'
 				style={{ color: 'var(--color-brand)' }}
 			>
 				← Bosh sahifaga
 			</Link>
 
-			<div className='grid grid-cols-1 gap-6 lg:grid-cols-[65fr_35fr]'>
+			<div className='grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_390px]'>
 				<div className='flex min-w-0 flex-col gap-8'>
 					<VenueGallery images={data.images} venueName={data.venue.name} />
 					<VenueInfoSection venue={data.venue} />

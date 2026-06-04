@@ -1,4 +1,5 @@
 import { Building2 } from 'lucide-react'
+import { useState } from 'react'
 
 import { formatCurrency } from '@/utils/formatCurrency'
 
@@ -20,63 +21,53 @@ export function CatalogGrid({
 	items,
 	emptyMessage,
 }: CatalogGridProps) {
+	const [failedIds, setFailedIds] = useState<Set<number>>(new Set())
+
 	return (
-		<section>
-			<h2
-				className='mb-3 text-lg font-semibold'
-				style={{ color: 'var(--color-text-primary)' }}
-			>
-				{title}
-			</h2>
+		<section className='product-card p-5 sm:p-6'>
+			<div className='mb-4 flex items-end justify-between gap-4'>
+				<div>
+					<p className='section-kicker'>Services</p>
+					<h2 className='text-2xl font-black'>{title}</h2>
+				</div>
+				{items.length > 0 ? (
+					<span className='premium-badge'>{items.length} options</span>
+				) : null}
+			</div>
 			{items.length === 0 ? (
-				<p className='text-sm' style={{ color: 'var(--color-text-hint)' }}>
+				<p className='text-sm text-[var(--color-text-hint)]'>
 					{emptyMessage}
 				</p>
 			) : (
-				<div className='grid grid-cols-2 gap-3 sm:grid-cols-3'>
+				<div className='grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3'>
 					{items.map(item => (
 						<article
 							key={item.id}
-							className='overflow-hidden rounded-[var(--radius-lg)] border'
-							style={{
-								backgroundColor: 'var(--color-card-bg)',
-								borderColor: 'var(--color-border)',
-							}}
+							className='overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white'
 						>
-							<div
-								className='aspect-[4/3]'
-								style={{
-									backgroundColor: 'var(--color-surface-secondary)',
-								}}
-							>
-								{item.imageUrl ? (
+							<div className='aspect-[4/3] bg-[var(--color-surface-secondary)]'>
+								{item.imageUrl && !failedIds.has(item.id) ? (
 									<img
 										src={item.imageUrl}
 										alt={item.name}
 										className='size-full object-cover'
 										loading='lazy'
+										onError={() =>
+											setFailedIds(prev => new Set(prev).add(item.id))
+										}
 									/>
 								) : (
 									<div className='flex size-full items-center justify-center'>
-										<Building2
-											className='size-8 opacity-40'
-											style={{ color: 'var(--color-brand)' }}
-										/>
+										<Building2 className='size-8 opacity-40 text-[var(--color-brand)]' />
 									</div>
 								)}
 							</div>
-							<div className='p-3'>
-								<p
-									className='line-clamp-2 text-sm font-medium'
-									style={{ color: 'var(--color-text-primary)' }}
-								>
+							<div className='p-4'>
+								<p className='line-clamp-2 text-sm font-black text-[var(--color-text-primary)]'>
 									{item.name}
 								</p>
 								{item.price != null && item.price > 0 && (
-									<p
-										className='mt-1 text-sm font-semibold'
-										style={{ color: 'var(--color-brand)' }}
-									>
+									<p className='mt-1 text-sm font-bold text-[var(--color-brand)]'>
 										{formatCurrency(item.price)}
 									</p>
 								)}

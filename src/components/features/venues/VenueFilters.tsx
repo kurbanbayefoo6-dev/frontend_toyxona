@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+import { SlidersHorizontal, Search } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 import { Input } from '@/components/ui/Input'
@@ -15,11 +15,11 @@ export type SortOption =
 	| 'capacity:desc'
 
 export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-	{ value: 'created_at:desc', label: 'Eng yangi' },
-	{ value: 'name:asc', label: 'Nomi (A–Z)' },
-	{ value: 'price_per_seat:asc', label: 'Narxi: arzon' },
-	{ value: 'price_per_seat:desc', label: 'Narxi: qimmat' },
-	{ value: 'capacity:desc', label: 'Sig‘imi: katta' },
+	{ value: 'created_at:desc', label: 'Newest' },
+	{ value: 'name:asc', label: 'Name A-Z' },
+	{ value: 'price_per_seat:asc', label: 'Price low first' },
+	{ value: 'price_per_seat:desc', label: 'Price high first' },
+	{ value: 'capacity:desc', label: 'Largest capacity' },
 ]
 
 export function parseSortOption(
@@ -66,105 +66,104 @@ export function VenueFilters({
 	hideSearch = false,
 }: VenueFiltersProps) {
 	return (
-		<div
-			className='rounded-[var(--radius-lg)] border p-4 sm:p-5'
-			style={{
-				backgroundColor: 'var(--color-card-bg)',
-				borderColor: 'var(--color-border)',
-			}}
-		>
-			{!hideSearch && (
-				<div className='relative mb-4'>
-					<Search
-						className='pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2'
-						style={{ color: 'var(--color-text-hint)' }}
-						aria-hidden
-					/>
-					<Input
-						type='search'
-						placeholder='Maskan nomi, tuman yoki manzil...'
-						value={search}
-						onChange={e => onSearchChange(e.target.value)}
-						disabled={disabled}
-						className='pl-10'
-						aria-label='Qidiruv'
-					/>
-					<p
-						className='mt-1.5 text-xs'
-						style={{ color: 'var(--color-text-hint)' }}
-					>
-						Birinchi harf yoki to‘liq nom bo‘yicha qidirish
+		<div className='product-card p-4 sm:p-5'>
+			<div className='mb-4 flex items-center justify-between gap-3'>
+				<div>
+					<p className='text-sm font-black'>Filters</p>
+					<p className='text-xs text-[var(--color-text-secondary)]'>
+						Refine by location, size, and budget
 					</p>
 				</div>
-			)}
+				<span className='flex size-10 items-center justify-center rounded-full bg-[var(--color-brand-light)] text-[var(--color-brand)]'>
+					<SlidersHorizontal className='size-4' />
+				</span>
+			</div>
 
-			<div
-				className={`grid grid-cols-1 gap-3 sm:grid-cols-2 ${hideSearch ? 'lg:grid-cols-4' : 'lg:grid-cols-5'}`}
-			>
+			<div className='grid grid-cols-1 gap-3'>
 				{!hideSearch && (
-					<FilterField label='Tuman'>
-						<Select
-							value={district ?? ''}
-							onChange={e =>
-								onDistrictChange(
-									e.target.value ? (e.target.value as District) : null,
-								)
-							}
-							disabled={disabled}
-							aria-label='Tuman filtri'
-						>
-							<option value=''>Barcha tumanlar</option>
-							{DISTRICTS.map(d => (
-								<option key={d} value={d}>
-									{d}
-								</option>
-							))}
-						</Select>
+					<FilterField label='Search'>
+						<div className='relative'>
+							<Search
+								className='pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[var(--color-text-hint)]'
+								aria-hidden
+							/>
+							<Input
+								type='search'
+								placeholder='Name, address, district...'
+								value={search}
+								onChange={e => onSearchChange(e.target.value)}
+								disabled={disabled}
+								className='pl-10'
+								aria-label='Search'
+							/>
+						</div>
 					</FilterField>
 				)}
 
-				<FilterField label='Minimal sig‘im'>
+				<FilterField label='District'>
+					<Select
+						value={district ?? ''}
+						onChange={e =>
+							onDistrictChange(
+								e.target.value ? (e.target.value as District) : null,
+							)
+						}
+						disabled={disabled}
+						aria-label='District filter'
+					>
+						<option value=''>All districts</option>
+						{DISTRICTS.map(d => (
+							<option key={d} value={d}>
+								{d}
+							</option>
+						))}
+					</Select>
+				</FilterField>
+
+				<FilterField label='Minimum capacity'>
 					<Input
 						type='number'
 						min={1}
-						placeholder='Masalan: 50'
+						placeholder='Example: 150'
 						value={capacity}
 						onChange={e => onCapacityChange(e.target.value)}
 						disabled={disabled}
-						aria-label='Minimal sig‘im'
+						aria-label='Minimum capacity'
 					/>
 				</FilterField>
 
-				<FilterField label='Minimal narx'>
-					<Input
-						type='number'
-						min={0}
-						placeholder='so‘m'
-						value={minPrice}
-						onChange={e => onMinPriceChange(e.target.value)}
-						disabled={disabled}
-						aria-label='Minimal narx'
-					/>
-				</FilterField>
+				<div className='grid grid-cols-2 gap-3'>
+					<FilterField label='Min price'>
+						<Input
+							type='number'
+							min={0}
+							placeholder='sum'
+							value={minPrice}
+							onChange={e => onMinPriceChange(e.target.value)}
+							disabled={disabled}
+							aria-label='Minimum price'
+						/>
+					</FilterField>
 
-				<FilterField label='Maksimal narx'>
-					<Input
-						type='number'
-						min={0}
-						placeholder='so‘m'
-						value={maxPrice}
-						onChange={e => onMaxPriceChange(e.target.value)}
-						disabled={disabled}
-						aria-label='Maksimal narx'
-					/>
-				</FilterField>
+					<FilterField label='Max price'>
+						<Input
+							type='number'
+							min={0}
+							placeholder='sum'
+							value={maxPrice}
+							onChange={e => onMaxPriceChange(e.target.value)}
+							disabled={disabled}
+							aria-label='Maximum price'
+						/>
+					</FilterField>
+				</div>
 
-				<FilterField label='Saralash'>
+				<FilterField label='Sort'>
 					<Select
 						value={sort}
 						onChange={e => onSortChange(e.target.value as SortOption)}
 						disabled={disabled}
-						aria-label='Saralash'
+						aria-label='Sort'
 					>
 						{SORT_OPTIONS.map(option => (
 							<option key={option.value} value={option.value}>
@@ -186,14 +185,11 @@ function FilterField({
 	children: ReactNode
 }) {
 	return (
-		<div className='flex flex-col gap-1.5'>
-			<span
-				className='text-xs font-medium'
-				style={{ color: 'var(--color-text-secondary)' }}
-			>
+		<label className='flex flex-col gap-1.5'>
+			<span className='text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
 				{label}
 			</span>
 			{children}
-		</div>
+		</label>
 	)
 }

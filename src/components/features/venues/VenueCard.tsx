@@ -1,4 +1,5 @@
-import { Building2, MapPin, Users } from 'lucide-react'
+import { Building2, CalendarCheck, MapPin, Users } from 'lucide-react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { FavoriteButton } from '@/components/features/venues/FavoriteButton'
@@ -8,87 +9,100 @@ import { formatCurrency } from '@/utils/formatCurrency'
 
 type VenueCardProps = {
 	venue: Venue
+	featured?: boolean
 }
 
-export function VenueCard({ venue }: VenueCardProps) {
+export function VenueCard({ venue, featured = false }: VenueCardProps) {
 	const detailPath = `/venues/${venue.id}`
+	const isApproved = venue.status === 'approved'
+	const [imageFailed, setImageFailed] = useState(false)
 
 	return (
-		<article
-			className='group flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] transition-colors duration-200 hover:border-[var(--color-brand)]'
-			style={{ backgroundColor: 'var(--color-card-bg)' }}
-		>
+		<article className='group product-card flex min-h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-md)]'>
 			<Link to={detailPath} className='block'>
-				<div
-					className='relative aspect-[4/3] overflow-hidden'
-					style={{ backgroundColor: 'var(--color-surface-secondary)' }}
-				>
-					<div className='absolute top-2 right-2 z-10'>
+				<div className='relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-secondary)]'>
+					<div className='absolute left-3 top-3 z-10 flex gap-2'>
+						<span
+							className='rounded-full px-3 py-1 text-xs font-black shadow-sm'
+							style={{
+								backgroundColor: isApproved
+									? 'var(--color-available-light)'
+									: 'var(--color-pending-light)',
+								color: isApproved
+									? 'var(--color-available)'
+									: 'var(--color-pending)',
+							}}
+						>
+							{isApproved ? 'Available' : 'Pending'}
+						</span>
+						{featured ? (
+							<span className='rounded-full bg-white/90 px-3 py-1 text-xs font-black text-[var(--color-brand)] shadow-sm'>
+								Featured
+							</span>
+						) : null}
+					</div>
+					<div className='absolute right-3 top-3 z-10'>
 						<FavoriteButton venueId={venue.id} />
 					</div>
-					{venue.imageUrl ? (
+					{venue.imageUrl && !imageFailed ? (
 						<img
 							src={venue.imageUrl}
 							alt={venue.name}
-							className='size-full object-cover'
+							className='size-full object-cover transition duration-500 group-hover:scale-105'
 							loading='lazy'
+							onError={() => setImageFailed(true)}
 						/>
 					) : (
 						<div className='flex size-full items-center justify-center'>
 							<Building2
-								className='size-12 opacity-50'
+								className='size-14 opacity-50'
 								style={{ color: 'var(--color-brand)' }}
 								aria-hidden
 							/>
 						</div>
 					)}
+					<div className='absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent' />
 				</div>
 			</Link>
 
-			<div className='flex flex-1 flex-col gap-3 p-4'>
-				<Link to={detailPath} className='block'>
-					<h2
-						className='line-clamp-2 text-base font-semibold leading-snug transition-colors group-hover:text-[var(--color-brand)]'
-						style={{ color: 'var(--color-text-primary)' }}
-					>
-						{venue.name}
-					</h2>
-				</Link>
-
-				<div
-					className='flex flex-wrap items-center gap-2 text-sm'
-					style={{ color: 'var(--color-text-secondary)' }}
-				>
-					<span className='inline-flex items-center gap-1'>
-						<MapPin className='size-3.5 shrink-0' aria-hidden />
-						{venue.district}
-					</span>
-					<span aria-hidden>·</span>
-					<span className='inline-flex items-center gap-1'>
-						<Users className='size-3.5 shrink-0' aria-hidden />
-						{venue.capacity} kishi
-					</span>
+			<div className='flex flex-1 flex-col gap-4 p-4'>
+				<div>
+					<Link to={detailPath} className='block'>
+						<h2 className='line-clamp-2 text-lg font-black leading-snug transition-colors group-hover:text-[var(--color-brand)]'>
+							{venue.name}
+						</h2>
+					</Link>
+					<div className='mt-2 flex flex-wrap items-center gap-2 text-sm text-[var(--color-text-secondary)]'>
+						<span className='inline-flex items-center gap-1'>
+							<MapPin className='size-3.5 shrink-0' aria-hidden />
+							{venue.district}
+						</span>
+						<span className='inline-flex items-center gap-1'>
+							<Users className='size-3.5 shrink-0' aria-hidden />
+							{venue.capacity} guests
+						</span>
+					</div>
 				</div>
 
-				<p
-					className='text-sm font-semibold'
-					style={{ color: 'var(--color-brand)' }}
-				>
-					{formatCurrency(venue.pricePerSeat)}
-					<span
-						className='font-normal'
-						style={{ color: 'var(--color-text-secondary)' }}
-					>
-						{' '}
-						/ o‘rin
-					</span>
-				</p>
-
-				<Link to={detailPath} className='mt-auto'>
-					<Button type='button' className='w-full'>
-						Bron qilish
-					</Button>
-				</Link>
+				<div className='mt-auto flex items-end justify-between gap-3 border-t border-[var(--color-border)] pt-4'>
+					<div>
+						<p className='text-xs font-bold uppercase tracking-wide text-[var(--color-text-hint)]'>
+							From
+						</p>
+						<p className='text-lg font-black text-[var(--color-text-primary)]'>
+							{formatCurrency(venue.pricePerSeat)}
+						</p>
+						<p className='text-xs text-[var(--color-text-secondary)]'>
+							per seat
+						</p>
+					</div>
+					<Link to={detailPath}>
+						<Button type='button' className='w-auto px-4'>
+							<CalendarCheck className='size-4' />
+							Book
+						</Button>
+					</Link>
+				</div>
 			</div>
 		</article>
 	)

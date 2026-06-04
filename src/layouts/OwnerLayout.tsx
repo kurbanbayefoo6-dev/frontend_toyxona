@@ -19,7 +19,7 @@ export default function OwnerLayout() {
 			<div className='flex min-w-0 flex-1 flex-col'>
 				<Topbar title='Sahib' />
 				<MobileNav links={ownerLinks} />
-				<main className='flex-1 p-4 sm:p-6'>
+				<main className='flex-1 p-4 sm:p-6 lg:p-8'>
 					<Outlet />
 				</main>
 			</div>

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import {
@@ -6,39 +7,54 @@ import {
 	OwnerLayout,
 	PublicLayout,
 } from '@/layouts'
-import AdminBookingsPage from '@/pages/admin/BookingsPage'
-import AdminDashboardPage from '@/pages/admin/DashboardPage'
-import AdminOwnersPage from '@/pages/admin/OwnersPage'
-import AdminPaymentsPage from '@/pages/admin/PaymentsPage'
-import AdminSettingsPage from '@/pages/admin/SettingsPage'
-import AdminUsersPage from '@/pages/admin/UsersPage'
-import AdminVenuesPage from '@/pages/admin/VenuesPage'
-import CustomerBookingsPage from '@/pages/customer/BookingsPage'
-import CustomerDashboardPage from '@/pages/customer/DashboardPage'
-import CustomerFavoritesPage from '@/pages/customer/FavoritesPage'
-import CustomerPaymentsPage from '@/pages/customer/PaymentsPage'
-import CustomerProfilePage from '@/pages/customer/ProfilePage'
-import CustomerReviewsPage from '@/pages/customer/ReviewsPage'
-import OwnerBookingsPage from '@/pages/owner/BookingsPage'
-import OwnerDashboardPage from '@/pages/owner/DashboardPage'
-import OwnerVenueEditPage from '@/pages/owner/VenueEditPage'
-import OwnerVenueNewPage from '@/pages/owner/VenueNewPage'
-import OwnerVenuesPage from '@/pages/owner/VenuesPage'
-import ForgotPasswordPage from '@/pages/public/ForgotPasswordPage'
-import HomePage from '@/pages/public/HomePage'
-import LoginPage from '@/pages/public/LoginPage'
-import RegisterOwnerPage from '@/pages/public/RegisterOwnerPage'
-import RegisterPage from '@/pages/public/RegisterPage'
-import ResetPasswordPage from '@/pages/public/ResetPasswordPage'
-import VenueDetailsPage from '@/pages/public/VenueDetailsPage'
-import VerifyOtpPage from '@/pages/public/VerifyOtpPage'
 import AdminGuard from '@/routes/guards/AdminGuard'
 import CustomerGuard from '@/routes/guards/CustomerGuard'
 import OwnerGuard from '@/routes/guards/OwnerGuard'
 
+const AdminBookingsPage = lazy(() => import('@/pages/admin/BookingsPage'))
+const AdminDashboardPage = lazy(() => import('@/pages/admin/DashboardPage'))
+const AdminOwnersPage = lazy(() => import('@/pages/admin/OwnersPage'))
+const AdminPaymentsPage = lazy(() => import('@/pages/admin/PaymentsPage'))
+const AdminSettingsPage = lazy(() => import('@/pages/admin/SettingsPage'))
+const AdminUsersPage = lazy(() => import('@/pages/admin/UsersPage'))
+const AdminVenueEditPage = lazy(() => import('@/pages/admin/VenueEditPage'))
+const AdminVenueNewPage = lazy(() => import('@/pages/admin/VenueNewPage'))
+const AdminVenuesPage = lazy(() => import('@/pages/admin/VenuesPage'))
+const CustomerBookingsPage = lazy(() => import('@/pages/customer/BookingsPage'))
+const CustomerDashboardPage = lazy(() => import('@/pages/customer/DashboardPage'))
+const CustomerFavoritesPage = lazy(() => import('@/pages/customer/FavoritesPage'))
+const CustomerPaymentsPage = lazy(() => import('@/pages/customer/PaymentsPage'))
+const CustomerProfilePage = lazy(() => import('@/pages/customer/ProfilePage'))
+const CustomerReviewsPage = lazy(() => import('@/pages/customer/ReviewsPage'))
+const OwnerBookingsPage = lazy(() => import('@/pages/owner/BookingsPage'))
+const OwnerDashboardPage = lazy(() => import('@/pages/owner/DashboardPage'))
+const OwnerVenueEditPage = lazy(() => import('@/pages/owner/VenueEditPage'))
+const OwnerVenueNewPage = lazy(() => import('@/pages/owner/VenueNewPage'))
+const OwnerVenuesPage = lazy(() => import('@/pages/owner/VenuesPage'))
+const ForgotPasswordPage = lazy(() => import('@/pages/public/ForgotPasswordPage'))
+const HomePage = lazy(() => import('@/pages/public/HomePage'))
+const LoginPage = lazy(() => import('@/pages/public/LoginPage'))
+const RegisterOwnerPage = lazy(() => import('@/pages/public/RegisterOwnerPage'))
+const RegisterPage = lazy(() => import('@/pages/public/RegisterPage'))
+const ResetPasswordPage = lazy(() => import('@/pages/public/ResetPasswordPage'))
+const VenueDetailsPage = lazy(() => import('@/pages/public/VenueDetailsPage'))
+const VerifyOtpPage = lazy(() => import('@/pages/public/VerifyOtpPage'))
+
+function RouteFallback() {
+	return (
+		<div className='flex min-h-[50vh] items-center justify-center p-6'>
+			<div className='product-card flex items-center gap-3 px-5 py-4 text-sm font-bold text-[var(--color-text-secondary)]'>
+				<span className='size-4 animate-spin rounded-full border-2 border-[var(--color-brand)] border-t-transparent' />
+				Yuklanmoqda...
+			</div>
+		</div>
+	)
+}
+
 export function AppRouter() {
 	return (
 		<BrowserRouter>
+			<Suspense fallback={<RouteFallback />}>
 			<Routes>
 				<Route element={<PublicLayout />}>
 					<Route path='/' element={<HomePage />} />
@@ -121,6 +137,11 @@ export function AppRouter() {
 					<Route path='/admin/users' element={<AdminUsersPage />} />
 					<Route path='/admin/owners' element={<AdminOwnersPage />} />
 					<Route path='/admin/venues' element={<AdminVenuesPage />} />
+					<Route path='/admin/venues/new' element={<AdminVenueNewPage />} />
+					<Route
+						path='/admin/venues/:id/edit'
+						element={<AdminVenueEditPage />}
+					/>
 					<Route path='/admin/bookings' element={<AdminBookingsPage />} />
 					<Route path='/admin/payments' element={<AdminPaymentsPage />} />
 					<Route path='/admin/settings' element={<AdminSettingsPage />} />
@@ -128,6 +149,7 @@ export function AppRouter() {
 
 				<Route path='*' element={<Navigate to='/' replace />} />
 			</Routes>
+			</Suspense>
 		</BrowserRouter>
 	)
 }
