@@ -49,8 +49,16 @@ function normalizeAssetPath(url: string): string {
 	return `/uploads/${trimmed.replace(/^\/+/, '')}`
 }
 
+function isLegacyLocalUpload(url: string): boolean {
+	return /(^|\/)uploads\//i.test(url)
+}
+
 export function resolveImageUrl(url: string | null | undefined): string | null {
 	if (!url) return null
+
+	if (isLegacyLocalUpload(url.trim())) {
+		return null
+	}
 
 	const path = normalizeAssetPath(url)
 	if (path.startsWith('http://') || path.startsWith('https://')) {
