@@ -112,12 +112,12 @@ export default function LoginPage() {
 			size='compact'
 			footer={
 				<p style={{ color: 'var(--color-text-secondary)' }}>
-					Hisobingiz yoвЂqmi?{' '}
+					Hisobingiz yo‘qmi?{' '}
 					<Link
 						to='/register'
 						style={{ color: 'var(--color-brand)' }}
 					>
-						RoвЂyxatdan oвЂting
+						Ro‘yxatdan o‘ting
 					</Link>
 				</p>
 			}

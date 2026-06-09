@@ -26,7 +26,7 @@ export default function CustomerPaymentsPage() {
 					className='mb-6 text-2xl font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					ToвЂlovlarim
+					To‘lovlarim
 				</h1>
 				<CustomerListSkeleton />
 			</div>
@@ -40,10 +40,10 @@ export default function CustomerPaymentsPage() {
 					className='mb-6 text-2xl font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					ToвЂlovlarim
+					To‘lovlarim
 				</h1>
 				<VenueListError
-					message={getApiErrorMessage(error, 'ToвЂlovlar yuklanmadi')}
+					message={getApiErrorMessage(error, 'To‘lovlar yuklanmadi')}
 					onRetry={() => void refetch()}
 					isRetrying={isFetching}
 				/>
@@ -57,11 +57,11 @@ export default function CustomerPaymentsPage() {
 				className='mb-6 text-2xl font-semibold'
 				style={{ color: 'var(--color-text-primary)' }}
 			>
-				ToвЂlovlarim
+				To‘lovlarim
 			</h1>
 
 			{payments.length === 0 ? (
-				<CustomerEmptyState message='ToвЂlovlar topilmadi' />
+				<CustomerEmptyState message='To‘lovlar topilmadi' />
 			) : (
 				<ul className='flex flex-col gap-3'>
 					{payments.map(payment => {

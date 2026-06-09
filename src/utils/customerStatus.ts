@@ -12,14 +12,14 @@ const BOOKING_STATUS_LABELS: Record<BookingDisplayStatus, string> = {
 	pending: 'Kutilmoqda',
 	confirmed: 'Tasdiqlangan',
 	cancelled: 'Bekor qilingan',
-	completed: 'BoвЂlib oвЂtgan',
+	completed: 'Bo‘lib o‘tgan',
 }
 
 const PAYMENT_STATUS_LABELS: Record<
 	PaymentListItem['paymentStatus'],
 	string
 > = {
-	paid: 'ToвЂlangan',
+	paid: 'To‘langan',
 	pending: 'Kutilmoqda',
 	failed: 'Muvaffaqiyatsiz',
 }

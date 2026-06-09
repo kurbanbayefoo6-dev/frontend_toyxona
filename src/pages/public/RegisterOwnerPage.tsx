@@ -17,11 +17,11 @@ const registerSchema = z.object({
 	firstName: z.string().min(1, 'Ism majburiy'),
 	lastName: z.string().min(1, 'Familiya majburiy'),
 	username: z.string().min(1, 'Foydalanuvchi nomi majburiy'),
-	email: z.string().email('Elektron pochta notoвЂgвЂri'),
+	email: z.string().email('Elektron pochta noto‘g‘ri'),
 	phone: z.string().min(1, 'Telefon raqami majburiy'),
 	password: z
 		.string()
-		.min(8, 'Parol kamida 8 ta belgidan iborat boвЂlsin'),
+		.min(8, 'Parol kamida 8 ta belgidan iborat bo‘lsin'),
 })
 
 type RegisterFormValues = z.infer<typeof registerSchema>
@@ -58,7 +58,7 @@ export default function RegisterOwnerPage() {
 			)
 
 			if (!res.data.success) {
-				const msg = 'RoвЂyxatdan oвЂtishda xatolik yuz berdi'
+				const msg = 'Ro‘yxatdan o‘tishda xatolik yuz berdi'
 				setServerError(msg)
 				toast.error(msg)
 				return
@@ -68,21 +68,21 @@ export default function RegisterOwnerPage() {
 			navigate(`/verify-otp?email=${encodeURIComponent(values.email)}`)
 		} catch (error) {
 			setServerError(
-				handleAuthError(error, 'RoвЂyxatdan oвЂtishda xatolik yuz berdi'),
+				handleAuthError(error, 'Ro‘yxatdan o‘tishda xatolik yuz berdi'),
 			)
 		}
 	}
 
 	return (
 		<AuthCard
-			title='To‘yxona egasi sifatida roвЂyxatdan oвЂtish'
-			subtitle='OвЂyin To‘yxonangizni platformaga qoвЂshing'
+			title='To‘yxona egasi sifatida ro‘yxatdan o‘tish'
+			subtitle='O‘yin To‘yxonangizni platformaga qo‘shing'
 			size='wide'
 			footer={
 				<p style={{ color: 'var(--color-text-secondary)' }}>
 					Mijozmisiz?{' '}
 					<Link to='/register' style={{ color: 'var(--color-brand)' }}>
-						Mijoz roвЂyxati
+						Mijoz ro‘yxati
 					</Link>
 					{' В· '}
 					<Link to='/login' style={{ color: 'var(--color-brand)' }}>
@@ -157,7 +157,7 @@ export default function RegisterOwnerPage() {
 					loading={isSubmitting}
 					disabled={isSubmitting}
 				>
-					{isSubmitting ? 'Yuborilmoqda...' : 'RoвЂyxatdan oвЂtish'}
+					{isSubmitting ? 'Yuborilmoqda...' : 'Ro‘yxatdan o‘tish'}
 				</Button>
 			</form>
 		</AuthCard>

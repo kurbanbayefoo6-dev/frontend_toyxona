@@ -61,7 +61,7 @@ export default function VenueDetailsPage() {
 		return (
 			<div className='mx-auto max-w-7xl px-4 py-12 text-center'>
 				<p style={{ color: 'var(--color-text-primary)' }}>
-					NotoвЂgвЂri To‘yxona identifikatori
+					Noto‘g‘ri To‘yxona identifikatori
 				</p>
 				<Link
 					to='/'
@@ -84,7 +84,7 @@ export default function VenueDetailsPage() {
 				<VenueDetailError
 					message={getApiErrorMessage(
 						error,
-						'To‘yxona maвЂ™lumotlari yuklanmadi',
+						'To‘yxona ma’lumotlari yuklanmadi',
 					)}
 					onRetry={() => void refetch()}
 					isRetrying={isFetching}
@@ -94,7 +94,7 @@ export default function VenueDetailsPage() {
 					className='mt-6 inline-block text-sm'
 					style={{ color: 'var(--color-brand)' }}
 				>
-					в†ђ Bosh sahifaga
+					← Bosh sahifaga
 				</Link>
 			</div>
 		)
@@ -128,7 +128,7 @@ export default function VenueDetailsPage() {
 				className='premium-badge mb-5'
 				style={{ color: 'var(--color-brand)' }}
 			>
-				в†ђ Bosh sahifaga
+				← Bosh sahifaga
 			</Link>
 
 			<div className='grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_390px]'>
@@ -138,17 +138,17 @@ export default function VenueDetailsPage() {
 					<CatalogGrid
 						title='Xonandalar'
 						items={singerItems}
-						emptyMessage='Xonandalar roвЂyxati boвЂsh'
+						emptyMessage='Xonandalar ro‘yxati bo‘sh'
 					/>
 					<CatalogGrid
 						title='Avtomobillar'
 						items={carItems}
-						emptyMessage='Avtomobillar roвЂyxati boвЂsh'
+						emptyMessage='Avtomobillar ro‘yxati bo‘sh'
 					/>
 					<CatalogGrid
 						title='Menyu'
 						items={menuItems}
-						emptyMessage='Menyu roвЂyxati boвЂsh'
+						emptyMessage='Menyu ro‘yxati bo‘sh'
 					/>
 					<KarnaySection items={data.karnaySurnay} />
 				</div>

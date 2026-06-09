@@ -57,7 +57,7 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 							onError={() => {
 								if (import.meta.env.DEV) {
 									console.warn(
-										'[image-render:VenueCard] img onError вЂ” showing placeholder',
+										'[image-render:VenueCard] img onError — showing placeholder',
 										{ venueId: venue.id, src: imageSrc },
 									)
 								}
@@ -105,7 +105,7 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 							{formatCurrency(venue.pricePerSeat)}
 						</p>
 						<p className='text-xs text-[var(--color-text-secondary)]'>
-							oвЂrin uchun
+							o‘rin uchun
 						</p>
 					</div>
 					<Link to={detailPath}>

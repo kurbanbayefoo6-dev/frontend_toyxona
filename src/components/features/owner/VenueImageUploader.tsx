@@ -48,7 +48,7 @@ export function VenueImageUploader({
 							disabled={disabled}
 							onClick={() => onDeleteExisting(img.id)}
 							className='absolute top-1 right-1 rounded-full bg-black/50 p-1 text-white'
-							aria-label='Rasmni oвЂchirish'
+							aria-label='Rasmni o‘chirish'
 						>
 							<Trash2 className='size-3.5' />
 						</button>
@@ -87,7 +87,7 @@ export function VenueImageUploader({
 					}}
 				>
 					<ImagePlus className='size-5' />
-					Rasm qoвЂshish
+					Rasm qo‘shish
 				</button>
 			</div>
 			<input

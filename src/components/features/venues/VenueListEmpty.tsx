@@ -11,13 +11,13 @@
 				className='text-lg font-semibold'
 				style={{ color: 'var(--color-text-primary)' }}
 			>
-				ToвЂyxonalar topilmadi
+				To‘yxonalar topilmadi
 			</p>
 			<p
 				className='mt-2 text-sm'
 				style={{ color: 'var(--color-text-hint)' }}
 			>
-				Filtrlarni oвЂzgartiring yoki boshqa kalit soвЂz bilan qidiring
+				Filtrlarni o‘zgartiring yoki boshqa kalit so‘z bilan qidiring
 			</p>
 		</div>
 	)

@@ -24,16 +24,16 @@ export function VenueInfoSection({ venue }: VenueInfoSectionProps) {
 
 			<div className='mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4'>
 				<InfoPill icon={<MapPin className='size-4' />} label='Tuman' value={venue.district} />
-				<InfoPill icon={<Users className='size-4' />} label='SigвЂim' value={`${venue.capacity} mehmon`} />
+				<InfoPill icon={<Users className='size-4' />} label='Sig‘im' value={`${venue.capacity} mehmon`} />
 				<InfoPill icon={<Phone className='size-4' />} label='Telefon' value={venue.phone} />
-				<InfoPill icon={<WalletCards className='size-4' />} label='Narx' value={`${formatCurrency(venue.pricePerSeat)} / oвЂrin`} />
+				<InfoPill icon={<WalletCards className='size-4' />} label='Narx' value={`${formatCurrency(venue.pricePerSeat)} / o‘rin`} />
 			</div>
 
 			<div className='mt-6 rounded-[var(--radius-lg)] bg-[var(--color-surface-secondary)] p-5'>
 				<h2 className='text-lg font-black'>Bu To‘yxona haqida</h2>
 				<p className='mt-2 leading-relaxed text-[var(--color-text-secondary)]'>
 					{venue.name} {venue.address} manzilida joylashgan. Zal {venue.capacity}{' '}
-					mehmongacha, toвЂy va oilaviy tadbirlar uchun mos. Barcha xizmatlar bir
+					mehmongacha, to‘y va oilaviy tadbirlar uchun mos. Barcha xizmatlar bir
 					joyda.
 				</p>
 			</div>

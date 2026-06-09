@@ -42,13 +42,13 @@ export default function AdminDashboardPage() {
 	return (
 		<DashboardShell
 			kicker='Boshqaruv markazi'
-			title='Bozor operatsiyalari uchun asosiy koвЂrsatkichlar'
-			subtitle='Foydalanuvchilar, egalar, To‘yxonalar, bandlovlar, kutilayotgan tasdiqlar va daromadning umumiy koвЂrinishi.'
+			title='Bozor operatsiyalari uchun asosiy ko‘rsatkichlar'
+			subtitle='Foydalanuvchilar, egalar, To‘yxonalar, bandlovlar, kutilayotgan tasdiqlar va daromadning umumiy ko‘rinishi.'
 			actions={
 				<Link to='/admin/venues'>
 					<Button className='sm:w-auto'>
 						<ShieldCheck className='size-4' />
-						To‘yxonalarni koвЂrib chiqish
+						To‘yxonalarni ko‘rib chiqish
 					</Button>
 				</Link>
 			}
@@ -57,7 +57,7 @@ export default function AdminDashboardPage() {
 				<MetricCard
 					label='Foydalanuvchilar'
 					value={data.totalUsers}
-					helper='RoвЂyxatdan oвЂtgan foydalanuvchilar'
+					helper='Ro‘yxatdan o‘tgan foydalanuvchilar'
 				/>
 				<MetricCard
 					label='Egalar'
@@ -68,7 +68,7 @@ export default function AdminDashboardPage() {
 				<MetricCard
 					label='To‘yxonalar'
 					value={data.totalVenues}
-					helper={`${data.pendingVenues} ta koвЂrib chiqish kutilmoqda`}
+					helper={`${data.pendingVenues} ta ko‘rib chiqish kutilmoqda`}
 					tone='warning'
 				/>
 				<MetricCard
@@ -106,7 +106,7 @@ export default function AdminDashboardPage() {
 							tone='success'
 						/>
 						<QueueRow
-							label='Jami toвЂlovlar'
+							label='Jami to‘lovlar'
 							value={formatCurrency(data.totalRevenue)}
 							href='/admin/payments'
 							tone='brand'

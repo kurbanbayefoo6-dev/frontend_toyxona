@@ -45,7 +45,7 @@ export function PaymentModal({
 		<Modal
 			open={open}
 			onClose={onClose}
-			title='ToвЂlov'
+			title='To‘lov'
 			size='lg'
 		>
 			<div
@@ -64,7 +64,7 @@ export function PaymentModal({
 						className='text-xs'
 						style={{ color: 'var(--color-text-hint)' }}
 					>
-						Oldindan toвЂlov (20%)
+						Oldindan to‘lov (20%)
 					</p>
 					<p
 						className='text-lg font-semibold'
@@ -82,7 +82,7 @@ export function PaymentModal({
 						onChange={e =>
 							setCardHolder(maskCardHolder(e.target.value))
 						}
-						placeholder='TOвЂLIQ ISM'
+						placeholder='TO‘LIQ ISM'
 						autoComplete='cc-name'
 						disabled={isProcessing}
 					/>
@@ -131,7 +131,7 @@ export function PaymentModal({
 					className='text-xs'
 					style={{ color: 'var(--color-text-hint)' }}
 				>
-					Sinov rejimi: toвЂlov har doim muvaffaqiyatli amalga oshiriladi.
+					Sinov rejimi: to‘lov har doim muvaffaqiyatli amalga oshiriladi.
 				</p>
 
 				<Button
@@ -140,7 +140,7 @@ export function PaymentModal({
 					loading={isProcessing}
 					disabled={!valid || isProcessing}
 				>
-					{isProcessing ? 'ToвЂlov amalga oshirilmoqda...' : 'ToвЂlash'}
+					{isProcessing ? 'To‘lov amalga oshirilmoqda...' : 'To‘lash'}
 				</Button>
 			</form>
 		</Modal>

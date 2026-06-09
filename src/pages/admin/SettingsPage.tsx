@@ -26,7 +26,7 @@ export default function AdminSettingsPage() {
 					className='mb-4 text-lg font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					Tizim maвЂ™lumotlari
+					Tizim ma’lumotlari
 				</h2>
 				<dl className='space-y-3 text-sm'>
 					<SettingsRow label='Loyiha' value={APP_NAME} />
@@ -54,7 +54,7 @@ export default function AdminSettingsPage() {
 						value={apiConfigured ? 'Sozlangan' : 'Sozlanmagan'}
 					/>
 					<SettingsRow
-						label='YigвЂish rejimi'
+						label='Yig‘ish rejimi'
 						value={import.meta.env.PROD ? 'Ishga tushirish' : 'Ishlab chiqish'}
 					/>
 				</dl>
@@ -62,7 +62,7 @@ export default function AdminSettingsPage() {
 					className='mt-4 text-xs'
 					style={{ color: 'var(--color-text-hint)' }}
 				>
-					Xavfsizlik uchun maxfiy kalitlar va tokenlar bu yerda koвЂrsatilmaydi.
+					Xavfsizlik uchun maxfiy kalitlar va tokenlar bu yerda ko‘rsatilmaydi.
 				</p>
 			</section>
 		</div>

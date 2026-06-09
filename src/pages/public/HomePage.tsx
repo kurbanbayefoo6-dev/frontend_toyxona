@@ -36,11 +36,11 @@ const TESTIMONIALS = [
 	},
 	{
 		name: 'Dilshod, To‘yxona egasi',
-		text: 'Egasi kabineti har bir mijozga qoвЂngвЂiroq qilmasdan bandlovlar va To‘yxona holatini kuzatishni osonlashtiradi.',
+		text: 'Egasi kabineti har bir mijozga qo‘ng‘iroq qilmasdan bandlovlar va To‘yxona holatini kuzatishni osonlashtiradi.',
 	},
 	{
 		name: 'Zarina',
-		text: 'Rasmlar, sigвЂim va narx aniq edi. Nihoyat skrinshotlar emas, haqiqiy mahsulot tanlashdek tuyuldi.',
+		text: 'Rasmlar, sig‘im va narx aniq edi. Nihoyat skrinshotlar emas, haqiqiy mahsulot tanlashdek tuyuldi.',
 	},
 ]
 
@@ -161,25 +161,25 @@ export default function HomePage() {
 				<ValueCard
 					icon={<ShieldCheck className='size-5' />}
 					title='Tasdiqlangan To‘yxonalar'
-					text='Band qilishdan oldin aniq holat, rasmlar, sigвЂim va aloqa maвЂ™lumotlari.'
+					text='Band qilishdan oldin aniq holat, rasmlar, sig‘im va aloqa ma’lumotlari.'
 				/>
 				<ValueCard
 					icon={<CalendarCheck className='size-5' />}
 					title='Avval mavjudlik'
-					text='BoвЂsh va band kunlarni koвЂring вЂ” qaror qabul qilishga qulay bandlov jarayoni.'
+					text='Bo‘sh va band kunlarni ko‘ring — qaror qabul qilishga qulay bandlov jarayoni.'
 				/>
 				<ValueCard
 					icon={<Sparkles className='size-5' />}
 					title='Kontekstdagi xizmatlar'
-					text='Xonandalar, avtomobillar, menyu va qoвЂshimcha xizmatlarni zal atrofida solishtiring.'
+					text='Xonandalar, avtomobillar, menyu va qo‘shimcha xizmatlarni zal atrofida solishtiring.'
 				/>
 			</section>
 
 			<section className='mx-auto w-full max-w-7xl px-4 py-8'>
 				<SectionHeader
 					kicker='Tanlangan'
-					title='Avval koвЂrishga arziydigan To‘yxonalar'
-					text='Rasmga urgвЂu berilgan kartochkalar joylashuv, sigвЂim, narx va bandlov niyatini izlashsiz koвЂrsatadi.'
+					title='Avval ko‘rishga arziydigan To‘yxonalar'
+					text='Rasmga urg‘u berilgan kartochkalar joylashuv, sig‘im, narx va bandlov niyatini izlashsiz ko‘rsatadi.'
 				/>
 				<div className='mt-6 grid grid-cols-1 gap-5 md:grid-cols-3'>
 					{showInitialLoading
@@ -219,7 +219,7 @@ export default function HomePage() {
 					<header className='mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between'>
 						<div>
 							<p className='section-kicker'>Bozor</p>
-							<h2 className='section-title'>To‘yxonalarni koвЂrib chiqish</h2>
+							<h2 className='section-title'>To‘yxonalarni ko‘rib chiqish</h2>
 						</div>
 						{!showInitialLoading && !isError && total > 0 && (
 							<p className='text-sm tabular-nums text-[var(--color-text-secondary)]'>
@@ -230,7 +230,7 @@ export default function HomePage() {
 								{isFetching ? (
 									<span className='text-[var(--color-text-hint)]'>
 										{' '}
-										вЂ” yangilanmoqda
+										— yangilanmoqda
 									</span>
 								) : null}
 							</p>
@@ -282,7 +282,7 @@ export default function HomePage() {
 			<section className='mx-auto w-full max-w-7xl px-4 py-10'>
 				<SectionHeader
 					kicker='Tumanlar'
-					title='Tuman boвЂyicha koвЂrish'
+					title='Tuman bo‘yicha ko‘rish'
 					text='Tez tuman tugmalari bozorni mahalliy va mobilga qulay qiladi.'
 				/>
 				<div className='mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6'>
@@ -323,10 +323,10 @@ export default function HomePage() {
 					<div className='grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center'>
 						<div>
 							<p className='text-sm font-bold uppercase tracking-wide text-white/70'>
-								Tayyor boвЂlsangiz, boshlaymiz
+								Tayyor bo‘lsangiz, boshlaymiz
 							</p>
 							<h2 className='mt-3 max-w-2xl text-3xl font-black leading-tight sm:text-5xl'>
-								Bugun qisqa roвЂyxat tuzing, ertaga ishonch bilan band qiling.
+								Bugun qisqa ro‘yxat tuzing, ertaga ishonch bilan band qiling.
 							</h2>
 						</div>
 						<Link to='/register'>
@@ -349,12 +349,12 @@ export default function HomePage() {
 					<div className='text-sm text-white/70'>
 						<p className='font-bold text-white'>Bozor</p>
 						<a href='#venue-results' className='mt-3 block'>To‘yxonalar</a>
-						<Link to='/register/owner' className='mt-2 block'>To‘yxonani roвЂyxatga qoвЂshish</Link>
+						<Link to='/register/owner' className='mt-2 block'>To‘yxonani ro‘yxatga qo‘shish</Link>
 					</div>
 					<div className='text-sm text-white/70'>
 						<p className='font-bold text-white'>Hisob</p>
 						<Link to='/login' className='mt-3 block'>Kirish</Link>
-						<Link to='/register' className='mt-2 block'>RoвЂyxatdan oвЂtish</Link>
+						<Link to='/register' className='mt-2 block'>Ro‘yxatdan o‘tish</Link>
 					</div>
 				</div>
 			</footer>

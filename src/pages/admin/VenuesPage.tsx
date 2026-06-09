@@ -44,10 +44,10 @@ export default function AdminVenuesPage() {
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'dashboard'] })
-			toast.success('To‘yxona oвЂchirildi')
+			toast.success('To‘yxona o‘chirildi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'To‘yxonani oвЂchirib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'To‘yxonani o‘chirib bo‘lmadi'))
 		},
 	})
 
@@ -65,7 +65,7 @@ export default function AdminVenuesPage() {
 			toast.success('To‘yxona holati yangilandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
 		},
 	})
 
@@ -135,7 +135,7 @@ export default function AdminVenuesPage() {
 			</AdminToolbar>
 
 			<AdminTable
-				headers={['Rasm', 'To‘yxona', 'Tuman', 'SigвЂim', 'Holat', 'Amallar']}
+				headers={['Rasm', 'To‘yxona', 'Tuman', 'Sig‘im', 'Holat', 'Amallar']}
 				rows={venues.map(venue =>
 					buildVenueRow(venue, statusMutation, deleteMutation),
 				)}
@@ -190,7 +190,7 @@ function buildVenueRow(
 						className='flex size-full items-center justify-center text-xs'
 						style={{ color: 'var(--color-text-hint)' }}
 					>
-						вЂ”
+						—
 					</span>
 				)}
 			</div>,
@@ -242,12 +242,12 @@ function buildVenueRow(
 					className='!w-auto px-3 text-xs'
 					disabled={deleteMutation.isPending}
 					onClick={() => {
-						if (window.confirm('To‘yxonani oвЂchirishni tasdiqlaysizmi?')) {
+						if (window.confirm('To‘yxonani o‘chirishni tasdiqlaysizmi?')) {
 							deleteMutation.mutate(venue.id)
 						}
 					}}
 				>
-					OвЂchirish
+					O‘chirish
 				</Button>
 			</div>,
 		],

@@ -43,7 +43,7 @@ export default function OwnerVenuesPage() {
 			<PageHeader />
 
 			{venues.length === 0 ? (
-				<CustomerEmptyState message='Sizda hali To‘yxonalar yoвЂq' />
+				<CustomerEmptyState message='Sizda hali To‘yxonalar yo‘q' />
 			) : (
 				<ul className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
 					{venues.map(venue => {
@@ -75,7 +75,7 @@ export default function OwnerVenuesPage() {
 										className='flex size-full items-center justify-center text-sm'
 										style={{ color: 'var(--color-text-hint)' }}
 									>
-										Rasm yoвЂq
+										Rasm yo‘q
 									</div>
 								)}
 							</div>
@@ -99,7 +99,7 @@ export default function OwnerVenuesPage() {
 									className='text-sm font-medium'
 									style={{ color: 'var(--color-brand)' }}
 								>
-									{formatCurrency(venue.pricePerSeat)} / oвЂrin
+									{formatCurrency(venue.pricePerSeat)} / o‘rin
 								</p>
 								<Link
 									to={`/owner/venues/${venue.id}/edit`}

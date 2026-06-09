@@ -9,7 +9,7 @@ export default function VenueEditPage() {
 	if (Number.isNaN(venueId) || venueId <= 0) {
 		return (
 			<p style={{ color: 'var(--color-text-secondary)' }}>
-				NotoвЂgвЂri To‘yxona identifikatori
+				Noto‘g‘ri To‘yxona identifikatori
 			</p>
 		)
 	}

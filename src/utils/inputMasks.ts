@@ -19,7 +19,7 @@ export function maskCvv(value: string): string {
 }
 
 export function maskCardHolder(value: string): string {
-	return value.replace(/[^a-zA-ZГЂ-Гї\s'-]/g, '').slice(0, 40)
+	return value.replace(/[^a-zA-Z\u0400-\u04FF\s'-]/g, '').slice(0, 40)
 }
 
 export function isPaymentFormValid(input: {

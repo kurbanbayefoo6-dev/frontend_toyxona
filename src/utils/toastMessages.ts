@@ -1,21 +1,21 @@
 ﻿export const AUTH_TOAST = {
-	registerSuccess: 'RoвЂyxatdan oвЂtish muvaffaqiyatli',
+	registerSuccess: 'Ro‘yxatdan o‘tish muvaffaqiyatli',
 	otpVerified: 'Tasdiqlash kodi qabul qilindi',
 	loginSuccess: 'Kirish muvaffaqiyatli',
 	forgotPasswordSent: 'Parol tiklash havolasi yuborildi',
 	passwordResetSuccess: 'Parol muvaffaqiyatli yangilandi',
 	resendOtpSuccess: 'Yangi OTP kodi yuborildi',
 	logoutSuccess: 'Tizimdan chiqildi',
-	invalidCredentials: 'NotoвЂgвЂri elektron pochta yoki parol',
-	invalidOtp: 'Tasdiqlash kodi notoвЂgвЂri',
-	networkError: 'Server bilan bogвЂlanib boвЂlmadi',
+	invalidCredentials: 'Noto‘g‘ri elektron pochta yoki parol',
+	invalidOtp: 'Tasdiqlash kodi noto‘g‘ri',
+	networkError: 'Server bilan bog‘lanib bo‘lmadi',
 } as const
 
 export const BOOKING_TOAST = {
 	bookingCreated: 'Bron muvaffaqiyatli yaratildi',
-	paymentSuccess: 'Muvaffaqiyatli toвЂlandi',
+	paymentSuccess: 'Muvaffaqiyatli to‘landi',
 	noDate: 'Sana tanlanmagan',
 	dateBooked: 'Bu kun band',
-	networkError: 'Server bilan bogвЂlanib boвЂlmadi',
+	networkError: 'Server bilan bog‘lanib bo‘lmadi',
 	customersOnly: 'Faqat mijozlar bron qila oladi',
 } as const

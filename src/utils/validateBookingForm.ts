@@ -20,7 +20,7 @@ export function validateBookingForm(
 	}
 
 	if (!Number.isFinite(guestCount) || guestCount < 1) {
-		return 'Mehmonlar soni notoвЂgвЂri'
+		return 'Mehmonlar soni noto‘g‘ri'
 	}
 
 	if (guestCount > capacity) {
@@ -30,7 +30,7 @@ export function validateBookingForm(
 	const day = parseISO(selectedDate)
 	const today = startOfDay(new Date())
 	if (isBefore(day, today)) {
-		return 'OвЂtgan sanani tanlab boвЂlmaydi'
+		return 'O‘tgan sanani tanlab bo‘lmaydi'
 	}
 
 	const past = buildDateSet(availability.pastDates)
@@ -38,7 +38,7 @@ export function validateBookingForm(
 	const key = selectedDate.split('T')[0]
 
 	if (past.has(key) || isBefore(day, today)) {
-		return 'OвЂtgan sanani tanlab boвЂlmaydi'
+		return 'O‘tgan sanani tanlab bo‘lmaydi'
 	}
 
 	if (booked.has(key)) {

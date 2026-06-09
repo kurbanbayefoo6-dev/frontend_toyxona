@@ -7,7 +7,7 @@ import { Topbar } from '@/components/layout/Topbar'
 export const customerLinks = [
 	{ to: '/customer/dashboard', label: 'Bosh sahifa' },
 	{ to: '/customer/bookings', label: 'Bandlovlar' },
-	{ to: '/customer/payments', label: 'ToвЂlovlar' },
+	{ to: '/customer/payments', label: 'To‘lovlar' },
 	{ to: '/customer/favorites', label: 'Sevimlilar' },
 	{ to: '/customer/reviews', label: 'Sharhlar' },
 	{ to: '/customer/profile', label: 'Profil' },

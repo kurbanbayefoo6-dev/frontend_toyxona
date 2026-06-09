@@ -54,7 +54,7 @@ export function BookingDetailsModal({
 					highlight
 				/>
 				<DetailRow
-					label='Oldindan toвЂlov'
+					label='Oldindan to‘lov'
 					value={formatCurrency(booking.advanceAmount)}
 				/>
 				<div className='flex justify-between gap-4'>
@@ -75,7 +75,7 @@ export function BookingDetailsModal({
 					className='inline-block text-sm font-medium'
 					style={{ color: 'var(--color-brand)' }}
 				>
-					To‘yxona sahifasiga в†’
+					To‘yxona sahifasiga →
 				</Link>
 				{canCancel ? (
 					<Button

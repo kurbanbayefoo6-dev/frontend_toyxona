@@ -88,12 +88,12 @@ export default function CustomerReviewsPage() {
 		},
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['customer', 'reviews'] })
-			toast.success(editing ? 'Sharh yangilandi' : 'Sharh qoвЂshildi')
+			toast.success(editing ? 'Sharh yangilandi' : 'Sharh qo‘shildi')
 			setModalOpen(false)
 			setEditing(null)
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
 		},
 	})
 
@@ -101,10 +101,10 @@ export default function CustomerReviewsPage() {
 		mutationFn: (id: number) => deleteReview(id),
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['customer', 'reviews'] })
-			toast.success('Sharh oвЂchirildi')
+			toast.success('Sharh o‘chirildi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
 		},
 	})
 
@@ -167,12 +167,12 @@ export default function CustomerReviewsPage() {
 					className='!w-auto px-6'
 					onClick={openCreate}
 				>
-					Sharh qoвЂshish
+					Sharh qo‘shish
 				</Button>
 			</div>
 
 			{reviews.length === 0 ? (
-				<CustomerEmptyState message='Sizda hali sharhlar yoвЂq' />
+				<CustomerEmptyState message='Sizda hali sharhlar yo‘q' />
 			) : (
 				<ul className='flex flex-col gap-3'>
 					{reviews.map(review => (
@@ -244,7 +244,7 @@ export default function CustomerReviewsPage() {
 										onClick={() => deleteMutation.mutate(review.id)}
 										className='rounded-[var(--radius-sm)] p-2'
 										style={{ color: 'var(--color-booked)' }}
-										aria-label='OвЂchirish'
+										aria-label='O‘chirish'
 										disabled={deleteMutation.isPending}
 									>
 										<Trash2 className='size-4' />

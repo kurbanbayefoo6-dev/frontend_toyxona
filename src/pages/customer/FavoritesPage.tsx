@@ -27,7 +27,7 @@ export default function CustomerFavoritesPage() {
 			toast.success('Sevimlilardan olib tashlandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
 		},
 	})
 
@@ -75,7 +75,7 @@ export default function CustomerFavoritesPage() {
 			</h1>
 
 			{favorites.length === 0 ? (
-				<CustomerEmptyState message='Sevimli To‘yxonalar roвЂyxati boвЂsh' />
+				<CustomerEmptyState message='Sevimli To‘yxonalar ro‘yxati bo‘sh' />
 			) : (
 				<ul className='grid grid-cols-1 gap-4 md:grid-cols-2'>
 					{favorites.map(fav => {
@@ -107,7 +107,7 @@ export default function CustomerFavoritesPage() {
 										className='flex size-full items-center justify-center text-sm'
 										style={{ color: 'var(--color-text-hint)' }}
 									>
-										Rasm yoвЂq
+										Rasm yo‘q
 									</div>
 								)}
 							</div>
@@ -133,7 +133,7 @@ export default function CustomerFavoritesPage() {
 											className='mt-1 text-sm font-medium'
 											style={{ color: 'var(--color-brand)' }}
 										>
-											{formatCurrency(fav.venue.pricePerSeat)} / oвЂrin
+											{formatCurrency(fav.venue.pricePerSeat)} / o‘rin
 										</p>
 									)}
 								</div>
@@ -143,7 +143,7 @@ export default function CustomerFavoritesPage() {
 										className='flex-1'
 									>
 										<Button type='button' variant='secondary'>
-											KoвЂrish
+											Ko‘rish
 										</Button>
 									</Link>
 									<Button

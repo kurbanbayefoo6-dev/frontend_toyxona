@@ -35,7 +35,7 @@ export default function AdminPaymentsPage() {
 	if (isLoading) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>ToвЂlovlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>To‘lovlar</h1>
 				<AdminTableSkeleton />
 			</div>
 		)
@@ -44,9 +44,9 @@ export default function AdminPaymentsPage() {
 	if (isError) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>ToвЂlovlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>To‘lovlar</h1>
 				<VenueListError
-					message={getApiErrorMessage(error, 'ToвЂlovlar yuklanmadi')}
+					message={getApiErrorMessage(error, 'To‘lovlar yuklanmadi')}
 					onRetry={() => void refetch()}
 					isRetrying={isFetching}
 				/>
@@ -60,7 +60,7 @@ export default function AdminPaymentsPage() {
 				className='mb-6 text-2xl font-semibold'
 				style={{ color: 'var(--color-text-primary)' }}
 			>
-				ToвЂlovlar
+				To‘lovlar
 			</h1>
 
 			<AdminToolbar
@@ -118,7 +118,7 @@ export default function AdminPaymentsPage() {
 						),
 					}
 				})}
-				emptyMessage='ToвЂlovlar topilmadi'
+				emptyMessage='To‘lovlar topilmadi'
 			/>
 
 			<div className='mt-6'>

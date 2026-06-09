@@ -176,7 +176,7 @@ export function BookingPanel({
 		if (!createdBooking) return
 
 		if (!createdBooking.id || createdBooking.id <= 0) {
-			toast.error('Bron identifikatori notoвЂgвЂri. Qayta urinib koring.')
+			toast.error('Bron identifikatori noto‘g‘ri. Qayta urinib koring.')
 			return
 		}
 
@@ -225,7 +225,7 @@ export function BookingPanel({
 					</div>
 					<div className='rounded-[var(--radius-lg)] bg-[var(--color-brand-light)] px-3 py-2 text-right'>
 						<p className='text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
-							OвЂrin
+							O‘rin
 						</p>
 						<p className='text-sm font-black text-[var(--color-brand)]'>
 							{formatCurrency(venue.pricePerSeat)}
@@ -274,7 +274,7 @@ export function BookingPanel({
 				<div className='mt-5 grid gap-3'>
 					<AddonCheckboxes
 						title='Xonandalar'
-						emptyText='Xonandalar yoвЂq'
+						emptyText='Xonandalar yo‘q'
 						items={singers.map(s => ({
 							id: s.id,
 							label: `${s.name} - ${formatCurrency(s.price)}`,
@@ -285,7 +285,7 @@ export function BookingPanel({
 
 					<AddonCheckboxes
 						title='Avtomobillar'
-						emptyText='Avtomobillar yoвЂq'
+						emptyText='Avtomobillar yo‘q'
 						items={cars.map(c => ({
 							id: c.id,
 							label: `${c.brand} - ${formatCurrency(c.price)}`,
@@ -296,7 +296,7 @@ export function BookingPanel({
 
 					<AddonCheckboxes
 						title='Karnay-surnay'
-						emptyText='Karnay-surnay yoвЂq'
+						emptyText='Karnay-surnay yo‘q'
 						items={availableKarnay.map(k => ({
 							id: k.id,
 							label: formatCurrency(k.price),
@@ -308,7 +308,7 @@ export function BookingPanel({
 
 				<div className='mt-5 space-y-2 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-elevated)] p-4'>
 					<PriceRow
-						label={`OвЂrinlar (${guestCount} x ${formatCurrency(venue.pricePerSeat)})`}
+						label={`O‘rinlar (${guestCount} x ${formatCurrency(venue.pricePerSeat)})`}
 						value={priceBreakdown.baseTotal}
 					/>
 					{priceBreakdown.singersTotal > 0 && (

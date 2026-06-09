@@ -85,7 +85,7 @@ export default function AdminOwnersPage() {
 					className='!w-auto px-4'
 					onClick={() => setCreateOpen(true)}
 				>
-					Yangi ega qoвЂshish
+					Yangi ega qo‘shish
 				</Button>
 			</div>
 
@@ -107,12 +107,12 @@ export default function AdminOwnersPage() {
 					const count = venueCountByOwner.get(owner.id) ?? 0
 					return {
 						key: owner.id,
-						cells: [name, count, owner.phone || 'вЂ”', owner.email],
+						cells: [name, count, owner.phone || '—', owner.email],
 						mobile: (
 							<div className='space-y-1 text-sm'>
 								<p className='font-semibold'>{name}</p>
 								<p>To‘yxonalar: {count}</p>
-								<p>{owner.phone || 'вЂ”'}</p>
+								<p>{owner.phone || '—'}</p>
 								<p>{owner.email}</p>
 							</div>
 						),

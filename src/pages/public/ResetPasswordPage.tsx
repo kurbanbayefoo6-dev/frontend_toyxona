@@ -15,7 +15,7 @@ import { AUTH_TOAST } from '@/utils/toastMessages'
 
 const resetSchema = z
 	.object({
-		newPassword: z.string().min(1, 'Yangi parol majburiy').min(6, 'Parol kamida 6 ta belgidan iborat boвЂlsin'),
+		newPassword: z.string().min(1, 'Yangi parol majburiy').min(6, 'Parol kamida 6 ta belgidan iborat bo‘lsin'),
 		confirmPassword: z.string().min(1, 'Parolni tasdiqlang'),
 	})
 	.refine(data => data.newPassword === data.confirmPassword, {
@@ -52,7 +52,7 @@ export default function ResetPasswordPage() {
 
 		if (!resetToken) {
 			const msg =
-				'Tiklash havolasi topilmadi. Elektron pochtadagi havoladan kiring yoki qayta soвЂrang.'
+				'Tiklash havolasi topilmadi. Elektron pochtadagi havoladan kiring yoki qayta so‘rang.'
 			setServerError(msg)
 			toast.error(msg)
 			return
@@ -68,7 +68,7 @@ export default function ResetPasswordPage() {
 			)
 
 			if (!res.data.success) {
-				const msg = 'Parol yangilanmadi. Qayta urinib koвЂring'
+				const msg = 'Parol yangilanmadi. Qayta urinib ko‘ring'
 				setServerError(msg)
 				toast.error(msg)
 				return
@@ -80,7 +80,7 @@ export default function ResetPasswordPage() {
 			toast.success(AUTH_TOAST.passwordResetSuccess)
 		} catch (error) {
 			setServerError(
-				handleAuthError(error, 'Parol yangilanmadi. Qayta urinib koвЂring'),
+				handleAuthError(error, 'Parol yangilanmadi. Qayta urinib ko‘ring'),
 			)
 		}
 	}
@@ -89,7 +89,7 @@ export default function ResetPasswordPage() {
 		return (
 			<AuthCard
 				title='Parolni yangilash'
-				subtitle='Tiklash havolasi notoвЂgвЂri yoki muddati tugagan'
+				subtitle='Tiklash havolasi noto‘g‘ri yoki muddati tugagan'
 				size='compact'
 				footer={
 					<p style={{ color: 'var(--color-text-secondary)' }}>
@@ -97,14 +97,14 @@ export default function ResetPasswordPage() {
 							to='/forgot-password'
 							style={{ color: 'var(--color-brand)' }}
 						>
-							Qayta soвЂrash
+							Qayta so‘rash
 						</Link>
 					</p>
 				}
 			>
 				<Alert variant='error'>
 					Tiklash kaliti topilmadi. Elektron pochtadagi havoladan kiring yoki parolni
-					qayta tiklashni soвЂrang.
+					qayta tiklashni so‘rang.
 				</Alert>
 				<Button
 					type='button'
@@ -119,7 +119,7 @@ export default function ResetPasswordPage() {
 
 	return (
 		<AuthCard
-			title='Yangi parol oвЂrnatish'
+			title='Yangi parol o‘rnatish'
 			subtitle='Hisobingiz uchun yangi parol kiriting'
 			size='compact'
 			footer={

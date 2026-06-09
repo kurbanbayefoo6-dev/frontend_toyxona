@@ -29,7 +29,7 @@ export default function OwnerBookingsPage() {
 			toast.success('Bandlov bekor qilindi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib bo‘lmadi'))
 		},
 	})
 
@@ -128,7 +128,7 @@ export default function OwnerBookingsPage() {
 												{booking.customerName}
 											</td>
 											<td className='px-4 py-3'>
-												{phonesQuery.data?.get(booking.id) ?? 'вЂ”'}
+												{phonesQuery.data?.get(booking.id) ?? '—'}
 											</td>
 											<td className='px-4 py-3'>
 												<StatusBadge
@@ -163,7 +163,7 @@ export default function OwnerBookingsPage() {
 														Bekor qilish
 													</Button>
 												) : (
-													'вЂ”'
+													'—'
 												)}
 											</td>
 										</tr>
@@ -207,7 +207,7 @@ export default function OwnerBookingsPage() {
 										<dd>{booking.customerName}</dd>
 										<dt style={{ color: 'var(--color-text-hint)' }}>Telefon</dt>
 										<dd>
-											{phonesQuery.data?.get(booking.id) ?? 'вЂ”'}
+											{phonesQuery.data?.get(booking.id) ?? '—'}
 										</dd>
 									</dl>
 									<p

@@ -44,12 +44,12 @@ export function FavoriteButton({ venueId, className = '' }: FavoriteButtonProps)
 			void queryClient.invalidateQueries({ queryKey: ['customer', 'favorites'] })
 			toast.success(
 				added
-					? 'Sevimlilarga qoвЂshildi'
+					? 'Sevimlilarga qo‘shildi'
 					: 'Sevimlilardan olib tashlandi',
 			)
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
 		},
 	})
 
@@ -80,7 +80,7 @@ export function FavoriteButton({ venueId, className = '' }: FavoriteButtonProps)
 
 	const label = isFavorite
 		? 'Sevimlilardan olib tashlash'
-		: 'Sevimlilarga qoвЂshish'
+		: 'Sevimlilarga qo‘shish'
 
 	return (
 		<button

@@ -15,7 +15,7 @@ type AdminTableProps = {
 export function AdminTable({
 	headers,
 	rows,
-	emptyMessage = 'MaвЂ™lumot topilmadi',
+	emptyMessage = 'Ma’lumot topilmadi',
 }: AdminTableProps) {
 	if (rows.length === 0) {
 		return (

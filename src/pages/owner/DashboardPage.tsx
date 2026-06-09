@@ -38,7 +38,7 @@ export default function OwnerDashboardPage() {
 			activity: bookings.slice(0, 5).map(item => ({
 				id: item.id,
 				title: `Bron #${item.id}`,
-				meta: `${item.bookingDate.split('T')[0]} вЂ” ${item.guestCount} mehmon вЂ” oldindan ${formatCurrency(item.advanceAmount)}`,
+				meta: `${item.bookingDate.split('T')[0]} — ${item.guestCount} mehmon — oldindan ${formatCurrency(item.advanceAmount)}`,
 				status: getApiBookingStatusLabel(item.status),
 			})),
 		}
@@ -58,7 +58,7 @@ export default function OwnerDashboardPage() {
 			<VenueListError
 				message={getApiErrorMessage(
 					venuesQuery.error ?? bookingsQuery.error,
-					'MaвЂ™lumotlar yuklanmadi',
+					'Ma’lumotlar yuklanmadi',
 				)}
 				onRetry={handleRetry}
 				isRetrying={venuesQuery.isFetching || bookingsQuery.isFetching}
@@ -77,7 +77,7 @@ export default function OwnerDashboardPage() {
 				<Link to='/owner/venues/new'>
 					<Button className='sm:w-auto'>
 						<Plus className='size-4' />
-						To‘yxona qoвЂshish
+						To‘yxona qo‘shish
 					</Button>
 				</Link>
 			}
@@ -104,7 +104,7 @@ export default function OwnerDashboardPage() {
 				<MetricCard
 					label='Bandlovlar'
 					value={stats.totalBookings}
-					helper={`Oldindan toвЂlov daromadi ${formatCurrency(stats.revenue)}`}
+					helper={`Oldindan to‘lov daromadi ${formatCurrency(stats.revenue)}`}
 				/>
 			</div>
 
@@ -119,7 +119,7 @@ export default function OwnerDashboardPage() {
 				<Timeline
 					title='Faollik lentasi'
 					items={stats.activity}
-					empty='Hali bandlov yoвЂq. Mijozlar band qilgach, nashr qilingan To‘yxonalar shu yerda koвЂrinadi.'
+					empty='Hali bandlov yo‘q. Mijozlar band qilgach, nashr qilingan To‘yxonalar shu yerda ko‘rinadi.'
 				/>
 			</div>
 
@@ -127,12 +127,12 @@ export default function OwnerDashboardPage() {
 				<OwnerAction
 					icon={<Building2 className='size-5' />}
 					title='To‘yxonalarni boshqarish'
-					text='EвЂ™lonlar, rasmlar, katalog va nashr holatini tahrirlang.'
+					text='E’lonlar, rasmlar, katalog va nashr holatini tahrirlang.'
 					href='/owner/venues'
 				/>
 				<OwnerAction
 					icon={<CalendarClock className='size-5' />}
-					title='Bandlovlarni koвЂrish'
+					title='Bandlovlarni ko‘rish'
 					text='Mijoz bronlari va holatini kuzating.'
 					href='/owner/bookings'
 				/>

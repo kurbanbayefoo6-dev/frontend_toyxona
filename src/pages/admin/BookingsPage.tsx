@@ -54,7 +54,7 @@ export default function AdminBookingsPage() {
 			toast.success('Bandlov bekor qilindi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib bo‘lmadi'))
 		},
 	})
 
@@ -79,7 +79,7 @@ export default function AdminBookingsPage() {
 		let items = (data?.items ?? []).map(b => ({
 			...b,
 			district: districtByVenueId.get(b.venueId) ?? '',
-			customerPhone: phoneByCustomerId.get(b.customerId) ?? 'вЂ”',
+			customerPhone: phoneByCustomerId.get(b.customerId) ?? '—',
 		}))
 		if (districtFilter) {
 			items = items.filter(b => b.district === districtFilter)
@@ -245,7 +245,7 @@ function buildBookingRow(
 				</Button>
 			) : (
 				<span key='cancel' className='text-xs text-[var(--color-text-hint)]'>
-					вЂ”
+					—
 				</span>
 			),
 		],

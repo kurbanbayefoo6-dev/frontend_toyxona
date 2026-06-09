@@ -4,7 +4,7 @@ export const DISTRICTS: District[] = [
 	'Bektemir',
 	'Chilonzor',
 	'Mirobod',
-	'Mirzo UlugвЂbek',
+	'Mirzo Ulug‘bek',
 	'Olmazor',
 	'Sergeli',
 	'Shayxontohur',

@@ -42,7 +42,7 @@ export default function CustomerBookingsPage() {
 			setSelected(null)
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Bronni bekor qilib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Bronni bekor qilib bo‘lmadi'))
 		},
 	})
 
@@ -77,7 +77,7 @@ export default function CustomerBookingsPage() {
 	return (
 		<PageShell title='Bandlovlarim'>
 			{bookings.length === 0 ? (
-				<CustomerEmptyState message='Sizda hali bandlovlar yoвЂq' />
+				<CustomerEmptyState message='Sizda hali bandlovlar yo‘q' />
 			) : (
 				<ul className='flex flex-col gap-3'>
 					{bookings.map(booking => {

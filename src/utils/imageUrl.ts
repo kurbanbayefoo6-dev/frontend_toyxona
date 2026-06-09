@@ -95,6 +95,6 @@ export function logImageRenderDebug(
 				: (source?.images?.[0]?.imageUrl ?? null),
 		picked: source ? pickVenueImageSource(source) : null,
 		resolved,
-		apiOrigin: API_BASE || '(empty вЂ” will load from Vite origin)',
+		apiOrigin: API_BASE || '(empty — will load from Vite origin)',
 	})
 }

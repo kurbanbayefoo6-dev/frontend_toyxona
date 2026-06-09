@@ -10,7 +10,7 @@ export const adminLinks = [
 	{ to: '/admin/owners', label: 'Egalar' },
 	{ to: '/admin/venues', label: 'To‘yxonalar' },
 	{ to: '/admin/bookings', label: 'Bandlovlar' },
-	{ to: '/admin/payments', label: 'ToвЂlovlar' },
+	{ to: '/admin/payments', label: 'To‘lovlar' },
 	{ to: '/admin/settings', label: 'Sozlamalar' },
 ]
 

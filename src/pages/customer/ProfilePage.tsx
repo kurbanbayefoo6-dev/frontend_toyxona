@@ -28,7 +28,7 @@ const passwordSchema = z
 		currentPassword: z.string().min(1, 'Joriy parolni kiriting'),
 		newPassword: z
 			.string()
-			.min(6, 'Yangi parol kamida 6 ta belgidan iborat boвЂlsin'),
+			.min(6, 'Yangi parol kamida 6 ta belgidan iborat bo‘lsin'),
 		confirmPassword: z.string().min(1, 'Parolni tasdiqlang'),
 	})
 	.refine(data => data.newPassword === data.confirmPassword, {
@@ -90,7 +90,7 @@ export default function CustomerProfilePage() {
 			toast.success('Profil yangilandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
 		},
 	})
 
@@ -101,7 +101,7 @@ export default function CustomerProfilePage() {
 			toast.success('Parol muvaffaqiyatli yangilandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
 		},
 	})
 
@@ -157,7 +157,7 @@ export default function CustomerProfilePage() {
 					className='mb-4 text-lg font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					Shaxsiy maвЂ™lumotlar
+					Shaxsiy ma’lumotlar
 				</h2>
 				<p
 					className='mb-4 text-sm'
@@ -212,7 +212,7 @@ export default function CustomerProfilePage() {
 					className='mb-4 text-lg font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					Parolni oвЂzgartirish
+					Parolni o‘zgartirish
 				</h2>
 
 				<form

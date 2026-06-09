@@ -124,7 +124,7 @@ function buildUserRow(user: AdminUser) {
 		cells: [
 			name,
 			user.email,
-			user.phone || 'вЂ”',
+			user.phone || '—',
 			getUserRoleLabel(user.role),
 			<StatusBadge
 				key='status'
@@ -143,7 +143,7 @@ function buildUserRow(user: AdminUser) {
 			<div className='space-y-1 text-sm'>
 				<p className='font-semibold'>{name}</p>
 				<p>{user.email}</p>
-				<p>{user.phone || 'вЂ”'}</p>
+				<p>{user.phone || '—'}</p>
 				<p>
 					{getUserRoleLabel(user.role)} В· {getUserStatusLabel(verified)}
 				</p>

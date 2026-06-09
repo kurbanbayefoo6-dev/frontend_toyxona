@@ -93,7 +93,7 @@ export function ReviewFormModal({
 						className='text-sm font-medium'
 						style={{ color: 'var(--color-text-primary)' }}
 					>
-						Baho (1вЂ“5)
+						Baho (1–5)
 					</label>
 					<Select
 						value={rating}

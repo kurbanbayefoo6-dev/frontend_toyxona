@@ -38,7 +38,7 @@ export default function CustomerDashboardPage() {
 
 	const errorMessage = getApiErrorMessage(
 		bookingsQuery.error ?? paymentsQuery.error ?? favoritesQuery.error,
-		'MaвЂ™lumotlar yuklanmadi',
+		'Ma’lumotlar yuklanmadi',
 	)
 
 	const stats = useMemo(() => {
@@ -54,7 +54,7 @@ export default function CustomerDashboardPage() {
 			timeline: bookings.slice(0, 5).map(item => ({
 				id: item.id,
 				title: `Bron #${item.id}`,
-				meta: `${item.bookingDate.split('T')[0]} вЂ” ${item.guestCount} mehmon вЂ” ${formatCurrency(item.totalPrice)}`,
+				meta: `${item.bookingDate.split('T')[0]} — ${item.guestCount} mehmon — ${formatCurrency(item.totalPrice)}`,
 				status: getApiBookingStatusLabel(item.status),
 			})),
 		}
@@ -87,8 +87,8 @@ export default function CustomerDashboardPage() {
 	return (
 		<DashboardShell
 			kicker='Mijoz boshqaruv paneli'
-			title='Rejalashtiring, kuzating va bitta joydan toвЂlang'
-			subtitle='Bandlovlar, toвЂlovlar, sevimlilar va keyingi qadamlarning umumiy koвЂrinishi.'
+			title='Rejalashtiring, kuzating va bitta joydan to‘lang'
+			subtitle='Bandlovlar, to‘lovlar, sevimlilar va keyingi qadamlarning umumiy ko‘rinishi.'
 			actions={
 				<Link to='/'>
 					<Button className='sm:w-auto'>
@@ -111,9 +111,9 @@ export default function CustomerDashboardPage() {
 					tone='success'
 				/>
 				<MetricCard
-					label='ToвЂlovlar'
+					label='To‘lovlar'
 					value={stats.totalPayments}
-					helper={`Oldindan toвЂlangan: ${formatCurrency(stats.paidTotal)}`}
+					helper={`Oldindan to‘langan: ${formatCurrency(stats.paidTotal)}`}
 					tone='accent'
 				/>
 				<MetricCard
@@ -128,7 +128,7 @@ export default function CustomerDashboardPage() {
 				<Timeline
 					title='Bandlovlar vaqti'
 					items={stats.timeline}
-					empty='Hali bandlov yoвЂq. To‘yxona qidiruvidan boshlang.'
+					empty='Hali bandlov yo‘q. To‘yxona qidiruvidan boshlang.'
 				/>
 
 				<section className='product-card p-5'>
@@ -136,12 +136,12 @@ export default function CustomerDashboardPage() {
 					<div className='mt-5 grid gap-3'>
 						<Shortcut
 							icon={<CalendarDays className='size-5' />}
-							title='Bandlovlarni koвЂrish'
+							title='Bandlovlarni ko‘rish'
 							href='/customer/bookings'
 						/>
 						<Shortcut
 							icon={<ReceiptText className='size-5' />}
-							title='ToвЂlovlarni tekshirish'
+							title='To‘lovlarni tekshirish'
 							href='/customer/payments'
 						/>
 						<Shortcut

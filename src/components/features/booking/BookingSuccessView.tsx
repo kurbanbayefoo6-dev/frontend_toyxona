@@ -60,7 +60,7 @@ export function BookingSuccessView({
 						className='mt-2 text-sm'
 						style={{ color: 'var(--color-text-secondary)' }}
 					>
-						ToвЂlov muvaffaqiyatli amalga oshirildi
+						To‘lov muvaffaqiyatli amalga oshirildi
 					</p>
 				</div>
 
@@ -88,7 +88,7 @@ export function BookingSuccessView({
 					className='mt-6 w-full'
 					onClick={() => navigate('/customer/bookings', { replace: true })}
 				>
-					Bandlovlarga oвЂtish
+					Bandlovlarga o‘tish
 				</Button>
 			</div>
 		</div>
