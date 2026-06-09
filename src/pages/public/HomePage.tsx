@@ -1,6 +1,6 @@
 ﻿import { useQuery } from '@tanstack/react-query'
 import { ArrowRight, CalendarCheck, MapPin, ShieldCheck, Sparkles } from 'lucide-react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -53,6 +53,7 @@ function parseOptionalPositiveInt(value: string): number | undefined {
 
 export default function HomePage() {
 	const resultsRef = useRef<HTMLElement>(null)
+	const filterScrollYRef = useRef<number | null>(null)
 	const district = useDistrictStore(s => s.district)
 	const setDistrict = useDistrictStore(s => s.setDistrict)
 	const isAuthenticated = useAuthStore(s => s.isAuthenticated)
@@ -101,6 +102,13 @@ export default function HomePage() {
 		sortOrder,
 	])
 
+	useLayoutEffect(() => {
+		if (filterScrollYRef.current === null) return
+
+		window.scrollTo(0, filterScrollYRef.current)
+		filterScrollYRef.current = null
+	}, [queryParams])
+
 	useEffect(() => {
 		setPage(1)
 	}, [debouncedSearch, district, capacity, minPrice, maxPrice, sort])
@@ -136,6 +144,11 @@ export default function HomePage() {
 
 	function scrollToResults() {
 		resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+	}
+
+	function keepScrollWhileFiltering(update: () => void) {
+		filterScrollYRef.current = window.scrollY
+		update()
 	}
 
 	return (
@@ -200,22 +213,32 @@ export default function HomePage() {
 				<aside className='lg:sticky lg:top-24 lg:self-start'>
 					<VenueFilters
 						search={search}
-						onSearchChange={setSearch}
+						onSearchChange={value =>
+							keepScrollWhileFiltering(() => setSearch(value))
+						}
 						district={district}
-						onDistrictChange={setDistrict}
+						onDistrictChange={value =>
+							keepScrollWhileFiltering(() => setDistrict(value))
+						}
 						capacity={capacity}
-						onCapacityChange={setCapacity}
+						onCapacityChange={value =>
+							keepScrollWhileFiltering(() => setCapacity(value))
+						}
 						minPrice={minPrice}
-						onMinPriceChange={setMinPrice}
+						onMinPriceChange={value =>
+							keepScrollWhileFiltering(() => setMinPrice(value))
+						}
 						maxPrice={maxPrice}
-						onMaxPriceChange={setMaxPrice}
+						onMaxPriceChange={value =>
+							keepScrollWhileFiltering(() => setMaxPrice(value))
+						}
 						sort={sort}
-						onSortChange={setSort}
+						onSortChange={value => keepScrollWhileFiltering(() => setSort(value))}
 						disabled={showInitialLoading}
 					/>
 				</aside>
 
-				<div className='min-w-0'>
+				<div className='min-w-0 [overflow-anchor:none]'>
 					<header className='mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between'>
 						<div>
 							<p className='section-kicker'>Bozor</p>
@@ -237,45 +260,47 @@ export default function HomePage() {
 						)}
 					</header>
 
-					{isError && (
-						<VenueListError
-							message={getApiErrorMessage(
-								error,
-								'To‘yxonalar yuklanmadi. Qayta urinib koring.',
-							)}
-							onRetry={() => void refetch()}
-							isRetrying={isFetching}
-						/>
-					)}
-
-					{showInitialLoading && (
-						<VenueGrid>
-							{Array.from({ length: VENUES_PER_PAGE }).map((_, i) => (
-								<VenueCardSkeleton key={i} />
-							))}
-						</VenueGrid>
-					)}
-
-					{!showInitialLoading && !isError && venues.length > 0 && (
-						<VenueGrid>
-							{venues.map(venue => (
-								<VenueCard key={venue.id} venue={venue} />
-							))}
-						</VenueGrid>
-					)}
-
-					{showEmpty && <VenueListEmpty />}
-
-					{!isError && totalPages > 1 && (
-						<div className='pt-6'>
-							<Pagination
-								page={page}
-								totalPages={totalPages}
-								onPageChange={setPage}
-								disabled={isFetching}
+					<div className='min-h-[760px]'>
+						{isError && (
+							<VenueListError
+								message={getApiErrorMessage(
+									error,
+									'To‘yxonalar yuklanmadi. Qayta urinib koring.',
+								)}
+								onRetry={() => void refetch()}
+								isRetrying={isFetching}
 							/>
-						</div>
-					)}
+						)}
+
+						{showInitialLoading && (
+							<VenueGrid>
+								{Array.from({ length: VENUES_PER_PAGE }).map((_, i) => (
+									<VenueCardSkeleton key={i} />
+								))}
+							</VenueGrid>
+						)}
+
+						{!showInitialLoading && !isError && venues.length > 0 && (
+							<VenueGrid>
+								{venues.map(venue => (
+									<VenueCard key={venue.id} venue={venue} />
+								))}
+							</VenueGrid>
+						)}
+
+						{showEmpty && <VenueListEmpty />}
+
+						{!isError && totalPages > 1 && (
+							<div className='pt-6'>
+								<Pagination
+									page={page}
+									totalPages={totalPages}
+									onPageChange={setPage}
+									disabled={isFetching}
+								/>
+							</div>
+						)}
+					</div>
 				</div>
 			</section>
 
