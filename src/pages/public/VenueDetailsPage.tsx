@@ -158,6 +158,7 @@ export default function VenueDetailsPage() {
 						data={data}
 						canViewBookingDetails={canViewBookingDetails}
 						onBookedDateClick={handleBookedDateClick}
+						bookedDetailsByDate={bookingByDate}
 					/>
 				</div>
 			</div>

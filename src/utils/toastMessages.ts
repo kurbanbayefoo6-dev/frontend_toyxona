@@ -13,7 +13,7 @@ export const AUTH_TOAST = {
 
 export const BOOKING_TOAST = {
 	bookingCreated: 'Bron muvaffaqiyatli yaratildi',
-	paymentSuccess: "To'lov muvaffaqiyatli amalga oshirildi",
+	paymentSuccess: 'Muvaffaqiyatli to‘landi',
 	noDate: 'Sana tanlanmagan',
 	dateBooked: 'Bu kun band',
 	networkError: 'Server bilan bog‘lanib bo‘lmadi',

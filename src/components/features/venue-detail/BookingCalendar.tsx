@@ -1,9 +1,13 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { format } from 'date-fns'
 import { uz } from 'date-fns/locale'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 
-import type { CalendarDayStatus, VenueAvailability } from '@/types/venueDetail'
+import type {
+	BookingCalendarEntry,
+	CalendarDayStatus,
+	VenueAvailability,
+} from '@/types/venueDetail'
 import {
 	addMonths,
 	getCalendarDays,
@@ -21,6 +25,7 @@ type BookingCalendarProps = {
 	onSelectDate: (date: string) => void
 	onBookedDateClick?: (date: string) => void
 	canViewBookingDetails?: boolean
+	bookedDetailsByDate?: Map<string, BookingCalendarEntry>
 }
 
 const statusStyles: Record<
@@ -50,6 +55,7 @@ export function BookingCalendar({
 	onSelectDate,
 	onBookedDateClick,
 	canViewBookingDetails = false,
+	bookedDetailsByDate,
 }: BookingCalendarProps) {
 	const [currentMonth, setCurrentMonth] = useState(() =>
 		startOfMonth(new Date()),
@@ -106,6 +112,7 @@ export function BookingCalendar({
 					const isPast = status === 'past'
 					const isBooked = status === 'booked'
 					const isAvailable = status === 'available'
+					const bookingDetails = bookedDetailsByDate?.get(key)
 
 					const handleClick = () => {
 						if (isBooked && canViewBookingDetails && onBookedDateClick) {
@@ -121,35 +128,58 @@ export function BookingCalendar({
 						(isAvailable || (isBooked && canViewBookingDetails)) && inMonth
 
 					return (
-						<button
-							key={key + day.toISOString()}
-							type='button'
-							disabled={!clickable}
-							onClick={handleClick}
-							className={[
-								'aspect-square rounded-[var(--radius-sm)] text-xs font-medium transition-opacity',
-								!inMonth ? 'opacity-30' : '',
-								!clickable ? 'cursor-not-allowed' : 'cursor-pointer hover:opacity-80',
-								isSelected ? 'ring-2 ring-offset-1' : '',
-							].join(' ')}
-							style={{
-								backgroundColor: styles.bg,
-								color: styles.color,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: isSelected
-									? 'var(--color-brand)'
-									: styles.border,
-								...(isSelected
-									? { outlineColor: 'var(--color-brand)' }
-									: {}),
-							}}
-							aria-label={`${format(day, 'd MMMM', { locale: uz })}${
-								isPast ? ' — o‘tgan' : isBooked ? ' — band' : ' — bo‘sh'
-							}`}
-						>
-							{format(day, 'd')}
-						</button>
+						<div key={key + day.toISOString()} className='group relative'>
+							<button
+								type='button'
+								disabled={!clickable}
+								onClick={handleClick}
+								className={[
+									'aspect-square w-full rounded-[var(--radius-sm)] text-xs font-medium transition-opacity',
+									!inMonth ? 'opacity-30' : '',
+									!clickable
+										? 'cursor-not-allowed'
+										: 'cursor-pointer hover:opacity-80',
+									isSelected ? 'ring-2 ring-offset-1' : '',
+								].join(' ')}
+								style={{
+									backgroundColor: styles.bg,
+									color: styles.color,
+									borderWidth: 1,
+									borderStyle: 'solid',
+									borderColor: isSelected
+										? 'var(--color-brand)'
+										: styles.border,
+									...(isSelected
+										? { outlineColor: 'var(--color-brand)' }
+										: {}),
+								}}
+								aria-label={`${format(day, 'd MMMM', { locale: uz })} - ${
+									isPast ? 'otgan' : isBooked ? 'band' : 'bosh'
+								}`}
+							>
+								{format(day, 'd')}
+							</button>
+							{isBooked && canViewBookingDetails && bookingDetails ? (
+								<div
+									className='pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 w-48 -translate-x-1/2 rounded-[var(--radius-md)] px-3 py-2 text-left text-xs opacity-0 shadow-lg transition-opacity group-hover:opacity-100'
+									style={{
+										backgroundColor: 'var(--color-card-bg)',
+										color: 'var(--color-text-primary)',
+										border: '1px solid var(--color-border)',
+									}}
+								>
+									<p className='truncate font-semibold'>
+										{bookingDetails.customerName}
+									</p>
+									<p style={{ color: 'var(--color-text-secondary)' }}>
+										{bookingDetails.customerPhone}
+									</p>
+									<p style={{ color: 'var(--color-text-secondary)' }}>
+										{bookingDetails.guestCount} kishi
+									</p>
+								</div>
+							) : null}
+						</div>
 					)
 				})}
 			</div>
@@ -159,9 +189,9 @@ export function BookingCalendar({
 
 function CalendarLegend() {
 	const items = [
-		{ label: 'Bo‘sh', color: 'var(--color-available)' },
+		{ label: 'Bosh', color: 'var(--color-available)' },
 		{ label: 'Band', color: 'var(--color-booked)' },
-		{ label: 'O‘tgan', color: 'var(--color-text-hint)' },
+		{ label: 'Otgan', color: 'var(--color-text-hint)' },
 	] as const
 
 	return (

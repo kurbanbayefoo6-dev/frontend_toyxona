@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Pencil, Plus, Trash2 } from 'lucide-react'
+import { ImagePlus, Pencil, Plus, Trash2, X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -47,6 +47,7 @@ import type { BookingCalendarEntry } from '@/types/venueDetail'
 import { getApiErrorMessage } from '@/utils/authErrors'
 import { formatCurrency } from '@/utils/formatCurrency'
 import { normalizeDateKey } from '@/utils/customerStatus'
+import { resolveImageUrl } from '@/utils/imageUrl'
 
 const venueSchema = z.object({
 	name: z.string().min(1, 'Nom kiriting'),
@@ -390,6 +391,7 @@ export default function VenueManagePage({
 							id: s.id,
 							primary: s.name,
 							secondary: formatCurrency(s.price),
+							imageUrl: s.imageUrl,
 						}))}
 						onAdd={() => {
 							setEditingSinger(null)
@@ -407,6 +409,7 @@ export default function VenueManagePage({
 							id: c.id,
 							primary: c.brand,
 							secondary: formatCurrency(c.price),
+							imageUrl: c.imageUrl,
 						}))}
 						onAdd={() => {
 							setEditingCar(null)
@@ -424,6 +427,7 @@ export default function VenueManagePage({
 							id: m.id,
 							primary: m.name,
 							secondary: '',
+							imageUrl: m.imageUrl,
 						}))}
 						onAdd={() => {
 							setEditingMenu(null)
@@ -445,6 +449,7 @@ export default function VenueManagePage({
 							onSelectDate={setCalendarDate}
 							onBookedDateClick={handleBookedClick}
 							canViewBookingDetails
+							bookedDetailsByDate={calendarByDate}
 						/>
 					</OwnerSection>
 				</div>
@@ -516,7 +521,12 @@ function CatalogSection({
 	onDelete,
 }: {
 	title: string
-	items: Array<{ id: number; primary: string; secondary: string }>
+	items: Array<{
+		id: number
+		primary: string
+		secondary: string
+		imageUrl?: string | null
+	}>
 	onAdd: () => void
 	onEdit: (id: number) => void
 	onDelete: (id: number) => void
@@ -542,13 +552,16 @@ function CatalogSection({
 							key={item.id}
 							className='flex items-center justify-between gap-2 py-3 first:pt-0'
 						>
-							<div>
-								<p className='font-medium'>{item.primary}</p>
-								{item.secondary && (
-									<p className='text-sm' style={{ color: 'var(--color-text-secondary)' }}>
-										{item.secondary}
-									</p>
-								)}
+							<div className='flex min-w-0 items-center gap-3'>
+								<CatalogThumb imageUrl={item.imageUrl} label={item.primary} />
+								<div className='min-w-0'>
+									<p className='truncate font-medium'>{item.primary}</p>
+									{item.secondary && (
+										<p className='text-sm' style={{ color: 'var(--color-text-secondary)' }}>
+											{item.secondary}
+										</p>
+									)}
+								</div>
 							</div>
 							<div className='flex gap-1'>
 								<button type='button' onClick={() => onEdit(item.id)} aria-label='Tahrirlash'>
@@ -563,6 +576,109 @@ function CatalogSection({
 				</ul>
 			)}
 		</OwnerSection>
+	)
+}
+
+function CatalogThumb({
+	imageUrl,
+	label,
+}: {
+	imageUrl?: string | null
+	label: string
+}) {
+	const src = resolveImageUrl(imageUrl)
+
+	return (
+		<div
+			className='grid size-12 shrink-0 place-items-center overflow-hidden rounded-[var(--radius-md)] border'
+			style={{
+				borderColor: 'var(--color-border)',
+				backgroundColor: 'var(--color-surface-secondary)',
+			}}
+		>
+			{src ? (
+				<img src={src} alt={label} className='size-full object-cover' />
+			) : (
+				<ImagePlus className='size-5' style={{ color: 'var(--color-text-hint)' }} />
+			)}
+		</div>
+	)
+}
+
+function ImagePicker({
+	file,
+	existingUrl,
+	onFileChange,
+}: {
+	file: File | null
+	existingUrl?: string | null
+	onFileChange: (file: File | null) => void
+}) {
+	const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+	const imageSrc = previewUrl ?? resolveImageUrl(existingUrl)
+
+	useEffect(() => {
+		if (!file) {
+			setPreviewUrl(null)
+			return
+		}
+
+		const nextPreview = URL.createObjectURL(file)
+		setPreviewUrl(nextPreview)
+
+		return () => URL.revokeObjectURL(nextPreview)
+	}, [file])
+
+	return (
+		<div className='flex items-center gap-3'>
+			<div
+				className='grid size-20 place-items-center overflow-hidden rounded-[var(--radius-md)] border'
+				style={{
+					borderColor: 'var(--color-border)',
+					backgroundColor: 'var(--color-surface-secondary)',
+				}}
+			>
+				{imageSrc ? (
+					<img src={imageSrc} alt='' className='size-full object-cover' />
+				) : (
+					<ImagePlus className='size-6' style={{ color: 'var(--color-text-hint)' }} />
+				)}
+			</div>
+			<div className='flex flex-wrap gap-2'>
+				<label>
+					<input
+						type='file'
+						accept='image/*'
+						className='hidden'
+						onChange={e => onFileChange(e.target.files?.[0] ?? null)}
+					/>
+					<span
+						className='inline-flex cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm font-medium'
+						style={{
+							borderColor: 'var(--color-border)',
+							color: 'var(--color-text-primary)',
+						}}
+					>
+						<ImagePlus className='size-4' />
+						Rasm tanlash
+					</span>
+				</label>
+				{file ? (
+					<button
+						type='button'
+						className='inline-flex items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm'
+						style={{
+							borderColor: 'var(--color-border)',
+							color: 'var(--color-text-secondary)',
+						}}
+						onClick={() => onFileChange(null)}
+					>
+						<X className='size-4' />
+						Bekor qilish
+					</button>
+				) : null}
+			</div>
+		</div>
 	)
 }
 
@@ -690,17 +806,19 @@ function SingerModal({
 	open: boolean
 	onClose: () => void
 	venueId: number
-	singer?: { id: number; name: string; price: number }
+	singer?: { id: number; name: string; price: number; imageUrl: string | null }
 	onSaved: () => void
 }) {
 	const [name, setName] = useState('')
 	const [price, setPrice] = useState('')
+	const [imageFile, setImageFile] = useState<File | null>(null)
 	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
 		if (open) {
 			setName(singer?.name ?? '')
 			setPrice(singer ? String(singer.price) : '')
+			setImageFile(null)
 		}
 	}, [open, singer])
 
@@ -709,9 +827,13 @@ function SingerModal({
 		setLoading(true)
 		try {
 			if (singer) {
-				await updateSinger(singer.id, { name, price: Number(price) })
+				await updateSinger(singer.id, {
+					name,
+					price: Number(price),
+					imageFile,
+				})
 			} else {
-				await createSinger({ venueId, name, price: Number(price) })
+				await createSinger({ venueId, name, price: Number(price), imageFile })
 			}
 			toast.success('Saqlandi')
 			onSaved()
@@ -727,6 +849,11 @@ function SingerModal({
 			<form onSubmit={e => void submit(e)} className='flex flex-col gap-3'>
 				<FormField label='Ism' value={name} onChange={e => setName(e.target.value)} required />
 				<FormField label='Narxi' type='number' value={price} onChange={e => setPrice(e.target.value)} required />
+				<ImagePicker
+					file={imageFile}
+					existingUrl={singer?.imageUrl}
+					onFileChange={setImageFile}
+				/>
 				<Button type='submit' loading={loading}>Saqlash</Button>
 			</form>
 		</Modal>
@@ -743,17 +870,19 @@ function CarModal({
 	open: boolean
 	onClose: () => void
 	venueId: number
-	car?: { id: number; brand: string; price: number }
+	car?: { id: number; brand: string; price: number; imageUrl: string | null }
 	onSaved: () => void
 }) {
 	const [brand, setBrand] = useState('')
 	const [price, setPrice] = useState('')
+	const [imageFile, setImageFile] = useState<File | null>(null)
 	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
 		if (open) {
 			setBrand(car?.brand ?? '')
 			setPrice(car ? String(car.price) : '')
+			setImageFile(null)
 		}
 	}, [open, car])
 
@@ -762,9 +891,9 @@ function CarModal({
 		setLoading(true)
 		try {
 			if (car) {
-				await updateCar(car.id, { brand, price: Number(price) })
+				await updateCar(car.id, { brand, price: Number(price), imageFile })
 			} else {
-				await createCar({ venueId, brand, price: Number(price) })
+				await createCar({ venueId, brand, price: Number(price), imageFile })
 			}
 			toast.success('Saqlandi')
 			onSaved()
@@ -780,6 +909,11 @@ function CarModal({
 			<form onSubmit={e => void submit(e)} className='flex flex-col gap-3'>
 				<FormField label='Marka' value={brand} onChange={e => setBrand(e.target.value)} required />
 				<FormField label='Narxi' type='number' value={price} onChange={e => setPrice(e.target.value)} required />
+				<ImagePicker
+					file={imageFile}
+					existingUrl={car?.imageUrl}
+					onFileChange={setImageFile}
+				/>
 				<Button type='submit' loading={loading}>Saqlash</Button>
 			</form>
 		</Modal>
@@ -796,14 +930,18 @@ function MenuModal({
 	open: boolean
 	onClose: () => void
 	venueId: number
-	item?: { id: number; name: string }
+	item?: { id: number; name: string; imageUrl: string | null }
 	onSaved: () => void
 }) {
 	const [name, setName] = useState('')
+	const [imageFile, setImageFile] = useState<File | null>(null)
 	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
-		if (open) setName(item?.name ?? '')
+		if (open) {
+			setName(item?.name ?? '')
+			setImageFile(null)
+		}
 	}, [open, item])
 
 	async function submit(e: React.FormEvent) {
@@ -811,9 +949,9 @@ function MenuModal({
 		setLoading(true)
 		try {
 			if (item) {
-				await updateMenuItem(item.id, { name })
+				await updateMenuItem(item.id, { name, imageFile })
 			} else {
-				await createMenuItem({ venueId, name })
+				await createMenuItem({ venueId, name, imageFile })
 			}
 			toast.success('Saqlandi')
 			onSaved()
@@ -828,6 +966,11 @@ function MenuModal({
 		<Modal open={open} onClose={onClose} title={item ? 'Menyu tahrirlash' : 'Menyu qo‘shish'}>
 			<form onSubmit={e => void submit(e)} className='flex flex-col gap-3'>
 				<FormField label='Nomi' value={name} onChange={e => setName(e.target.value)} required />
+				<ImagePicker
+					file={imageFile}
+					existingUrl={item?.imageUrl}
+					onFileChange={setImageFile}
+				/>
 				<Button type='submit' loading={loading}>Saqlash</Button>
 			</form>
 		</Modal>

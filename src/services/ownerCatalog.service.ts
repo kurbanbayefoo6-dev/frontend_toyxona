@@ -15,6 +15,29 @@ import type {
 } from '@/types/venueDetail'
 import { parseApiNumber } from '@/utils/parseApiNumber'
 
+type CatalogPayloadWithImage<T> = T & { imageFile?: File | null }
+
+function toCatalogFormData(
+	payload: Record<string, string | number | boolean | File | null | undefined>,
+): FormData {
+	const form = new FormData()
+	Object.entries(payload).forEach(([key, value]) => {
+		if (value === undefined || value === null) return
+		if (key === 'imageFile' && value instanceof File) {
+			form.append('image', value)
+			return
+		}
+		if (key !== 'imageFile') {
+			form.append(key, String(value))
+		}
+	})
+	return form
+}
+
+function hasImageFile(payload: { imageFile?: File | null }): boolean {
+	return payload.imageFile instanceof File
+}
+
 export async function getVenueImages(venueId: number): Promise<VenueImage[]> {
 	const res = await apiClient.get<ApiSuccessResponse<VenueImage[]>>(
 		`/api/venues/${venueId}/images`,
@@ -47,20 +70,24 @@ export async function getSingers(venueId: number): Promise<VenueSinger[]> {
 	return res.data.data.map(s => ({ ...s, price: parseApiNumber(s.price) }))
 }
 
-export async function createSinger(payload: SingerPayload): Promise<VenueSinger> {
+export async function createSinger(
+	payload: CatalogPayloadWithImage<SingerPayload>,
+): Promise<VenueSinger> {
+	const body = hasImageFile(payload) ? toCatalogFormData(payload) : payload
 	const res = await apiClient.post<
 		ApiSuccessResponse<Omit<VenueSinger, 'price'> & { price: number | string }>
-	>('/api/singers', payload)
+	>('/api/singers', body)
 	return { ...res.data.data, price: parseApiNumber(res.data.data.price) }
 }
 
 export async function updateSinger(
 	id: number,
-	payload: Partial<Omit<SingerPayload, 'venueId'>>,
+	payload: CatalogPayloadWithImage<Partial<Omit<SingerPayload, 'venueId'>>>,
 ): Promise<VenueSinger> {
+	const body = hasImageFile(payload) ? toCatalogFormData(payload) : payload
 	const res = await apiClient.patch<
 		ApiSuccessResponse<Omit<VenueSinger, 'price'> & { price: number | string }>
-	>(`/api/singers/${id}`, payload)
+	>(`/api/singers/${id}`, body)
 	return { ...res.data.data, price: parseApiNumber(res.data.data.price) }
 }
 
@@ -75,20 +102,24 @@ export async function getCars(venueId: number): Promise<VenueCar[]> {
 	return res.data.data.map(c => ({ ...c, price: parseApiNumber(c.price) }))
 }
 
-export async function createCar(payload: CarPayload): Promise<VenueCar> {
+export async function createCar(
+	payload: CatalogPayloadWithImage<CarPayload>,
+): Promise<VenueCar> {
+	const body = hasImageFile(payload) ? toCatalogFormData(payload) : payload
 	const res = await apiClient.post<
 		ApiSuccessResponse<Omit<VenueCar, 'price'> & { price: number | string }>
-	>('/api/cars', payload)
+	>('/api/cars', body)
 	return { ...res.data.data, price: parseApiNumber(res.data.data.price) }
 }
 
 export async function updateCar(
 	id: number,
-	payload: Partial<Omit<CarPayload, 'venueId'>>,
+	payload: CatalogPayloadWithImage<Partial<Omit<CarPayload, 'venueId'>>>,
 ): Promise<VenueCar> {
+	const body = hasImageFile(payload) ? toCatalogFormData(payload) : payload
 	const res = await apiClient.patch<
 		ApiSuccessResponse<Omit<VenueCar, 'price'> & { price: number | string }>
-	>(`/api/cars/${id}`, payload)
+	>(`/api/cars/${id}`, body)
 	return { ...res.data.data, price: parseApiNumber(res.data.data.price) }
 }
 
@@ -105,22 +136,24 @@ export async function getMenuItems(venueId: number): Promise<VenueMenuItem[]> {
 }
 
 export async function createMenuItem(
-	payload: MenuItemPayload,
+	payload: CatalogPayloadWithImage<MenuItemPayload>,
 ): Promise<VenueMenuItem> {
+	const body = hasImageFile(payload) ? toCatalogFormData(payload) : payload
 	const res = await apiClient.post<ApiSuccessResponse<VenueMenuItem>>(
 		'/api/menu-items',
-		payload,
+		body,
 	)
 	return res.data.data
 }
 
 export async function updateMenuItem(
 	id: number,
-	payload: Partial<Omit<MenuItemPayload, 'venueId'>>,
+	payload: CatalogPayloadWithImage<Partial<Omit<MenuItemPayload, 'venueId'>>>,
 ): Promise<VenueMenuItem> {
+	const body = hasImageFile(payload) ? toCatalogFormData(payload) : payload
 	const res = await apiClient.patch<ApiSuccessResponse<VenueMenuItem>>(
 		`/api/menu-items/${id}`,
-		payload,
+		body,
 	)
 	return res.data.data
 }

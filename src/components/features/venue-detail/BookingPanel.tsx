@@ -14,7 +14,7 @@ import { createBooking, createPayment } from '@/services/booking.service'
 import { toast } from '@/stores/toastStore'
 import { useAuthStore } from '@/stores/authStore'
 import type { SafeBooking } from '@/types/booking'
-import type { VenueFullData } from '@/types/venueDetail'
+import type { BookingCalendarEntry, VenueFullData } from '@/types/venueDetail'
 import { getApiErrorMessage } from '@/utils/authErrors'
 import {
 	calculateBookingPrice,
@@ -36,12 +36,14 @@ type BookingPanelProps = {
 	data: VenueFullData
 	canViewBookingDetails: boolean
 	onBookedDateClick: (date: string) => void
+	bookedDetailsByDate?: Map<string, BookingCalendarEntry>
 }
 
 export function BookingPanel({
 	data,
 	canViewBookingDetails,
 	onBookedDateClick,
+	bookedDetailsByDate,
 }: BookingPanelProps) {
 	const navigate = useNavigate()
 	const queryClient = useQueryClient()
@@ -237,6 +239,7 @@ export function BookingPanel({
 					onSelectDate={setSelectedDate}
 					onBookedDateClick={onBookedDateClick}
 					canViewBookingDetails={canViewBookingDetails}
+					bookedDetailsByDate={bookedDetailsByDate}
 				/>
 
 				<div className='mt-5 flex flex-col gap-1.5'>
