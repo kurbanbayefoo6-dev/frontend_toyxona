@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+﻿import { Outlet } from 'react-router-dom'
 
 import { MobileNav } from '@/components/layout/MobileNav'
 import { Sidebar } from '@/components/layout/Sidebar'
@@ -6,7 +6,7 @@ import { Topbar } from '@/components/layout/Topbar'
 
 export const ownerLinks = [
 	{ to: '/owner/dashboard', label: 'Bosh sahifa' },
-	{ to: '/owner/venues', label: 'Maskanlar' },
+	{ to: '/owner/venues', label: 'To‘yxonalar' },
 	{ to: '/owner/bookings', label: 'Bandlovlar' },
 ]
 

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+﻿import { useQuery } from '@tanstack/react-query'
 
 import { getAdminBookings } from '@/services/admin.service'
 import type { AdminListParams } from '@/types/admin'

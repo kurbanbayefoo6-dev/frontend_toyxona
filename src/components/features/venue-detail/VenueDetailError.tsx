@@ -1,4 +1,4 @@
-import { VenueListError } from '@/components/features/venues/VenueListError'
+﻿import { VenueListError } from '@/components/features/venues/VenueListError'
 
 type VenueDetailErrorProps = {
 	message: string

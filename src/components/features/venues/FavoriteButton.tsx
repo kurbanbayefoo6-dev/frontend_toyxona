@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Heart } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -44,12 +44,12 @@ export function FavoriteButton({ venueId, className = '' }: FavoriteButtonProps)
 			void queryClient.invalidateQueries({ queryKey: ['customer', 'favorites'] })
 			toast.success(
 				added
-					? 'Sevimlilarga qo‘shildi'
+					? 'Sevimlilarga qoвЂshildi'
 					: 'Sevimlilardan olib tashlandi',
 			)
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -80,7 +80,7 @@ export function FavoriteButton({ venueId, className = '' }: FavoriteButtonProps)
 
 	const label = isFavorite
 		? 'Sevimlilardan olib tashlash'
-		: 'Sevimlilarga qo‘shish'
+		: 'Sevimlilarga qoвЂshish'
 
 	return (
 		<button

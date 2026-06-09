@@ -1,10 +1,10 @@
-import type { District } from '@/stores/districtStore'
+﻿import type { District } from '@/stores/districtStore'
 
 export const DISTRICTS: District[] = [
 	'Bektemir',
 	'Chilonzor',
 	'Mirobod',
-	'Mirzo Ulug‘bek',
+	'Mirzo UlugвЂbek',
 	'Olmazor',
 	'Sergeli',
 	'Shayxontohur',

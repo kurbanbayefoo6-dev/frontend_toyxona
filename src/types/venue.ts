@@ -1,4 +1,4 @@
-export type VenueStatus = 'pending' | 'approved' | 'rejected'
+﻿export type VenueStatus = 'pending' | 'approved' | 'rejected'
 
 export type VenueImageRef = {
 	id?: number

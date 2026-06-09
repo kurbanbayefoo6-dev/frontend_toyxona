@@ -1,4 +1,4 @@
-import { isBefore, parseISO, startOfDay } from 'date-fns'
+﻿import { isBefore, parseISO, startOfDay } from 'date-fns'
 
 import type { BookingListItem, PaymentListItem } from '@/types/customer'
 
@@ -12,14 +12,14 @@ const BOOKING_STATUS_LABELS: Record<BookingDisplayStatus, string> = {
 	pending: 'Kutilmoqda',
 	confirmed: 'Tasdiqlangan',
 	cancelled: 'Bekor qilingan',
-	completed: 'Bo‘lib o‘tgan',
+	completed: 'BoвЂlib oвЂtgan',
 }
 
 const PAYMENT_STATUS_LABELS: Record<
 	PaymentListItem['paymentStatus'],
 	string
 > = {
-	paid: 'To‘langan',
+	paid: 'ToвЂlangan',
 	pending: 'Kutilmoqda',
 	failed: 'Muvaffaqiyatsiz',
 }

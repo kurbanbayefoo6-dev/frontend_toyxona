@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+﻿import { useParams } from 'react-router-dom'
 
 import VenueManagePage from '@/pages/owner/VenueManagePage'
 
@@ -7,7 +7,7 @@ export default function AdminVenueEditPage() {
 	const venueId = Number(id)
 
 	if (Number.isNaN(venueId) || venueId <= 0) {
-		return <p>Noto'g'ri maskan identifikatori</p>
+		return <p>Noto'g'ri To‘yxona identifikatori</p>
 	}
 
 	return <VenueManagePage mode='edit' venueId={venueId} adminMode />

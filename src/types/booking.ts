@@ -1,4 +1,4 @@
-export type BookingStatus = 'upcoming' | 'completed' | 'cancelled'
+﻿export type BookingStatus = 'upcoming' | 'completed' | 'cancelled'
 
 export type SafeBooking = {
 	id: number

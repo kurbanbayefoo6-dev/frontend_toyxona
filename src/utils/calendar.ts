@@ -1,4 +1,4 @@
-import {
+﻿import {
 	addMonths,
 	eachDayOfInterval,
 	endOfMonth,
@@ -42,7 +42,7 @@ export function getDayStatus(
 	if (available.has(key)) {
 		return 'available'
 	}
-	// Backend often returns empty availableDates — treat future non-booked as available
+	// Backend often returns empty availableDates вЂ” treat future non-booked as available
 	return 'available'
 }
 

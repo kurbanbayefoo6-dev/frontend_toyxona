@@ -1,4 +1,4 @@
-export function digitsOnly(value: string, maxLength?: number): string {
+﻿export function digitsOnly(value: string, maxLength?: number): string {
 	const digits = value.replace(/\D/g, '')
 	return maxLength !== undefined ? digits.slice(0, maxLength) : digits
 }
@@ -19,7 +19,7 @@ export function maskCvv(value: string): string {
 }
 
 export function maskCardHolder(value: string): string {
-	return value.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, '').slice(0, 40)
+	return value.replace(/[^a-zA-ZГЂ-Гї\s'-]/g, '').slice(0, 40)
 }
 
 export function isPaymentFormValid(input: {

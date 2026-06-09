@@ -1,4 +1,4 @@
-import { Music2 } from 'lucide-react'
+﻿import { Music2 } from 'lucide-react'
 
 import type { VenueKarnaySurnay } from '@/types/venueDetail'
 import { formatCurrency } from '@/utils/formatCurrency'

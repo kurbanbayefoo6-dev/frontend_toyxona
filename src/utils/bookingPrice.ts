@@ -1,4 +1,4 @@
-import type { VenueCar, VenueKarnaySurnay, VenueSinger } from '@/types/venueDetail'
+﻿import type { VenueCar, VenueKarnaySurnay, VenueSinger } from '@/types/venueDetail'
 
 export type BookingAddonsSelection = {
 	selectedSingerIds: number[]

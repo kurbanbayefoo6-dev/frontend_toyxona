@@ -1,4 +1,4 @@
-type CustomerListSkeletonProps = {
+﻿type CustomerListSkeletonProps = {
 	rows?: number
 }
 

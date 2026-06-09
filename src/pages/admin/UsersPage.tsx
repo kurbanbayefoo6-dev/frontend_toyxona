@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+﻿import { useMemo, useState } from 'react'
 
 import {
 	AdminTable,
@@ -124,7 +124,7 @@ function buildUserRow(user: AdminUser) {
 		cells: [
 			name,
 			user.email,
-			user.phone || '—',
+			user.phone || 'вЂ”',
 			getUserRoleLabel(user.role),
 			<StatusBadge
 				key='status'
@@ -143,9 +143,9 @@ function buildUserRow(user: AdminUser) {
 			<div className='space-y-1 text-sm'>
 				<p className='font-semibold'>{name}</p>
 				<p>{user.email}</p>
-				<p>{user.phone || '—'}</p>
+				<p>{user.phone || 'вЂ”'}</p>
 				<p>
-					{getUserRoleLabel(user.role)} · {getUserStatusLabel(verified)}
+					{getUserRoleLabel(user.role)} В· {getUserStatusLabel(verified)}
 				</p>
 			</div>
 		),

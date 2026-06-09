@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+﻿import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -13,7 +13,7 @@ import { getApiErrorMessage } from '@/utils/authErrors'
 const schema = z.object({
 	firstName: z.string().min(1, 'Ism kiriting'),
 	lastName: z.string().min(1, 'Familiya kiriting'),
-	email: z.string().email('Elektron pochta noto‘g‘ri'),
+	email: z.string().email('Elektron pochta notoвЂgвЂri'),
 	username: z.string().min(3, 'Foydalanuvchi nomi kamida 3 belgi'),
 	password: z.string().min(6, 'Parol kamida 6 belgi'),
 	phone: z.string().optional(),
@@ -53,12 +53,12 @@ export function CreateOwnerModal({
 			onClose()
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Ega yaratib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Ega yaratib boвЂlmadi'))
 		},
 	})
 
 	return (
-		<Modal open={open} onClose={onClose} title='Yangi ega qo‘shish' size='lg'>
+		<Modal open={open} onClose={onClose} title='Yangi ega qoвЂshish' size='lg'>
 			<form
 				onSubmit={form.handleSubmit(values => mutation.mutate(values))}
 				className='flex flex-col gap-3'

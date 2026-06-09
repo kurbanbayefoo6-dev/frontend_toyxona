@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+﻿import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -112,12 +112,12 @@ export default function LoginPage() {
 			size='compact'
 			footer={
 				<p style={{ color: 'var(--color-text-secondary)' }}>
-					Hisobingiz yo‘qmi?{' '}
+					Hisobingiz yoвЂqmi?{' '}
 					<Link
 						to='/register'
 						style={{ color: 'var(--color-brand)' }}
 					>
-						Ro‘yxatdan o‘ting
+						RoвЂyxatdan oвЂting
 					</Link>
 				</p>
 			}

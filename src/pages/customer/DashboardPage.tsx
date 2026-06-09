@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import { CalendarDays, Heart, ReceiptText, Search } from 'lucide-react'
 import { useMemo } from 'react'
 import type { ReactNode } from 'react'
@@ -38,7 +38,7 @@ export default function CustomerDashboardPage() {
 
 	const errorMessage = getApiErrorMessage(
 		bookingsQuery.error ?? paymentsQuery.error ?? favoritesQuery.error,
-		'Ma’lumotlar yuklanmadi',
+		'MaвЂ™lumotlar yuklanmadi',
 	)
 
 	const stats = useMemo(() => {
@@ -54,7 +54,7 @@ export default function CustomerDashboardPage() {
 			timeline: bookings.slice(0, 5).map(item => ({
 				id: item.id,
 				title: `Bron #${item.id}`,
-				meta: `${item.bookingDate.split('T')[0]} — ${item.guestCount} mehmon — ${formatCurrency(item.totalPrice)}`,
+				meta: `${item.bookingDate.split('T')[0]} вЂ” ${item.guestCount} mehmon вЂ” ${formatCurrency(item.totalPrice)}`,
 				status: getApiBookingStatusLabel(item.status),
 			})),
 		}
@@ -87,13 +87,13 @@ export default function CustomerDashboardPage() {
 	return (
 		<DashboardShell
 			kicker='Mijoz boshqaruv paneli'
-			title='Rejalashtiring, kuzating va bitta joydan to‘lang'
-			subtitle='Bandlovlar, to‘lovlar, sevimlilar va keyingi qadamlarning umumiy ko‘rinishi.'
+			title='Rejalashtiring, kuzating va bitta joydan toвЂlang'
+			subtitle='Bandlovlar, toвЂlovlar, sevimlilar va keyingi qadamlarning umumiy koвЂrinishi.'
 			actions={
 				<Link to='/'>
 					<Button className='sm:w-auto'>
 						<Search className='size-4' />
-						Maskan qidirish
+						To‘yxona qidirish
 					</Button>
 				</Link>
 			}
@@ -111,15 +111,15 @@ export default function CustomerDashboardPage() {
 					tone='success'
 				/>
 				<MetricCard
-					label='To‘lovlar'
+					label='ToвЂlovlar'
 					value={stats.totalPayments}
-					helper={`Oldindan to‘langan: ${formatCurrency(stats.paidTotal)}`}
+					helper={`Oldindan toвЂlangan: ${formatCurrency(stats.paidTotal)}`}
 					tone='accent'
 				/>
 				<MetricCard
 					label='Sevimlilar'
 					value={stats.totalFavorites}
-					helper='Solishtirish uchun saqlangan maskanlar'
+					helper='Solishtirish uchun saqlangan To‘yxonalar'
 					tone='warning'
 				/>
 			</div>
@@ -128,7 +128,7 @@ export default function CustomerDashboardPage() {
 				<Timeline
 					title='Bandlovlar vaqti'
 					items={stats.timeline}
-					empty='Hali bandlov yo‘q. Maskan qidiruvidan boshlang.'
+					empty='Hali bandlov yoвЂq. To‘yxona qidiruvidan boshlang.'
 				/>
 
 				<section className='product-card p-5'>
@@ -136,12 +136,12 @@ export default function CustomerDashboardPage() {
 					<div className='mt-5 grid gap-3'>
 						<Shortcut
 							icon={<CalendarDays className='size-5' />}
-							title='Bandlovlarni ko‘rish'
+							title='Bandlovlarni koвЂrish'
 							href='/customer/bookings'
 						/>
 						<Shortcut
 							icon={<ReceiptText className='size-5' />}
-							title='To‘lovlarni tekshirish'
+							title='ToвЂlovlarni tekshirish'
 							href='/customer/payments'
 						/>
 						<Shortcut

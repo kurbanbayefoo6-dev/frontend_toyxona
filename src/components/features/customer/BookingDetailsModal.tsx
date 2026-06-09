@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 
 import { Modal } from '@/components/ui/Modal'
 import { Button } from '@/components/ui/Button'
@@ -42,7 +42,7 @@ export function BookingDetailsModal({
 	return (
 		<Modal open={open} onClose={onClose} title='Bron tafsilotlari' size='lg'>
 			<dl className='space-y-3 text-sm'>
-				<DetailRow label='Maskan' value={booking.venueName} />
+				<DetailRow label='To‘yxona' value={booking.venueName} />
 				<DetailRow
 					label='Sana'
 					value={normalizeDateKey(booking.bookingDate)}
@@ -54,7 +54,7 @@ export function BookingDetailsModal({
 					highlight
 				/>
 				<DetailRow
-					label='Oldindan to‘lov'
+					label='Oldindan toвЂlov'
 					value={formatCurrency(booking.advanceAmount)}
 				/>
 				<div className='flex justify-between gap-4'>
@@ -75,7 +75,7 @@ export function BookingDetailsModal({
 					className='inline-block text-sm font-medium'
 					style={{ color: 'var(--color-brand)' }}
 				>
-					Maskan sahifasiga →
+					To‘yxona sahifasiga в†’
 				</Link>
 				{canCancel ? (
 					<Button

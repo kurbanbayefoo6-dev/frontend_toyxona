@@ -1,4 +1,4 @@
-import type { BookingStatus } from '@/types/booking'
+﻿import type { BookingStatus } from '@/types/booking'
 
 export type PaginatedResult<T> = {
 	items: T[]

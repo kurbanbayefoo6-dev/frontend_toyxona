@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo, useState } from 'react'
 
 import {
@@ -54,7 +54,7 @@ export default function AdminBookingsPage() {
 			toast.success('Bandlov bekor qilindi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib boвЂlmadi'))
 		},
 	})
 
@@ -79,7 +79,7 @@ export default function AdminBookingsPage() {
 		let items = (data?.items ?? []).map(b => ({
 			...b,
 			district: districtByVenueId.get(b.venueId) ?? '',
-			customerPhone: phoneByCustomerId.get(b.customerId) ?? '—',
+			customerPhone: phoneByCustomerId.get(b.customerId) ?? 'вЂ”',
 		}))
 		if (districtFilter) {
 			items = items.filter(b => b.district === districtFilter)
@@ -133,7 +133,7 @@ export default function AdminBookingsPage() {
 					setSearch(v)
 					setPage(1)
 				}}
-				searchPlaceholder='Maskan yoki mijoz...'
+				searchPlaceholder='To‘yxona yoki mijoz...'
 			>
 				<FilterSelect
 					label='Holat'
@@ -176,7 +176,7 @@ export default function AdminBookingsPage() {
 
 			<AdminTable
 				headers={[
-					'Maskan',
+					'To‘yxona',
 					'Mijoz',
 					'Telefon',
 					'Mehmon',
@@ -245,7 +245,7 @@ function buildBookingRow(
 				</Button>
 			) : (
 				<span key='cancel' className='text-xs text-[var(--color-text-hint)]'>
-					—
+					вЂ”
 				</span>
 			),
 		],
@@ -255,7 +255,7 @@ function buildBookingRow(
 				<p>{booking.customerName}</p>
 				<p>{booking.customerPhone}</p>
 				<p>
-					{booking.guestCount} mehmon ·{' '}
+					{booking.guestCount} mehmon В·{' '}
 					{normalizeDateKey(booking.bookingDate)}
 				</p>
 				<StatusBadge

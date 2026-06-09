@@ -1,4 +1,4 @@
-export function DemoOtpBox() {
+﻿export function DemoOtpBox() {
 	return (
 		<div
 			className='rounded-[var(--radius-md)] border px-4 py-3 text-sm'

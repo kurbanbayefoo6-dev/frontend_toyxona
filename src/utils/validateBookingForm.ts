@@ -1,4 +1,4 @@
-import { isBefore, parseISO, startOfDay } from 'date-fns'
+﻿import { isBefore, parseISO, startOfDay } from 'date-fns'
 
 import type { VenueAvailability } from '@/types/venueDetail'
 import { buildDateSet } from '@/utils/calendar'
@@ -20,7 +20,7 @@ export function validateBookingForm(
 	}
 
 	if (!Number.isFinite(guestCount) || guestCount < 1) {
-		return 'Mehmonlar soni noto‘g‘ri'
+		return 'Mehmonlar soni notoвЂgвЂri'
 	}
 
 	if (guestCount > capacity) {
@@ -30,7 +30,7 @@ export function validateBookingForm(
 	const day = parseISO(selectedDate)
 	const today = startOfDay(new Date())
 	if (isBefore(day, today)) {
-		return 'O‘tgan sanani tanlab bo‘lmaydi'
+		return 'OвЂtgan sanani tanlab boвЂlmaydi'
 	}
 
 	const past = buildDateSet(availability.pastDates)
@@ -38,7 +38,7 @@ export function validateBookingForm(
 	const key = selectedDate.split('T')[0]
 
 	if (past.has(key) || isBefore(day, today)) {
-		return 'O‘tgan sanani tanlab bo‘lmaydi'
+		return 'OвЂtgan sanani tanlab boвЂlmaydi'
 	}
 
 	if (booked.has(key)) {

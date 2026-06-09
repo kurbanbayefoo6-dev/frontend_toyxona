@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 import { CustomerEmptyState, CustomerListSkeleton, StatusBadge } from '@/components/features/customer'
@@ -29,7 +29,7 @@ export default function OwnerBookingsPage() {
 			toast.success('Bandlov bekor qilindi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Bandlovni bekor qilib boвЂlmadi'))
 		},
 	})
 
@@ -91,7 +91,7 @@ export default function OwnerBookingsPage() {
 										color: 'var(--color-text-hint)',
 									}}
 								>
-									<th className='px-4 py-3'>Maskan</th>
+									<th className='px-4 py-3'>To‘yxona</th>
 									<th className='px-4 py-3'>Sana</th>
 									<th className='px-4 py-3'>Mehmon</th>
 									<th className='px-4 py-3'>Mijoz</th>
@@ -128,7 +128,7 @@ export default function OwnerBookingsPage() {
 												{booking.customerName}
 											</td>
 											<td className='px-4 py-3'>
-												{phonesQuery.data?.get(booking.id) ?? '—'}
+												{phonesQuery.data?.get(booking.id) ?? 'вЂ”'}
 											</td>
 											<td className='px-4 py-3'>
 												<StatusBadge
@@ -163,7 +163,7 @@ export default function OwnerBookingsPage() {
 														Bekor qilish
 													</Button>
 												) : (
-													'—'
+													'вЂ”'
 												)}
 											</td>
 										</tr>
@@ -207,7 +207,7 @@ export default function OwnerBookingsPage() {
 										<dd>{booking.customerName}</dd>
 										<dt style={{ color: 'var(--color-text-hint)' }}>Telefon</dt>
 										<dd>
-											{phonesQuery.data?.get(booking.id) ?? '—'}
+											{phonesQuery.data?.get(booking.id) ?? 'вЂ”'}
 										</dd>
 									</dl>
 									<p

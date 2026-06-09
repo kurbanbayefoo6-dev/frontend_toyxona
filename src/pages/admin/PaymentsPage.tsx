@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 
 import {
 	AdminTable,
@@ -35,7 +35,7 @@ export default function AdminPaymentsPage() {
 	if (isLoading) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>To‘lovlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>ToвЂlovlar</h1>
 				<AdminTableSkeleton />
 			</div>
 		)
@@ -44,9 +44,9 @@ export default function AdminPaymentsPage() {
 	if (isError) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>To‘lovlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>ToвЂlovlar</h1>
 				<VenueListError
-					message={getApiErrorMessage(error, 'To‘lovlar yuklanmadi')}
+					message={getApiErrorMessage(error, 'ToвЂlovlar yuklanmadi')}
 					onRetry={() => void refetch()}
 					isRetrying={isFetching}
 				/>
@@ -60,7 +60,7 @@ export default function AdminPaymentsPage() {
 				className='mb-6 text-2xl font-semibold'
 				style={{ color: 'var(--color-text-primary)' }}
 			>
-				To‘lovlar
+				ToвЂlovlar
 			</h1>
 
 			<AdminToolbar
@@ -69,7 +69,7 @@ export default function AdminPaymentsPage() {
 					setSearch(v)
 					setPage(1)
 				}}
-				searchPlaceholder='Tranzaksiya, maskan yoki mijoz...'
+				searchPlaceholder='Tranzaksiya, To‘yxona yoki mijoz...'
 			/>
 
 			<AdminTable
@@ -106,7 +106,7 @@ export default function AdminPaymentsPage() {
 								<p className='font-mono text-xs'>{p.transactionId}</p>
 								<p className='font-semibold'>{formatCurrency(p.amount)}</p>
 								<p>
-									{p.venueName} · {p.customerName}
+									{p.venueName} В· {p.customerName}
 								</p>
 								<p>{normalizeDateKey(date)}</p>
 								<StatusBadge
@@ -118,7 +118,7 @@ export default function AdminPaymentsPage() {
 						),
 					}
 				})}
-				emptyMessage='To‘lovlar topilmadi'
+				emptyMessage='ToвЂlovlar topilmadi'
 			/>
 
 			<div className='mt-6'>

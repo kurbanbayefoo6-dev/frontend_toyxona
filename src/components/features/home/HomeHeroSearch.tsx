@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+﻿import { Search } from 'lucide-react'
 import type { FormEvent } from 'react'
 
 import { Button } from '@/components/ui/Button'
@@ -37,7 +37,7 @@ export function HomeHeroSearch({
 		>
 			<label className='flex min-w-0 flex-col gap-1'>
 				<span className='px-1 text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
-					Maskan qidirish
+					To‘yxona qidirish
 				</span>
 				<div className='relative min-w-0'>
 					<Search
@@ -47,7 +47,7 @@ export function HomeHeroSearch({
 					/>
 					<Input
 						type='search'
-						placeholder='Maskan nomi, manzil, tuman...'
+						placeholder='To‘yxona nomi, manzil, tuman...'
 						value={search}
 						onChange={e => onSearchChange(e.target.value)}
 						disabled={disabled}

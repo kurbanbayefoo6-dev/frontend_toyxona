@@ -1,4 +1,4 @@
-type CustomerEmptyStateProps = {
+﻿type CustomerEmptyStateProps = {
 	message: string
 }
 

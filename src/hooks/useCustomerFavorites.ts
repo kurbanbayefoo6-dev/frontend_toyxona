@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+﻿import { useQuery } from '@tanstack/react-query'
 
 import { getFavoritesWithVenues } from '@/services/favorite.service'
 

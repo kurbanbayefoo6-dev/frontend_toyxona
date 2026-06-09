@@ -1,4 +1,4 @@
-import { CheckCircle2 } from 'lucide-react'
+﻿import { CheckCircle2 } from 'lucide-react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -60,12 +60,12 @@ export function BookingSuccessView({
 						className='mt-2 text-sm'
 						style={{ color: 'var(--color-text-secondary)' }}
 					>
-						To‘lov muvaffaqiyatli amalga oshirildi
+						ToвЂlov muvaffaqiyatli amalga oshirildi
 					</p>
 				</div>
 
 				<dl className='space-y-3 text-sm'>
-					<SuccessRow label='Maskan' value={data.venueName} />
+					<SuccessRow label='To‘yxona' value={data.venueName} />
 					<SuccessRow label='Sana' value={data.bookingDate} />
 					<SuccessRow
 						label='Mehmonlar'
@@ -88,7 +88,7 @@ export function BookingSuccessView({
 					className='mt-6 w-full'
 					onClick={() => navigate('/customer/bookings', { replace: true })}
 				>
-					Bandlovlarga o‘tish
+					Bandlovlarga oвЂtish
 				</Button>
 			</div>
 		</div>

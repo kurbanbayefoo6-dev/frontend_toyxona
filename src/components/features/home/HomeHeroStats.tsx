@@ -1,4 +1,4 @@
-type HomeHeroStatsProps = {
+﻿type HomeHeroStatsProps = {
 	venueCount: number | null
 	activeBookingsCount: number | null
 	approvedVenueCount: number | null
@@ -12,7 +12,7 @@ export function HomeHeroStats({
 	isLoading = false,
 }: HomeHeroStatsProps) {
 	const items = [
-		{ label: 'Maskanlar', value: venueCount },
+		{ label: 'To‘yxonalar', value: venueCount },
 		{ label: 'Faol bandlovlar', value: activeBookingsCount },
 		{ label: 'Tasdiqlangan hamkorlar', value: approvedVenueCount },
 	]

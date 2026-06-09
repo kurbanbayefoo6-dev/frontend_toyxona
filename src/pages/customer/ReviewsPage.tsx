@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Pencil, Star, Trash2 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -62,7 +62,7 @@ export default function CustomerReviewsPage() {
 					if (!cancelled) {
 						setVenueNames(prev => ({
 							...prev,
-							[review.venueId]: `Maskan #${review.venueId}`,
+							[review.venueId]: `To‘yxona #${review.venueId}`,
 						}))
 					}
 				})
@@ -88,12 +88,12 @@ export default function CustomerReviewsPage() {
 		},
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['customer', 'reviews'] })
-			toast.success(editing ? 'Sharh yangilandi' : 'Sharh qo‘shildi')
+			toast.success(editing ? 'Sharh yangilandi' : 'Sharh qoвЂshildi')
 			setModalOpen(false)
 			setEditing(null)
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -101,10 +101,10 @@ export default function CustomerReviewsPage() {
 		mutationFn: (id: number) => deleteReview(id),
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['customer', 'reviews'] })
-			toast.success('Sharh o‘chirildi')
+			toast.success('Sharh oвЂchirildi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -167,12 +167,12 @@ export default function CustomerReviewsPage() {
 					className='!w-auto px-6'
 					onClick={openCreate}
 				>
-					Sharh qo‘shish
+					Sharh qoвЂshish
 				</Button>
 			</div>
 
 			{reviews.length === 0 ? (
-				<CustomerEmptyState message='Sizda hali sharhlar yo‘q' />
+				<CustomerEmptyState message='Sizda hali sharhlar yoвЂq' />
 			) : (
 				<ul className='flex flex-col gap-3'>
 					{reviews.map(review => (
@@ -192,7 +192,7 @@ export default function CustomerReviewsPage() {
 										style={{ color: 'var(--color-brand)' }}
 									>
 										{venueNames[review.venueId] ??
-											`Maskan #${review.venueId}`}
+											`To‘yxona #${review.venueId}`}
 									</Link>
 									<div
 										className='mt-1 flex items-center gap-0.5'
@@ -244,7 +244,7 @@ export default function CustomerReviewsPage() {
 										onClick={() => deleteMutation.mutate(review.id)}
 										className='rounded-[var(--radius-sm)] p-2'
 										style={{ color: 'var(--color-booked)' }}
-										aria-label='O‘chirish'
+										aria-label='OвЂchirish'
 										disabled={deleteMutation.isPending}
 									>
 										<Trash2 className='size-4' />

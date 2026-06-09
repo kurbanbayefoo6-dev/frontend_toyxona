@@ -1,10 +1,10 @@
-import { create } from 'zustand'
+﻿import { create } from 'zustand'
 
 export type District =
 	| 'Bektemir'
 	| 'Chilonzor'
 	| 'Mirobod'
-	| 'Mirzo Ulug‘bek'
+	| 'Mirzo UlugвЂbek'
 	| 'Olmazor'
 	| 'Sergeli'
 	| 'Shayxontohur'

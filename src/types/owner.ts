@@ -1,4 +1,4 @@
-export type VenueFormPayload = {
+﻿export type VenueFormPayload = {
 	ownerId?: number
 	name: string
 	district: string

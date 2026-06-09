@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+﻿import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ImagePlus, Pencil, Plus, Trash2, X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
@@ -53,8 +53,8 @@ const venueSchema = z.object({
 	name: z.string().min(1, 'Nom kiriting'),
 	district: z.string().min(1, 'Tumanni tanlang'),
 	address: z.string().min(1, 'Manzil kiriting'),
-	capacity: z.number().min(1, 'Sig‘im kamida 1'),
-	pricePerSeat: z.number().min(0, 'Narx manfiy bo‘lmasin'),
+	capacity: z.number().min(1, 'SigвЂim kamida 1'),
+	pricePerSeat: z.number().min(0, 'Narx manfiy boвЂlmasin'),
 	phone: z.string().min(9, 'Telefon kiriting'),
 	description: z.string().optional(),
 })
@@ -159,7 +159,7 @@ export default function VenueManagePage({
 			clearPending()
 			void queryClient.invalidateQueries({ queryKey: ['owner'] })
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
-			toast.success(isEdit ? 'Maskan yangilandi' : 'Maskan yaratildi')
+			toast.success(isEdit ? 'To‘yxona yangilandi' : 'To‘yxona yaratildi')
 			if (!isEdit) {
 				const editPath = adminMode
 					? `/admin/venues/${id}/edit`
@@ -168,7 +168,7 @@ export default function VenueManagePage({
 			}
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -177,11 +177,11 @@ export default function VenueManagePage({
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['owner'] })
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
-			toast.success('Maskan o‘chirildi')
+			toast.success('To‘yxona oвЂchirildi')
 			navigate(venuesListPath)
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Maskanni o‘chirib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'To‘yxonani oвЂchirib boвЂlmadi'))
 		},
 	})
 
@@ -191,9 +191,9 @@ export default function VenueManagePage({
 			void queryClient.invalidateQueries({
 				queryKey: ['owner', 'venue', venueId, 'full'],
 			})
-			toast.success('Rasm o‘chirildi')
+			toast.success('Rasm oвЂchirildi')
 		} catch (err) {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		}
 	}
 
@@ -206,7 +206,7 @@ export default function VenueManagePage({
 	if (isEdit && fullQuery.isLoading) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>Maskan</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>To‘yxona</h1>
 				<CustomerListSkeleton rows={4} />
 			</div>
 		)
@@ -216,7 +216,7 @@ export default function VenueManagePage({
 		return (
 			<div>
 				<VenueListError
-					message={getApiErrorMessage(fullQuery.error, 'Maskan yuklanmadi')}
+					message={getApiErrorMessage(fullQuery.error, 'To‘yxona yuklanmadi')}
 					onRetry={() => void fullQuery.refetch()}
 					isRetrying={fullQuery.isFetching}
 				/>
@@ -235,13 +235,13 @@ export default function VenueManagePage({
 					className='text-sm'
 					style={{ color: 'var(--color-brand)' }}
 				>
-					← Maskanlar
+					в†ђ To‘yxonalar
 				</Link>
 				<h1
 					className='text-2xl font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					{isEdit ? data?.venue.name ?? 'Tahrirlash' : 'Yangi maskan'}
+					{isEdit ? data?.venue.name ?? 'Tahrirlash' : 'Yangi To‘yxona'}
 				</h1>
 				{isEdit && data && <VenueStatusBadge status={data.venue.status} />}
 			</div>
@@ -257,7 +257,7 @@ export default function VenueManagePage({
 				className='flex flex-col gap-6'
 				noValidate
 			>
-				<OwnerSection title='Asosiy ma’lumotlar'>
+				<OwnerSection title='Asosiy maвЂ™lumotlar'>
 					{adminMode ? (
 						<div className='mb-4 flex flex-col gap-1.5'>
 							<label className='text-sm font-medium'>Egasi</label>
@@ -300,13 +300,13 @@ export default function VenueManagePage({
 							/>
 						</div>
 						<FormField
-							label='Sig‘im'
+							label='SigвЂim'
 							type='number'
 							error={form.formState.errors.capacity?.message}
 							{...form.register('capacity', { valueAsNumber: true })}
 						/>
 						<FormField
-							label='O‘rin narxi'
+							label='OвЂrin narxi'
 							type='number'
 							error={form.formState.errors.pricePerSeat?.message}
 							{...form.register('pricePerSeat', { valueAsNumber: true })}
@@ -326,14 +326,14 @@ export default function VenueManagePage({
 								borderColor: 'var(--color-border)',
 								backgroundColor: 'var(--color-card-bg)',
 							}}
-							placeholder='Maskan haqida qisqa ma’lumot'
+							placeholder='To‘yxona haqida qisqa maвЂ™lumot'
 							{...form.register('description')}
 						/>
 						<span
 							className='text-xs'
 							style={{ color: 'var(--color-text-hint)' }}
 						>
-							Tavsif hozircha faqat shaklda ko‘rsatiladi
+							Tavsif hozircha faqat shaklda koвЂrsatiladi
 						</span>
 					</label>
 				</OwnerSection>
@@ -352,7 +352,7 @@ export default function VenueManagePage({
 							className='mt-2 text-xs'
 							style={{ color: 'var(--color-text-hint)' }}
 						>
-							Rasmlar maskan yaratilgandan keyin yuklanadi
+							Rasmlar To‘yxona yaratilgandan keyin yuklanadi
 						</p>
 					)}
 				</OwnerSection>
@@ -370,14 +370,14 @@ export default function VenueManagePage({
 							onClick={() => {
 								if (
 									window.confirm(
-										'Maskanni o‘chirishni tasdiqlaysizmi? Bu amalni qaytarib bo‘lmaydi.',
+										'To‘yxonani oвЂchirishni tasdiqlaysizmi? Bu amalni qaytarib boвЂlmaydi.',
 									)
 								) {
 									deleteVenueMutation.mutate()
 								}
 							}}
 						>
-							Maskanni o‘chirish
+							To‘yxonani oвЂchirish
 						</Button>
 					) : null}
 				</div>
@@ -537,13 +537,13 @@ function CatalogSection({
 			action={
 				<Button type='button' variant='secondary' className='!w-auto px-4' onClick={onAdd}>
 					<Plus className='size-4' />
-					Qo‘shish
+					QoвЂshish
 				</Button>
 			}
 		>
 			{items.length === 0 ? (
 				<p className='text-sm' style={{ color: 'var(--color-text-hint)' }}>
-					Ro‘yxat bo‘sh
+					RoвЂyxat boвЂsh
 				</p>
 			) : (
 				<ul className='divide-y' style={{ borderColor: 'var(--color-border)' }}>
@@ -567,7 +567,7 @@ function CatalogSection({
 								<button type='button' onClick={() => onEdit(item.id)} aria-label='Tahrirlash'>
 									<Pencil className='size-4' />
 								</button>
-								<button type='button' onClick={() => onDelete(item.id)} aria-label='O‘chirish'>
+								<button type='button' onClick={() => onDelete(item.id)} aria-label='OвЂchirish'>
 									<Trash2 className='size-4' style={{ color: 'var(--color-booked)' }} />
 								</button>
 							</div>
@@ -722,7 +722,7 @@ function KarnaySection({
 			})
 			toast.success('Karnay-surnay saqlandi')
 		} catch (err) {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		}
 	}
 
@@ -762,9 +762,9 @@ async function handleDeleteSinger(
 	try {
 		await deleteSinger(id)
 		void queryClient.invalidateQueries({ queryKey: ['owner', 'venue', venueId, 'full'] })
-		toast.success('O‘chirildi')
+		toast.success('OвЂchirildi')
 	} catch (err) {
-		toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+		toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 	}
 }
 
@@ -776,9 +776,9 @@ async function handleDeleteCar(
 	try {
 		await deleteCar(id)
 		void queryClient.invalidateQueries({ queryKey: ['owner', 'venue', venueId, 'full'] })
-		toast.success('O‘chirildi')
+		toast.success('OвЂchirildi')
 	} catch (err) {
-		toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+		toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 	}
 }
 
@@ -790,9 +790,9 @@ async function handleDeleteMenu(
 	try {
 		await deleteMenuItem(id)
 		void queryClient.invalidateQueries({ queryKey: ['owner', 'venue', venueId, 'full'] })
-		toast.success('O‘chirildi')
+		toast.success('OвЂchirildi')
 	} catch (err) {
-		toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+		toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 	}
 }
 
@@ -838,14 +838,14 @@ function SingerModal({
 			toast.success('Saqlandi')
 			onSaved()
 		} catch (err) {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		} finally {
 			setLoading(false)
 		}
 	}
 
 	return (
-		<Modal open={open} onClose={onClose} title={singer ? 'Xonandani tahrirlash' : 'Xonanda qo‘shish'}>
+		<Modal open={open} onClose={onClose} title={singer ? 'Xonandani tahrirlash' : 'Xonanda qoвЂshish'}>
 			<form onSubmit={e => void submit(e)} className='flex flex-col gap-3'>
 				<FormField label='Ism' value={name} onChange={e => setName(e.target.value)} required />
 				<FormField label='Narxi' type='number' value={price} onChange={e => setPrice(e.target.value)} required />
@@ -898,14 +898,14 @@ function CarModal({
 			toast.success('Saqlandi')
 			onSaved()
 		} catch (err) {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		} finally {
 			setLoading(false)
 		}
 	}
 
 	return (
-		<Modal open={open} onClose={onClose} title={car ? 'Avtomobilni tahrirlash' : 'Avtomobil qo‘shish'}>
+		<Modal open={open} onClose={onClose} title={car ? 'Avtomobilni tahrirlash' : 'Avtomobil qoвЂshish'}>
 			<form onSubmit={e => void submit(e)} className='flex flex-col gap-3'>
 				<FormField label='Marka' value={brand} onChange={e => setBrand(e.target.value)} required />
 				<FormField label='Narxi' type='number' value={price} onChange={e => setPrice(e.target.value)} required />
@@ -956,14 +956,14 @@ function MenuModal({
 			toast.success('Saqlandi')
 			onSaved()
 		} catch (err) {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		} finally {
 			setLoading(false)
 		}
 	}
 
 	return (
-		<Modal open={open} onClose={onClose} title={item ? 'Menyu tahrirlash' : 'Menyu qo‘shish'}>
+		<Modal open={open} onClose={onClose} title={item ? 'Menyu tahrirlash' : 'Menyu qoвЂshish'}>
 			<form onSubmit={e => void submit(e)} className='flex flex-col gap-3'>
 				<FormField label='Nomi' value={name} onChange={e => setName(e.target.value)} required />
 				<ImagePicker

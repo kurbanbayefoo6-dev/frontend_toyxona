@@ -1,4 +1,4 @@
-import type { BookingAddonsSelection } from '@/utils/bookingPrice'
+﻿import type { BookingAddonsSelection } from '@/utils/bookingPrice'
 
 const DRAFT_KEY = 'toyxona-booking-draft'
 const REDIRECT_KEY = 'toyxona-auth-redirect'

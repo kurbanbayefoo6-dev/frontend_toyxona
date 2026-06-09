@@ -1,4 +1,4 @@
-export function VenueDetailSkeleton() {
+﻿export function VenueDetailSkeleton() {
 	return (
 		<div className='mx-auto max-w-7xl animate-pulse'>
 			<div className='grid grid-cols-1 gap-6 lg:grid-cols-[65fr_35fr]'>

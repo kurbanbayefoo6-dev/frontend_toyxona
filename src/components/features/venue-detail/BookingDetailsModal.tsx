@@ -1,4 +1,4 @@
-import { Modal } from '@/components/ui/Modal'
+﻿import { Modal } from '@/components/ui/Modal'
 import type { BookingCalendarEntry } from '@/types/venueDetail'
 
 const STATUS_LABELS: Record<BookingCalendarEntry['status'], string> = {

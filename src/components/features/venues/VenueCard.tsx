@@ -1,4 +1,4 @@
-import { Building2, CalendarCheck, MapPin, Users } from 'lucide-react'
+﻿import { Building2, CalendarCheck, MapPin, Users } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -57,7 +57,7 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 							onError={() => {
 								if (import.meta.env.DEV) {
 									console.warn(
-										'[image-render:VenueCard] img onError — showing placeholder',
+										'[image-render:VenueCard] img onError вЂ” showing placeholder',
 										{ venueId: venue.id, src: imageSrc },
 									)
 								}
@@ -105,7 +105,7 @@ export function VenueCard({ venue, featured = false }: VenueCardProps) {
 							{formatCurrency(venue.pricePerSeat)}
 						</p>
 						<p className='text-xs text-[var(--color-text-secondary)]'>
-							o‘rin uchun
+							oвЂrin uchun
 						</p>
 					</div>
 					<Link to={detailPath}>

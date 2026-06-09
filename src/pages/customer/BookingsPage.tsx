@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo, useState } from 'react'
 
 import {
@@ -42,7 +42,7 @@ export default function CustomerBookingsPage() {
 			setSelected(null)
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Bronni bekor qilib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Bronni bekor qilib boвЂlmadi'))
 		},
 	})
 
@@ -77,7 +77,7 @@ export default function CustomerBookingsPage() {
 	return (
 		<PageShell title='Bandlovlarim'>
 			{bookings.length === 0 ? (
-				<CustomerEmptyState message='Sizda hali bandlovlar yo‘q' />
+				<CustomerEmptyState message='Sizda hali bandlovlar yoвЂq' />
 			) : (
 				<ul className='flex flex-col gap-3'>
 					{bookings.map(booking => {
@@ -113,7 +113,7 @@ export default function CustomerBookingsPage() {
 													color: 'var(--color-text-secondary)',
 												}}
 											>
-												{normalizeDateKey(booking.bookingDate)} ·{' '}
+												{normalizeDateKey(booking.bookingDate)} В·{' '}
 												{booking.guestCount} mehmon
 											</p>
 										</div>

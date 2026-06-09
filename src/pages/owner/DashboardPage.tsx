@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import { Building2, CalendarClock, Plus } from 'lucide-react'
 import { useMemo } from 'react'
 import type { ReactNode } from 'react'
@@ -38,7 +38,7 @@ export default function OwnerDashboardPage() {
 			activity: bookings.slice(0, 5).map(item => ({
 				id: item.id,
 				title: `Bron #${item.id}`,
-				meta: `${item.bookingDate.split('T')[0]} — ${item.guestCount} mehmon — oldindan ${formatCurrency(item.advanceAmount)}`,
+				meta: `${item.bookingDate.split('T')[0]} вЂ” ${item.guestCount} mehmon вЂ” oldindan ${formatCurrency(item.advanceAmount)}`,
 				status: getApiBookingStatusLabel(item.status),
 			})),
 		}
@@ -58,7 +58,7 @@ export default function OwnerDashboardPage() {
 			<VenueListError
 				message={getApiErrorMessage(
 					venuesQuery.error ?? bookingsQuery.error,
-					'Ma’lumotlar yuklanmadi',
+					'MaвЂ™lumotlar yuklanmadi',
 				)}
 				onRetry={handleRetry}
 				isRetrying={venuesQuery.isFetching || bookingsQuery.isFetching}
@@ -71,22 +71,22 @@ export default function OwnerDashboardPage() {
 	return (
 		<DashboardShell
 			kicker='Egasi ish maydoni'
-			title='Maskanlarni boshqarish markazi'
+			title='To‘yxonalarni boshqarish markazi'
 			subtitle='Tasdiqlar, bandlovlar va daromad signallarini bitta paneldan kuzating.'
 			actions={
 				<Link to='/owner/venues/new'>
 					<Button className='sm:w-auto'>
 						<Plus className='size-4' />
-						Maskan qo‘shish
+						To‘yxona qoвЂshish
 					</Button>
 				</Link>
 			}
 		>
 			<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4'>
 				<MetricCard
-					label='Maskanlar'
+					label='To‘yxonalar'
 					value={stats.totalVenues}
-					helper='Barcha egalik maskanlar'
+					helper='Barcha egalik To‘yxonalar'
 					tone='accent'
 				/>
 				<MetricCard
@@ -104,13 +104,13 @@ export default function OwnerDashboardPage() {
 				<MetricCard
 					label='Bandlovlar'
 					value={stats.totalBookings}
-					helper={`Oldindan to‘lov daromadi ${formatCurrency(stats.revenue)}`}
+					helper={`Oldindan toвЂlov daromadi ${formatCurrency(stats.revenue)}`}
 				/>
 			</div>
 
 			<div className='grid gap-5 xl:grid-cols-[0.9fr_1.1fr]'>
 				<BarList
-					title='Maskan holati'
+					title='To‘yxona holati'
 					items={[
 						{ label: 'Tasdiqlangan', value: stats.approved, max: maxVenueMetric },
 						{ label: 'Kutilmoqda', value: stats.pending, max: maxVenueMetric },
@@ -119,20 +119,20 @@ export default function OwnerDashboardPage() {
 				<Timeline
 					title='Faollik lentasi'
 					items={stats.activity}
-					empty='Hali bandlov yo‘q. Mijozlar band qilgach, nashr qilingan maskanlar shu yerda ko‘rinadi.'
+					empty='Hali bandlov yoвЂq. Mijozlar band qilgach, nashr qilingan To‘yxonalar shu yerda koвЂrinadi.'
 				/>
 			</div>
 
 			<div className='grid gap-4 md:grid-cols-2'>
 				<OwnerAction
 					icon={<Building2 className='size-5' />}
-					title='Maskanlarni boshqarish'
-					text='E’lonlar, rasmlar, katalog va nashr holatini tahrirlang.'
+					title='To‘yxonalarni boshqarish'
+					text='EвЂ™lonlar, rasmlar, katalog va nashr holatini tahrirlang.'
 					href='/owner/venues'
 				/>
 				<OwnerAction
 					icon={<CalendarClock className='size-5' />}
-					title='Bandlovlarni ko‘rish'
+					title='Bandlovlarni koвЂrish'
 					text='Mijoz bronlari va holatini kuzating.'
 					href='/owner/bookings'
 				/>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import { ShieldCheck } from 'lucide-react'
 
 import {
@@ -42,13 +42,13 @@ export default function AdminDashboardPage() {
 	return (
 		<DashboardShell
 			kicker='Boshqaruv markazi'
-			title='Bozor operatsiyalari uchun asosiy ko‘rsatkichlar'
-			subtitle='Foydalanuvchilar, egalar, maskanlar, bandlovlar, kutilayotgan tasdiqlar va daromadning umumiy ko‘rinishi.'
+			title='Bozor operatsiyalari uchun asosiy koвЂrsatkichlar'
+			subtitle='Foydalanuvchilar, egalar, To‘yxonalar, bandlovlar, kutilayotgan tasdiqlar va daromadning umumiy koвЂrinishi.'
 			actions={
 				<Link to='/admin/venues'>
 					<Button className='sm:w-auto'>
 						<ShieldCheck className='size-4' />
-						Maskanlarni ko‘rib chiqish
+						To‘yxonalarni koвЂrib chiqish
 					</Button>
 				</Link>
 			}
@@ -57,18 +57,18 @@ export default function AdminDashboardPage() {
 				<MetricCard
 					label='Foydalanuvchilar'
 					value={data.totalUsers}
-					helper='Ro‘yxatdan o‘tgan foydalanuvchilar'
+					helper='RoвЂyxatdan oвЂtgan foydalanuvchilar'
 				/>
 				<MetricCard
 					label='Egalar'
 					value={data.totalOwners}
-					helper='Maskan hamkorlari'
+					helper='To‘yxona hamkorlari'
 					tone='accent'
 				/>
 				<MetricCard
-					label='Maskanlar'
+					label='To‘yxonalar'
 					value={data.totalVenues}
-					helper={`${data.pendingVenues} ta ko‘rib chiqish kutilmoqda`}
+					helper={`${data.pendingVenues} ta koвЂrib chiqish kutilmoqda`}
 					tone='warning'
 				/>
 				<MetricCard
@@ -85,7 +85,7 @@ export default function AdminDashboardPage() {
 					items={[
 						{ label: 'Foydalanuvchilar', value: data.totalUsers, max: maxOps },
 						{ label: 'Egalar', value: data.totalOwners, max: maxOps },
-						{ label: 'Maskanlar', value: data.totalVenues, max: maxOps },
+						{ label: 'To‘yxonalar', value: data.totalVenues, max: maxOps },
 						{ label: 'Bandlovlar', value: data.totalBookings, max: maxOps },
 					]}
 				/>
@@ -94,7 +94,7 @@ export default function AdminDashboardPage() {
 					<h2 className='text-xl font-black'>Operatsion navbat</h2>
 					<div className='mt-5 grid gap-3'>
 						<QueueRow
-							label='Kutilayotgan maskanlar'
+							label='Kutilayotgan To‘yxonalar'
 							value={data.pendingVenues}
 							href='/admin/venues'
 							tone='warning'
@@ -106,7 +106,7 @@ export default function AdminDashboardPage() {
 							tone='success'
 						/>
 						<QueueRow
-							label='Jami to‘lovlar'
+							label='Jami toвЂlovlar'
 							value={formatCurrency(data.totalRevenue)}
 							href='/admin/payments'
 							tone='brand'

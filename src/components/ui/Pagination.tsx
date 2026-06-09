@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/Button'
+﻿import { Button } from '@/components/ui/Button'
 
 type PaginationProps = {
 	page: number
@@ -39,7 +39,7 @@ export function Pagination({
 						className='px-2 text-sm'
 						style={{ color: 'var(--color-text-hint)' }}
 					>
-						…
+						вЂ¦
 					</span>
 				) : (
 					<Button

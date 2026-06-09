@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+﻿import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -17,11 +17,11 @@ const registerSchema = z.object({
 	firstName: z.string().min(1, 'Ism majburiy'),
 	lastName: z.string().min(1, 'Familiya majburiy'),
 	username: z.string().min(1, 'Foydalanuvchi nomi majburiy'),
-	email: z.string().email('Elektron pochta noto‘g‘ri'),
+	email: z.string().email('Elektron pochta notoвЂgвЂri'),
 	phone: z.string().min(1, 'Telefon raqami majburiy'),
 	password: z
 		.string()
-		.min(8, 'Parol kamida 8 ta belgidan iborat bo‘lsin'),
+		.min(8, 'Parol kamida 8 ta belgidan iborat boвЂlsin'),
 })
 
 type RegisterFormValues = z.infer<typeof registerSchema>
@@ -58,7 +58,7 @@ export default function RegisterPage() {
 			)
 
 			if (!res.data.success) {
-				const msg = 'Ro‘yxatdan o‘tishda xatolik yuz berdi'
+				const msg = 'RoвЂyxatdan oвЂtishda xatolik yuz berdi'
 				setServerError(msg)
 				toast.error(msg)
 				return
@@ -68,14 +68,14 @@ export default function RegisterPage() {
 			navigate(`/verify-otp?email=${encodeURIComponent(values.email)}`)
 		} catch (error) {
 			setServerError(
-				handleAuthError(error, 'Ro‘yxatdan o‘tishda xatolik yuz berdi'),
+				handleAuthError(error, 'RoвЂyxatdan oвЂtishda xatolik yuz berdi'),
 			)
 		}
 	}
 
 	return (
 		<AuthCard
-			title='Mijoz sifatida ro‘yxatdan o‘tish'
+			title='Mijoz sifatida roвЂyxatdan oвЂtish'
 			subtitle='Toyxona band qilish uchun hisob yarating'
 			size='wide'
 			footer={
@@ -84,12 +84,12 @@ export default function RegisterPage() {
 					<Link to='/login' style={{ color: 'var(--color-brand)' }}>
 						Kirish
 					</Link>
-					{' · '}
+					{' В· '}
 					<Link
 						to='/register/owner'
 						style={{ color: 'var(--color-brand)' }}
 					>
-						Maskan egasi
+						To‘yxona egasi
 					</Link>
 				</p>
 			}
@@ -162,7 +162,7 @@ export default function RegisterPage() {
 					loading={isSubmitting}
 					disabled={isSubmitting}
 				>
-					{isSubmitting ? 'Yuborilmoqda...' : 'Ro‘yxatdan o‘tish'}
+					{isSubmitting ? 'Yuborilmoqda...' : 'RoвЂyxatdan oвЂtish'}
 				</Button>
 			</form>
 		</AuthCard>

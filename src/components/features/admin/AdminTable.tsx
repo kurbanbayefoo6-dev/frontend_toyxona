@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+﻿import type { ReactNode } from 'react'
 
 export type AdminTableRowData = {
 	key: string | number
@@ -15,7 +15,7 @@ type AdminTableProps = {
 export function AdminTable({
 	headers,
 	rows,
-	emptyMessage = 'Ma’lumot topilmadi',
+	emptyMessage = 'MaвЂ™lumot topilmadi',
 }: AdminTableProps) {
 	if (rows.length === 0) {
 		return (

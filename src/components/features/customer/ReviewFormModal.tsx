@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 
 import { Modal } from '@/components/ui/Modal'
 import { Button, Select } from '@/components/ui'
@@ -68,7 +68,7 @@ export function ReviewFormModal({
 							className='text-sm font-medium'
 							style={{ color: 'var(--color-text-primary)' }}
 						>
-							Maskan
+							To‘yxona
 						</label>
 						<Select
 							value={venueId}
@@ -76,7 +76,7 @@ export function ReviewFormModal({
 							disabled={isSubmitting || venueOptions.length === 0}
 						>
 							{venueOptions.length === 0 ? (
-								<option value=''>Maskan mavjud emas</option>
+								<option value=''>To‘yxona mavjud emas</option>
 							) : (
 								venueOptions.map(v => (
 									<option key={v.venueId} value={v.venueId}>
@@ -93,7 +93,7 @@ export function ReviewFormModal({
 						className='text-sm font-medium'
 						style={{ color: 'var(--color-text-primary)' }}
 					>
-						Baho (1–5)
+						Baho (1вЂ“5)
 					</label>
 					<Select
 						value={rating}

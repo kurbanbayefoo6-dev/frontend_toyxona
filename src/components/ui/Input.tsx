@@ -1,4 +1,4 @@
-import { forwardRef, type InputHTMLAttributes } from 'react'
+﻿import { forwardRef, type InputHTMLAttributes } from 'react'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 	hasError?: boolean

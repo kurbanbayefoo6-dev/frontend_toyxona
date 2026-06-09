@@ -1,4 +1,4 @@
-type StatusBadgeProps = {
+﻿type StatusBadgeProps = {
 	label: string
 	bg: string
 	color: string

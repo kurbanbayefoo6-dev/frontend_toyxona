@@ -1,4 +1,4 @@
-import { SlidersHorizontal, Search } from 'lucide-react'
+﻿import { SlidersHorizontal, Search } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 import { Input } from '@/components/ui/Input'
@@ -16,10 +16,10 @@ export type SortOption =
 
 export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 	{ value: 'created_at:desc', label: 'Eng yangi' },
-	{ value: 'name:asc', label: 'Nom A–Z' },
+	{ value: 'name:asc', label: 'Nom AвЂ“Z' },
 	{ value: 'price_per_seat:asc', label: 'Avval arzon' },
 	{ value: 'price_per_seat:desc', label: 'Avval qimmat' },
-	{ value: 'capacity:desc', label: 'Eng katta sig‘im' },
+	{ value: 'capacity:desc', label: 'Eng katta sigвЂim' },
 ]
 
 export function parseSortOption(
@@ -71,7 +71,7 @@ export function VenueFilters({
 				<div>
 					<p className='text-sm font-black'>Filtrlar</p>
 					<p className='text-xs text-[var(--color-text-secondary)]'>
-						Joylashuv, sig‘im va byudjet bo‘yicha aniqlang
+						Joylashuv, sigвЂim va byudjet boвЂyicha aniqlang
 					</p>
 				</div>
 				<span className='flex size-10 items-center justify-center rounded-full bg-[var(--color-brand-light)] text-[var(--color-brand)]'>
@@ -120,7 +120,7 @@ export function VenueFilters({
 					</Select>
 				</FilterField>
 
-				<FilterField label='Minimal sig‘im'>
+				<FilterField label='Minimal sigвЂim'>
 					<Input
 						type='number'
 						min={1}
@@ -128,7 +128,7 @@ export function VenueFilters({
 						value={capacity}
 						onChange={e => onCapacityChange(e.target.value)}
 						disabled={disabled}
-						aria-label='Minimal sig‘im'
+						aria-label='Minimal sigвЂim'
 					/>
 				</FilterField>
 
@@ -137,7 +137,7 @@ export function VenueFilters({
 						<Input
 							type='number'
 							min={0}
-							placeholder='so‘m'
+							placeholder='soвЂm'
 							value={minPrice}
 							onChange={e => onMinPriceChange(e.target.value)}
 							disabled={disabled}
@@ -149,7 +149,7 @@ export function VenueFilters({
 						<Input
 							type='number'
 							min={0}
-							placeholder='so‘m'
+							placeholder='soвЂm'
 							value={maxPrice}
 							onChange={e => onMaxPriceChange(e.target.value)}
 							disabled={disabled}

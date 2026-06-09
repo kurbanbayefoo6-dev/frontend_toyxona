@@ -1,4 +1,4 @@
-import type { Venue } from '@/types/venue'
+﻿import type { Venue } from '@/types/venue'
 
 export type VenueImage = {
 	id: number

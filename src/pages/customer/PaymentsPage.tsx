@@ -1,4 +1,4 @@
-import {
+﻿import {
 	CustomerEmptyState,
 	CustomerListSkeleton,
 	StatusBadge,
@@ -26,7 +26,7 @@ export default function CustomerPaymentsPage() {
 					className='mb-6 text-2xl font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					To‘lovlarim
+					ToвЂlovlarim
 				</h1>
 				<CustomerListSkeleton />
 			</div>
@@ -40,10 +40,10 @@ export default function CustomerPaymentsPage() {
 					className='mb-6 text-2xl font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					To‘lovlarim
+					ToвЂlovlarim
 				</h1>
 				<VenueListError
-					message={getApiErrorMessage(error, 'To‘lovlar yuklanmadi')}
+					message={getApiErrorMessage(error, 'ToвЂlovlar yuklanmadi')}
 					onRetry={() => void refetch()}
 					isRetrying={isFetching}
 				/>
@@ -57,11 +57,11 @@ export default function CustomerPaymentsPage() {
 				className='mb-6 text-2xl font-semibold'
 				style={{ color: 'var(--color-text-primary)' }}
 			>
-				To‘lovlarim
+				ToвЂlovlarim
 			</h1>
 
 			{payments.length === 0 ? (
-				<CustomerEmptyState message='To‘lovlar topilmadi' />
+				<CustomerEmptyState message='ToвЂlovlar topilmadi' />
 			) : (
 				<ul className='flex flex-col gap-3'>
 					{payments.map(payment => {
@@ -94,7 +94,7 @@ export default function CustomerPaymentsPage() {
 											className='mt-1 text-sm'
 											style={{ color: 'var(--color-text-secondary)' }}
 										>
-											{payment.venueName} ·{' '}
+											{payment.venueName} В·{' '}
 											{normalizeDateKey(date)}
 										</p>
 									</div>

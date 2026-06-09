@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+﻿import { zodResolver } from '@hookform/resolvers/zod'
 
 import { useEffect, useMemo, useState } from 'react'
 
@@ -38,7 +38,7 @@ import { AUTH_TOAST } from '@/utils/toastMessages'
 
 const verifySchema = z.object({
 
-	email: z.string().email('Elektron pochta noto‘g‘ri'),
+	email: z.string().email('Elektron pochta notoвЂgвЂri'),
 
 	otpCode: z.string().min(1, 'Tasdiqlash kodi majburiy'),
 
@@ -214,7 +214,7 @@ export default function VerifyOtpPage() {
 
 			if (!res.data.success) {
 
-				const msg = 'Kodni qayta yuborib bo‘lmadi'
+				const msg = 'Kodni qayta yuborib boвЂlmadi'
 
 				setServerError(msg)
 
@@ -232,7 +232,7 @@ export default function VerifyOtpPage() {
 
 			setServerError(
 
-				handleAuthError(error, 'Kodni qayta yuborib bo‘lmadi'),
+				handleAuthError(error, 'Kodni qayta yuborib boвЂlmadi'),
 
 			)
 

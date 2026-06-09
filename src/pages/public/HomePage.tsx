@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+﻿import { useQuery } from '@tanstack/react-query'
 import { ArrowRight, CalendarCheck, MapPin, ShieldCheck, Sparkles } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
@@ -35,12 +35,12 @@ const TESTIMONIALS = [
 		text: 'Bir joyda zallar, xizmatlar va narxlarni solishtirdik. Band qilish jarayoni juda band haftada ham xotirjam tuyuldi.',
 	},
 	{
-		name: 'Dilshod, maskan egasi',
-		text: 'Egasi kabineti har bir mijozga qo‘ng‘iroq qilmasdan bandlovlar va maskan holatini kuzatishni osonlashtiradi.',
+		name: 'Dilshod, To‘yxona egasi',
+		text: 'Egasi kabineti har bir mijozga qoвЂngвЂiroq qilmasdan bandlovlar va To‘yxona holatini kuzatishni osonlashtiradi.',
 	},
 	{
 		name: 'Zarina',
-		text: 'Rasmlar, sig‘im va narx aniq edi. Nihoyat skrinshotlar emas, haqiqiy mahsulot tanlashdek tuyuldi.',
+		text: 'Rasmlar, sigвЂim va narx aniq edi. Nihoyat skrinshotlar emas, haqiqiy mahsulot tanlashdek tuyuldi.',
 	},
 ]
 
@@ -160,26 +160,26 @@ export default function HomePage() {
 			<section className='mx-auto grid w-full max-w-7xl gap-4 px-4 py-8 sm:grid-cols-3 lg:-mt-8 lg:py-12'>
 				<ValueCard
 					icon={<ShieldCheck className='size-5' />}
-					title='Tasdiqlangan maskanlar'
-					text='Band qilishdan oldin aniq holat, rasmlar, sig‘im va aloqa ma’lumotlari.'
+					title='Tasdiqlangan To‘yxonalar'
+					text='Band qilishdan oldin aniq holat, rasmlar, sigвЂim va aloqa maвЂ™lumotlari.'
 				/>
 				<ValueCard
 					icon={<CalendarCheck className='size-5' />}
 					title='Avval mavjudlik'
-					text='Bo‘sh va band kunlarni ko‘ring — qaror qabul qilishga qulay bandlov jarayoni.'
+					text='BoвЂsh va band kunlarni koвЂring вЂ” qaror qabul qilishga qulay bandlov jarayoni.'
 				/>
 				<ValueCard
 					icon={<Sparkles className='size-5' />}
 					title='Kontekstdagi xizmatlar'
-					text='Xonandalar, avtomobillar, menyu va qo‘shimcha xizmatlarni zal atrofida solishtiring.'
+					text='Xonandalar, avtomobillar, menyu va qoвЂshimcha xizmatlarni zal atrofida solishtiring.'
 				/>
 			</section>
 
 			<section className='mx-auto w-full max-w-7xl px-4 py-8'>
 				<SectionHeader
 					kicker='Tanlangan'
-					title='Avval ko‘rishga arziydigan maskanlar'
-					text='Rasmga urg‘u berilgan kartochkalar joylashuv, sig‘im, narx va bandlov niyatini izlashsiz ko‘rsatadi.'
+					title='Avval koвЂrishga arziydigan To‘yxonalar'
+					text='Rasmga urgвЂu berilgan kartochkalar joylashuv, sigвЂim, narx va bandlov niyatini izlashsiz koвЂrsatadi.'
 				/>
 				<div className='mt-6 grid grid-cols-1 gap-5 md:grid-cols-3'>
 					{showInitialLoading
@@ -219,7 +219,7 @@ export default function HomePage() {
 					<header className='mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between'>
 						<div>
 							<p className='section-kicker'>Bozor</p>
-							<h2 className='section-title'>Maskanlarni ko‘rib chiqish</h2>
+							<h2 className='section-title'>To‘yxonalarni koвЂrib chiqish</h2>
 						</div>
 						{!showInitialLoading && !isError && total > 0 && (
 							<p className='text-sm tabular-nums text-[var(--color-text-secondary)]'>
@@ -230,7 +230,7 @@ export default function HomePage() {
 								{isFetching ? (
 									<span className='text-[var(--color-text-hint)]'>
 										{' '}
-										— yangilanmoqda
+										вЂ” yangilanmoqda
 									</span>
 								) : null}
 							</p>
@@ -241,7 +241,7 @@ export default function HomePage() {
 						<VenueListError
 							message={getApiErrorMessage(
 								error,
-								'Maskanlar yuklanmadi. Qayta urinib koring.',
+								'To‘yxonalar yuklanmadi. Qayta urinib koring.',
 							)}
 							onRetry={() => void refetch()}
 							isRetrying={isFetching}
@@ -282,7 +282,7 @@ export default function HomePage() {
 			<section className='mx-auto w-full max-w-7xl px-4 py-10'>
 				<SectionHeader
 					kicker='Tumanlar'
-					title='Tuman bo‘yicha ko‘rish'
+					title='Tuman boвЂyicha koвЂrish'
 					text='Tez tuman tugmalari bozorni mahalliy va mobilga qulay qiladi.'
 				/>
 				<div className='mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6'>
@@ -323,10 +323,10 @@ export default function HomePage() {
 					<div className='grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center'>
 						<div>
 							<p className='text-sm font-bold uppercase tracking-wide text-white/70'>
-								Tayyor bo‘lsangiz, boshlaymiz
+								Tayyor boвЂlsangiz, boshlaymiz
 							</p>
 							<h2 className='mt-3 max-w-2xl text-3xl font-black leading-tight sm:text-5xl'>
-								Bugun qisqa ro‘yxat tuzing, ertaga ishonch bilan band qiling.
+								Bugun qisqa roвЂyxat tuzing, ertaga ishonch bilan band qiling.
 							</h2>
 						</div>
 						<Link to='/register'>
@@ -343,18 +343,18 @@ export default function HomePage() {
 					<div>
 						<p className='text-2xl font-black'>Toyxona</p>
 						<p className='mt-2 max-w-md text-sm leading-relaxed text-white/65'>
-							Maskanlar, bandlovlar, egalar va adminlar uchun zamonaviy bozor.
+							To‘yxonalar, bandlovlar, egalar va adminlar uchun zamonaviy bozor.
 						</p>
 					</div>
 					<div className='text-sm text-white/70'>
 						<p className='font-bold text-white'>Bozor</p>
-						<a href='#venue-results' className='mt-3 block'>Maskanlar</a>
-						<Link to='/register/owner' className='mt-2 block'>Maskanni ro‘yxatga qo‘shish</Link>
+						<a href='#venue-results' className='mt-3 block'>To‘yxonalar</a>
+						<Link to='/register/owner' className='mt-2 block'>To‘yxonani roвЂyxatga qoвЂshish</Link>
 					</div>
 					<div className='text-sm text-white/70'>
 						<p className='font-bold text-white'>Hisob</p>
 						<Link to='/login' className='mt-3 block'>Kirish</Link>
-						<Link to='/register' className='mt-2 block'>Ro‘yxatdan o‘tish</Link>
+						<Link to='/register' className='mt-2 block'>RoвЂyxatdan oвЂtish</Link>
 					</div>
 				</div>
 			</footer>

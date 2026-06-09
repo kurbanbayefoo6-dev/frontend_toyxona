@@ -1,4 +1,4 @@
-export function VenueCardSkeleton() {
+﻿export function VenueCardSkeleton() {
 	return (
 		<div
 			className='flex flex-col overflow-hidden rounded-[var(--radius-lg)] border animate-pulse'

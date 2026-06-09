@@ -1,4 +1,4 @@
-import ProtectedRoute from '@/routes/ProtectedRoute'
+﻿import ProtectedRoute from '@/routes/ProtectedRoute'
 import type { UserRole } from '@/types/auth'
 
 export default function CustomerGuard({

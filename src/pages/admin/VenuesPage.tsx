@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -44,10 +44,10 @@ export default function AdminVenuesPage() {
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'dashboard'] })
-			toast.success('Maskan o‘chirildi')
+			toast.success('To‘yxona oвЂchirildi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Maskanni o‘chirib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'To‘yxonani oвЂchirib boвЂlmadi'))
 		},
 	})
 
@@ -62,10 +62,10 @@ export default function AdminVenuesPage() {
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'venues'] })
 			void queryClient.invalidateQueries({ queryKey: ['admin', 'dashboard'] })
-			toast.success('Maskan holati yangilandi')
+			toast.success('To‘yxona holati yangilandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -75,7 +75,7 @@ export default function AdminVenuesPage() {
 	if (isLoading) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>Maskanlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>To‘yxonalar</h1>
 				<AdminTableSkeleton />
 			</div>
 		)
@@ -84,9 +84,9 @@ export default function AdminVenuesPage() {
 	if (isError) {
 		return (
 			<div>
-				<h1 className='mb-6 text-2xl font-semibold'>Maskanlar</h1>
+				<h1 className='mb-6 text-2xl font-semibold'>To‘yxonalar</h1>
 				<VenueListError
-					message={getApiErrorMessage(error, 'Maskanlar yuklanmadi')}
+					message={getApiErrorMessage(error, 'To‘yxonalar yuklanmadi')}
 					onRetry={() => void refetch()}
 					isRetrying={isFetching}
 				/>
@@ -101,11 +101,11 @@ export default function AdminVenuesPage() {
 					className='text-2xl font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					Maskanlar
+					To‘yxonalar
 				</h1>
 				<Link to='/admin/venues/new'>
 					<Button type='button' className='!w-auto px-4'>
-						Yangi maskan
+						Yangi To‘yxona
 					</Button>
 				</Link>
 			</div>
@@ -116,7 +116,7 @@ export default function AdminVenuesPage() {
 					setSearch(v)
 					setPage(1)
 				}}
-				searchPlaceholder='Maskan nomi yoki tuman...'
+				searchPlaceholder='To‘yxona nomi yoki tuman...'
 			>
 				<FilterSelect
 					label='Holat'
@@ -135,11 +135,11 @@ export default function AdminVenuesPage() {
 			</AdminToolbar>
 
 			<AdminTable
-				headers={['Rasm', 'Maskan', 'Tuman', 'Sig‘im', 'Holat', 'Amallar']}
+				headers={['Rasm', 'To‘yxona', 'Tuman', 'SigвЂim', 'Holat', 'Amallar']}
 				rows={venues.map(venue =>
 					buildVenueRow(venue, statusMutation, deleteMutation),
 				)}
-				emptyMessage='Maskanlar topilmadi'
+				emptyMessage='To‘yxonalar topilmadi'
 			/>
 
 			<div className='mt-6'>
@@ -190,7 +190,7 @@ function buildVenueRow(
 						className='flex size-full items-center justify-center text-xs'
 						style={{ color: 'var(--color-text-hint)' }}
 					>
-						—
+						вЂ”
 					</span>
 				)}
 			</div>,
@@ -242,12 +242,12 @@ function buildVenueRow(
 					className='!w-auto px-3 text-xs'
 					disabled={deleteMutation.isPending}
 					onClick={() => {
-						if (window.confirm('Maskanni o‘chirishni tasdiqlaysizmi?')) {
+						if (window.confirm('To‘yxonani oвЂchirishni tasdiqlaysizmi?')) {
 							deleteMutation.mutate(venue.id)
 						}
 					}}
 				>
-					O‘chirish
+					OвЂchirish
 				</Button>
 			</div>,
 		],

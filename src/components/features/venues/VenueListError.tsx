@@ -1,4 +1,4 @@
-import { Alert, Button } from '@/components/ui'
+﻿import { Alert, Button } from '@/components/ui'
 
 type VenueListErrorProps = {
 	message: string

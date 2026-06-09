@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+﻿import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
 import { getVenues } from '@/services/venue.service'
 import type { VenueListParams } from '@/types/venue'

@@ -1,4 +1,4 @@
-import type { UserRole } from '@/types/auth'
+﻿import type { UserRole } from '@/types/auth'
 
 export function getUserRoleLabel(role: UserRole): string {
 	switch (role) {

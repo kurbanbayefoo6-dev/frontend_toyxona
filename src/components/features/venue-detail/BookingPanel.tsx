@@ -1,4 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query'
+﻿import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -176,7 +176,7 @@ export function BookingPanel({
 		if (!createdBooking) return
 
 		if (!createdBooking.id || createdBooking.id <= 0) {
-			toast.error('Bron identifikatori noto‘g‘ri. Qayta urinib koring.')
+			toast.error('Bron identifikatori notoвЂgвЂri. Qayta urinib koring.')
 			return
 		}
 
@@ -221,11 +221,11 @@ export function BookingPanel({
 				<div className='mb-4 flex items-start justify-between gap-3'>
 					<div>
 						<p className='section-kicker'>Bron</p>
-						<h2 className='mt-1 text-2xl font-black'>Maskanni bron qilish</h2>
+						<h2 className='mt-1 text-2xl font-black'>To‘yxonani bron qilish</h2>
 					</div>
 					<div className='rounded-[var(--radius-lg)] bg-[var(--color-brand-light)] px-3 py-2 text-right'>
 						<p className='text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]'>
-							O‘rin
+							OвЂrin
 						</p>
 						<p className='text-sm font-black text-[var(--color-brand)]'>
 							{formatCurrency(venue.pricePerSeat)}
@@ -274,7 +274,7 @@ export function BookingPanel({
 				<div className='mt-5 grid gap-3'>
 					<AddonCheckboxes
 						title='Xonandalar'
-						emptyText='Xonandalar yo‘q'
+						emptyText='Xonandalar yoвЂq'
 						items={singers.map(s => ({
 							id: s.id,
 							label: `${s.name} - ${formatCurrency(s.price)}`,
@@ -285,7 +285,7 @@ export function BookingPanel({
 
 					<AddonCheckboxes
 						title='Avtomobillar'
-						emptyText='Avtomobillar yo‘q'
+						emptyText='Avtomobillar yoвЂq'
 						items={cars.map(c => ({
 							id: c.id,
 							label: `${c.brand} - ${formatCurrency(c.price)}`,
@@ -296,7 +296,7 @@ export function BookingPanel({
 
 					<AddonCheckboxes
 						title='Karnay-surnay'
-						emptyText='Karnay-surnay yo‘q'
+						emptyText='Karnay-surnay yoвЂq'
 						items={availableKarnay.map(k => ({
 							id: k.id,
 							label: formatCurrency(k.price),
@@ -308,7 +308,7 @@ export function BookingPanel({
 
 				<div className='mt-5 space-y-2 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-elevated)] p-4'>
 					<PriceRow
-						label={`O‘rinlar (${guestCount} x ${formatCurrency(venue.pricePerSeat)})`}
+						label={`OвЂrinlar (${guestCount} x ${formatCurrency(venue.pricePerSeat)})`}
 						value={priceBreakdown.baseTotal}
 					/>
 					{priceBreakdown.singersTotal > 0 && (

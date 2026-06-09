@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+﻿import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -17,7 +17,7 @@ const forgotSchema = z.object({
 	email: z
 		.string()
 		.min(1, 'Elektron pochta majburiy')
-		.email('Elektron pochta noto‘g‘ri'),
+		.email('Elektron pochta notoвЂgвЂri'),
 })
 
 type ForgotFormValues = z.infer<typeof forgotSchema>
@@ -47,20 +47,20 @@ export default function ForgotPasswordPage() {
 			)
 
 			if (!res.data.success) {
-				const msg = 'So‘rov yuborilmadi. Qayta urinib ko‘ring'
+				const msg = 'SoвЂrov yuborilmadi. Qayta urinib koвЂring'
 				setServerError(msg)
 				toast.error(msg)
 				return
 			}
 
 			const msg =
-				'Agar bu email ro‘yxatdan o‘tgan bo‘lsa, parolni tiklash havolasi yuborildi. Pochtangizni tekshiring.'
+				'Agar bu email roвЂyxatdan oвЂtgan boвЂlsa, parolni tiklash havolasi yuborildi. Pochtangizni tekshiring.'
 			setSuccessMessage(msg)
 			toast.success(AUTH_TOAST.forgotPasswordSent)
 			form.reset({ email: values.email })
 		} catch (error) {
 			setServerError(
-				handleAuthError(error, 'So‘rov yuborilmadi. Qayta urinib ko‘ring'),
+				handleAuthError(error, 'SoвЂrov yuborilmadi. Qayta urinib koвЂring'),
 			)
 		}
 	}
@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
 	return (
 		<AuthCard
 			title='Parolni tiklash'
-			subtitle='Elektron pochta manzilingizni kiriting — tiklash havolasini yuboramiz'
+			subtitle='Elektron pochta manzilingizni kiriting вЂ” tiklash havolasini yuboramiz'
 			size='compact'
 			footer={
 				<p style={{ color: 'var(--color-text-secondary)' }}>
@@ -82,7 +82,7 @@ export default function ForgotPasswordPage() {
 				<div className='flex flex-col gap-4'>
 					<Alert variant='success'>{successMessage}</Alert>
 					<Button type='button' onClick={() => navigate('/login')}>
-						Kirish sahifasiga o‘tish
+						Kirish sahifasiga oвЂtish
 					</Button>
 				</div>
 			) : (
@@ -98,7 +98,7 @@ export default function ForgotPasswordPage() {
 						type='email'
 						placeholder='email@misol.uz'
 						autoComplete='email'
-						hint='Ro‘yxatdan o‘tgan email manzilingizni kiriting'
+						hint='RoвЂyxatdan oвЂtgan email manzilingizni kiriting'
 						disabled={isSubmitting}
 						error={form.formState.errors.email?.message}
 						{...form.register('email')}

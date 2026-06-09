@@ -1,4 +1,4 @@
-import type { VenueStatus } from '@/types/venue'
+﻿import type { VenueStatus } from '@/types/venue'
 
 export const VENUE_STATUS_LABELS: Record<VenueStatus, string> = {
 	approved: 'Tasdiqlangan',

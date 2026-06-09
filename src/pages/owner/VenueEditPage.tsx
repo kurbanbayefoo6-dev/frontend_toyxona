@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+﻿import { useParams } from 'react-router-dom'
 
 import VenueManagePage from '@/pages/owner/VenueManagePage'
 
@@ -9,7 +9,7 @@ export default function VenueEditPage() {
 	if (Number.isNaN(venueId) || venueId <= 0) {
 		return (
 			<p style={{ color: 'var(--color-text-secondary)' }}>
-				Noto‘g‘ri maskan identifikatori
+				NotoвЂgвЂri To‘yxona identifikatori
 			</p>
 		)
 	}

@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+﻿import { Outlet } from 'react-router-dom'
 
 import { MobileNav } from '@/components/layout/MobileNav'
 import { Sidebar } from '@/components/layout/Sidebar'
@@ -8,9 +8,9 @@ export const adminLinks = [
 	{ to: '/admin/dashboard', label: 'Bosh sahifa' },
 	{ to: '/admin/users', label: 'Foydalanuvchilar' },
 	{ to: '/admin/owners', label: 'Egalar' },
-	{ to: '/admin/venues', label: 'Maskanlar' },
+	{ to: '/admin/venues', label: 'To‘yxonalar' },
 	{ to: '/admin/bookings', label: 'Bandlovlar' },
-	{ to: '/admin/payments', label: 'To‘lovlar' },
+	{ to: '/admin/payments', label: 'ToвЂlovlar' },
 	{ to: '/admin/settings', label: 'Sozlamalar' },
 ]
 

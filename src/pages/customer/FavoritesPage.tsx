@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+﻿import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Heart, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -27,7 +27,7 @@ export default function CustomerFavoritesPage() {
 			toast.success('Sevimlilardan olib tashlandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -75,7 +75,7 @@ export default function CustomerFavoritesPage() {
 			</h1>
 
 			{favorites.length === 0 ? (
-				<CustomerEmptyState message='Sevimli maskanlar ro‘yxati bo‘sh' />
+				<CustomerEmptyState message='Sevimli To‘yxonalar roвЂyxati boвЂsh' />
 			) : (
 				<ul className='grid grid-cols-1 gap-4 md:grid-cols-2'>
 					{favorites.map(fav => {
@@ -99,7 +99,7 @@ export default function CustomerFavoritesPage() {
 								{imageSrc ? (
 									<img
 										src={imageSrc}
-										alt={fav.venue?.name ?? `Maskan #${fav.venueId}`}
+										alt={fav.venue?.name ?? `To‘yxona #${fav.venueId}`}
 										className='size-full object-cover'
 									/>
 								) : (
@@ -107,7 +107,7 @@ export default function CustomerFavoritesPage() {
 										className='flex size-full items-center justify-center text-sm'
 										style={{ color: 'var(--color-text-hint)' }}
 									>
-										Rasm yo‘q
+										Rasm yoвЂq
 									</div>
 								)}
 							</div>
@@ -117,7 +117,7 @@ export default function CustomerFavoritesPage() {
 										className='font-semibold'
 										style={{ color: 'var(--color-text-primary)' }}
 									>
-										{fav.venue?.name ?? `Maskan #${fav.venueId}`}
+										{fav.venue?.name ?? `To‘yxona #${fav.venueId}`}
 									</p>
 									{fav.venue && (
 										<p
@@ -133,7 +133,7 @@ export default function CustomerFavoritesPage() {
 											className='mt-1 text-sm font-medium'
 											style={{ color: 'var(--color-brand)' }}
 										>
-											{formatCurrency(fav.venue.pricePerSeat)} / o‘rin
+											{formatCurrency(fav.venue.pricePerSeat)} / oвЂrin
 										</p>
 									)}
 								</div>
@@ -143,7 +143,7 @@ export default function CustomerFavoritesPage() {
 										className='flex-1'
 									>
 										<Button type='button' variant='secondary'>
-											Ko‘rish
+											KoвЂrish
 										</Button>
 									</Link>
 									<Button

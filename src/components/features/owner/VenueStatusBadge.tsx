@@ -1,4 +1,4 @@
-import { StatusBadge } from '@/components/features/customer/StatusBadge'
+﻿import { StatusBadge } from '@/components/features/customer/StatusBadge'
 import type { VenueStatus } from '@/types/venue'
 import {
 	getVenueStatusStyle,

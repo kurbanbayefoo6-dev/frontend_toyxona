@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+﻿import { useQuery } from '@tanstack/react-query'
 
 import { getFavorites } from '@/services/favorite.service'
 import { useAuthStore } from '@/stores/authStore'

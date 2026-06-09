@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+﻿import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -28,7 +28,7 @@ const passwordSchema = z
 		currentPassword: z.string().min(1, 'Joriy parolni kiriting'),
 		newPassword: z
 			.string()
-			.min(6, 'Yangi parol kamida 6 ta belgidan iborat bo‘lsin'),
+			.min(6, 'Yangi parol kamida 6 ta belgidan iborat boвЂlsin'),
 		confirmPassword: z.string().min(1, 'Parolni tasdiqlang'),
 	})
 	.refine(data => data.newPassword === data.confirmPassword, {
@@ -90,7 +90,7 @@ export default function CustomerProfilePage() {
 			toast.success('Profil yangilandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -101,7 +101,7 @@ export default function CustomerProfilePage() {
 			toast.success('Parol muvaffaqiyatli yangilandi')
 		},
 		onError: err => {
-			toast.error(getApiErrorMessage(err, 'Server bilan bog‘lanib bo‘lmadi'))
+			toast.error(getApiErrorMessage(err, 'Server bilan bogвЂlanib boвЂlmadi'))
 		},
 	})
 
@@ -157,13 +157,13 @@ export default function CustomerProfilePage() {
 					className='mb-4 text-lg font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					Shaxsiy ma’lumotlar
+					Shaxsiy maвЂ™lumotlar
 				</h2>
 				<p
 					className='mb-4 text-sm'
 					style={{ color: 'var(--color-text-hint)' }}
 				>
-					{data.email} · @{data.username}
+					{data.email} В· @{data.username}
 				</p>
 
 				<form
@@ -212,7 +212,7 @@ export default function CustomerProfilePage() {
 					className='mb-4 text-lg font-semibold'
 					style={{ color: 'var(--color-text-primary)' }}
 				>
-					Parolni o‘zgartirish
+					Parolni oвЂzgartirish
 				</h2>
 
 				<form
